@@ -23,7 +23,13 @@ export const AuthorizationProcess = {
  * action creators
  */
 
-const login = () => Promise.resolve(JSON.stringify({"test": true}));
+const login = ({email, password}) => new Promise((resolve, reject) => {
+    if (email === 'test@test.com' && password === 'testtest') {
+        resolve(JSON.stringify({email, display_name: "test", slug: 'test'}));
+    } else {
+        reject(new Error('The email or the password is incorrect.'));
+    }
+});
 
 export const requestLogin = () =>
 {

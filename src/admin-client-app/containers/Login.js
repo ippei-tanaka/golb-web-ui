@@ -21,8 +21,8 @@ let Login = ({dispatch}) =>
                 password: passwordInput.value
             }));
         }}>
-            email: <input type="text" ref={node => {emailInput = node }} /><br />
-            password: <input type="password" ref={node => {passwordInput = node }} /><br />
+            email: <input type="email" ref={node => {emailInput = node}} /><br />
+            password: <input type="password" ref={node => {passwordInput = node}} /><br />
             <button>Login</button>
         </form>
     );

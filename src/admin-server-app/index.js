@@ -8,6 +8,10 @@ export default class {
 
         app.use(express.static(config.adminDocRoot));
 
+        app.get("*", (request, response) => {
+            response.sendFile('index.html', {root: config.adminDocRoot});
+        });
+
         // adding class methods to the express app
 
         for (let propName of Object.getOwnPropertyNames(this.constructor.prototype))

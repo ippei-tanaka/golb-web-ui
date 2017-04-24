@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 
-const App = (props) => {
+const Home = (props) => {
 
     return (
         <div>
-            App
+            Home
         </div>
     );
 };
 
-export default App;
+export default Home;

@@ -13,6 +13,7 @@ module.exports =
     output:
     {
         path: path.resolve(cwd, config.adminDocRoot),
+        publicPath: config.adminRoot,
         filename: 'index_bundle.js'
     },
 

@@ -1,26 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Provider} from 'react-redux';
-import {BrowserRouter, Route, Link} from 'react-router-dom';
-import Login from '../containers/Login';
-import Login2 from '../containers/Login2';
+import {Provider, connect} from 'react-redux';
+import {BrowserRouter, Route, Link, Redirect, Switch} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
+import Login from '../containers/Login';
+import App from '../components/App';
+import Home from '../components/Home';
+import NotFound from '../components/NotFound';
+import ProtectedRoute from '../containers/ProtectedRoute';
+
+const BASE_PATH = '/admin';
 
 const history = createBrowserHistory({
-    basename: "/admin"
+    basename: BASE_PATH
 });
 
 const Root = ({store}) => (
     <Provider store={store}>
-        <BrowserRouter history={history} basename="/admin">
+        <BrowserRouter history={history} basename={BASE_PATH}>
             <div>
                 <ul>
-                    <li><Link to="/">Login</Link></li>
-                    <li><Link to="/r">Login2</Link></li>
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/app">App</Link></li>
                 </ul>
-
-                <Route path="/" exact component={Login} />
-                <Route path="/r" component={Login2}/>
+                <Switch>
+                    <ProtectedRoute path="/" exact component={Home} ifNotAllowed={Login} />
+                    <ProtectedRoute path="/app" component={App} ifNotAllowed={Login} />
+                    <ProtectedRoute path="*" component={NotFound} ifNotAllowed={Login} />
+                </Switch>
             </div>
         </BrowserRouter>
     </Provider>

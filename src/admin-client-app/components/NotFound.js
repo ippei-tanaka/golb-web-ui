@@ -1,12 +1,12 @@
 import React, { PropTypes } from 'react';
 
-const App = (props) => {
+const NotFound = (props) => {
 
     return (
         <div>
-            App
+            Not Found
         </div>
     );
 };
 
-export default App;
+export default NotFound;
