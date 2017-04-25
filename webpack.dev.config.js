@@ -10,10 +10,12 @@ const {NODE_ENV, GOLB_CONFIG} = process.env;
 const cwd = process.cwd();
 const config = JSON.parse(fs.readFileSync(path.resolve(cwd, GOLB_CONFIG || "config.json"), 'utf8'));
 
+const srcDir = path.resolve(__dirname, "./src/admin-client-app");
+
 module.exports =
 {
     entry: {
-        app: "./src/admin-client-app",
+        app: srcDir,
         vendor: [
             'react',
             'react-dom',
@@ -53,7 +55,7 @@ module.exports =
         }),
         new HtmlWebpackPlugin({
             title: 'Golb Admin App',
-            template: './src/admin-client-app/index.ejs'
+            template: path.resolve(srcDir, 'index.ejs')
         })
     ],
 

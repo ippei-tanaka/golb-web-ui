@@ -22,9 +22,9 @@ const Root = ({store, basename}) =>
                         <li><Link to="/app">App</Link></li>
                     </ul>
                     <Switch>
-                        <ProtectedRoute path="/" exact component={Home} ifNotAllowed={Login}/>
-                        <ProtectedRoute path="/app" component={App} ifNotAllowed={Login}/>
-                        <ProtectedRoute path="*" component={NotFound} ifNotAllowed={Login}/>
+                        <ProtectedRoute path="/" exact component={Home} alternativeComponent={Login}/>
+                        <ProtectedRoute path="/app" component={App} alternativeComponent={Login}/>
+                        <ProtectedRoute path="*" component={NotFound} alternativeComponent={Login}/>
                     </Switch>
                 </div>
             </BrowserRouter>

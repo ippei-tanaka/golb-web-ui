@@ -4,7 +4,7 @@ import {Route} from 'react-router-dom';
 
 let ProtectedRoute = ({
     component: Component,
-    ifNotAllowed: AlternativeComponent,
+    alternativeComponent: AlternativeComponent,
     isAuthenticated,
     ...rest}) =>
 {
