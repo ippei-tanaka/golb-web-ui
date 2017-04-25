@@ -9,29 +9,28 @@ import Home from '../components/Home';
 import NotFound from '../components/NotFound';
 import ProtectedRoute from '../containers/ProtectedRoute';
 
-const BASE_PATH = '/admin';
+const Root = ({store, basename}) =>
+{
+    const history = createBrowserHistory({basename});
 
-const history = createBrowserHistory({
-    basename: BASE_PATH
-});
-
-const Root = ({store}) => (
-    <Provider store={store}>
-        <BrowserRouter history={history} basename={BASE_PATH}>
-            <div>
-                <ul>
-                    <li><Link to="/">Home</Link></li>
-                    <li><Link to="/app">App</Link></li>
-                </ul>
-                <Switch>
-                    <ProtectedRoute path="/" exact component={Home} ifNotAllowed={Login} />
-                    <ProtectedRoute path="/app" component={App} ifNotAllowed={Login} />
-                    <ProtectedRoute path="*" component={NotFound} ifNotAllowed={Login} />
-                </Switch>
-            </div>
-        </BrowserRouter>
-    </Provider>
-);
+    return (
+        <Provider store={store}>
+            <BrowserRouter history={history} basename={basename}>
+                <div>
+                    <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/app">App</Link></li>
+                    </ul>
+                    <Switch>
+                        <ProtectedRoute path="/" exact component={Home} ifNotAllowed={Login}/>
+                        <ProtectedRoute path="/app" component={App} ifNotAllowed={Login}/>
+                        <ProtectedRoute path="*" component={NotFound} ifNotAllowed={Login}/>
+                    </Switch>
+                </div>
+            </BrowserRouter>
+        </Provider>
+    )
+};
 
 Root.propTypes = {
     store: PropTypes.object.isRequired,
