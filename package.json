@@ -4,7 +4,6 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "npm-run-all --parallel webpack-dev run-dev-server",
     "run-dev-server": "babel-node scripts/run-server.js -c golb.config.dev.json",
     "webpack-dev": "GOLB_CONFIG=golb.config.dev.json NODE_ENV=development webpack --config webpack.dev.config.js -w",
     "test": "mocha $(find test -name '*.test.js') --compilers js:babel-core/register",

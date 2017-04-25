@@ -37,5 +37,8 @@ module.exports =
             title: 'Golb Admin App',
             template: './src/admin-client-app/index.ejs'
         })
-    ]
+    ],
+
+    devtool: NODE_ENV === "development" ? 'inline-source-map' : false
+
 };
