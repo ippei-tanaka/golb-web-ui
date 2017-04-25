@@ -1,18 +1,29 @@
 const path = require('path');
 const fs = require('fs');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+const DefinePlugin = webpack.DefinePlugin;
+
 const {NODE_ENV, GOLB_CONFIG} = process.env;
-const configFilePath = path.resolve(__dirname, GOLB_CONFIG || "config.json");
-const config = JSON.parse(fs.readFileSync(configFilePath, 'utf8'));
 const cwd = process.cwd();
+const config = JSON.parse(fs.readFileSync(path.resolve(cwd, GOLB_CONFIG || "config.json"), 'utf8'));
 
 module.exports =
 {
     entry: {
         app: "./src/admin-client-app",
-        vendor: ['react', 'react-dom']
+        vendor: [
+            'react',
+            'react-dom',
+            'redux',
+            'react-redux',
+            'redux-thunk',
+            'redux-logger',
+            'react-router-dom',
+            'history'
+        ]
     },
 
     output: {
@@ -28,11 +39,11 @@ module.exports =
     },
 
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
+        new CommonsChunkPlugin({
             name: "vendor",
             filename: "vendor.bundle.js"
         }),
-        new webpack.DefinePlugin({
+        new DefinePlugin({
             process: {
                 env: {
                     NODE_ENV: JSON.stringify(NODE_ENV),
