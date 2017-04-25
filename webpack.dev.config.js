@@ -10,12 +10,15 @@ const cwd = process.cwd();
 
 module.exports =
 {
-    entry: './src/admin-client-app',
+    entry: {
+        app: "./src/admin-client-app",
+        vendor: ['react', 'react-dom']
+    },
 
     output: {
         path: path.resolve(cwd, config.adminDocRoot),
         publicPath: config.adminRoot,
-        filename: 'index_bundle.js'
+        filename: 'index.bundle.js'
     },
 
     module: {
@@ -25,6 +28,10 @@ module.exports =
     },
 
     plugins: [
+        new webpack.optimize.CommonsChunkPlugin({
+            name: "vendor",
+            filename: "vendor.bundle.js"
+        }),
         new webpack.DefinePlugin({
             process: {
                 env: {
