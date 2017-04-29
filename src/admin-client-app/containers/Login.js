@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { postLoginCredentials } from '../actions';
+import {connect} from 'react-redux';
+import {login} from '../actions';
 
 let Login = ({dispatch}) =>
 {
@@ -12,17 +12,18 @@ let Login = ({dispatch}) =>
         {
             e.preventDefault();
 
-            if (!emailInput.value.trim()) {
+            if (!emailInput.value.trim())
+            {
                 return;
             }
 
-            dispatch(postLoginCredentials({
+            dispatch(login({
                 email: emailInput.value,
                 password: passwordInput.value
             }));
         }}>
-            email: <input type="email" ref={node => {emailInput = node}} /><br />
-            password: <input type="password" ref={node => {passwordInput = node}} /><br />
+            email: <input type="email" ref={node => {emailInput = node}}/><br />
+            password: <input type="password" ref={node => {passwordInput = node}}/><br />
             <button>Login</button>
         </form>
     );

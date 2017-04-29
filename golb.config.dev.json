@@ -1,6 +1,6 @@
 {
     "webHost": "localhost",
-    "webPort": 3004,
+    "webPort": 3003,
     "adminRoot": "/admin",
     "adminDocRoot": "./dist-dev/client",
     "publicRoot": "/"

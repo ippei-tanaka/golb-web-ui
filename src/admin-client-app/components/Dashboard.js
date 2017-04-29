@@ -1,13 +1,14 @@
 import React, { PropTypes } from 'react';
 import Menu from './Menu';
 
-const Home = (props) => {
+const Dashboard = (props) => {
+
     return (
         <div>
             <Menu/>
-            Home
+            Dashboard
         </div>
     );
 };
 
-export default Home;
+export default Dashboard;

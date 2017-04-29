@@ -24,7 +24,8 @@ module.exports =
             'redux-thunk',
             'redux-logger',
             'react-router-dom',
-            'history'
+            'history',
+            'whatwg-fetch'
         ]
     },
 
