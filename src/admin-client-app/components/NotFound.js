@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
-import Menu from './Menu';
+import Header from './Header';
 
 const NotFound = (props) =>
 {
     return (
         <div>
-            <Menu/>
+            <Header/>
             Not Found
         </div>
     );

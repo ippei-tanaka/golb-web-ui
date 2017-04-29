@@ -13,7 +13,7 @@ export const createStore = (initialState) =>
         applyMiddleware(
             promiseMiddleware,
             thunkMiddleware, // lets us dispatch() functions
-            loggerMiddleware // neat middleware that logs actions
+            //loggerMiddleware // neat middleware that logs actions
         )
     );
 };

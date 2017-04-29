@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
-import App from './App';
-
+import {Switch} from 'react-router-dom';
+import Home from './Home';
+import Dashboard from './Dashboard';
+import NotFound from './NotFound';
+import ProtectedRoute from '../containers/ProtectedRoute';
 
 const Root = ({store, basename}) =>
 {
@@ -13,7 +16,11 @@ const Root = ({store, basename}) =>
     return (
         <Provider store={store}>
             <BrowserRouter history={history} basename={basename}>
-                <App />
+                <Switch>
+                    <ProtectedRoute path="/" exact component={Home}/>
+                    <ProtectedRoute path="/dashboard" component={Dashboard}/>
+                    <ProtectedRoute path="*" component={NotFound}/>
+                </Switch>
             </BrowserRouter>
         </Provider>
     )

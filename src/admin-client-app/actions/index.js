@@ -96,6 +96,8 @@ export const authenticate = () =>
             type: AUTHENTICATION_REQUEST
         });
 
+        await new Promise(resolve => setTimeout(resolve, 500));
+
         try
         {
             const me = await getMe();

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {logout} from '../actions';
 
-let Menu = ({dispatch}) => {
+let Header = ({dispatch}) => {
     return (
         <ul>
             <li><Link to="/">Home</Link></li>
@@ -16,6 +16,6 @@ let Menu = ({dispatch}) => {
     );
 };
 
-Menu = connect()(Menu);
+Header = connect()(Header);
 
-export default Menu;
+export default Header;

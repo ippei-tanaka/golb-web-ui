@@ -1,16 +1,25 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Route} from 'react-router-dom';
-import Login from './Login';
 import Pending from '../components/Pending';
+import LoginForm from '../components/LoginForm';
 import {AuthenticationStatus} from '../actions';
-import {authenticate} from '../actions';
+import {authenticate, login} from '../actions';
 
-let ProtectedRoute = class extends Component
-{
+let ProtectedRoute = class extends Component {
+    constructor (props)
+    {
+        super(props);
+
+        this.state =
+        {
+            email: "",
+            password: ""
+        }
+    }
+
     componentDidMount ()
     {
-        console.log(this);
         this.props.authenticate();
     }
 
@@ -19,27 +28,45 @@ let ProtectedRoute = class extends Component
         const {
             component: Component,
             authenticationStatus,
+            loginProcess,
+            loginProcessError,
+            login,
             ...rest
         } = this.props;
 
-        let TargetComponent;
+        const {email, password} = this.state;
 
         switch (authenticationStatus)
         {
             case AuthenticationStatus.AUTHENTICATED:
-                TargetComponent = Component;
-                break;
-            case AuthenticationStatus.UNAUTHENTICATED:
-                TargetComponent = Login;
-                break;
-            default:
-                TargetComponent = Pending;
-                break;
-        }
+                return (
+                    <Route {...rest} component={Component}/>
+                );
 
-        return (
-            <Route {...rest} component={TargetComponent} />
-        );
+            case AuthenticationStatus.UNAUTHENTICATED:
+                return (
+                    <Route {...rest} render={props => (
+                        <LoginForm
+                            email={email}
+                            password={password}
+                            onSubmit={e =>
+                            {
+                                e.preventDefault();
+                                login({email, password});
+                            }}
+                            onChange={e => this.setState({[e.target.name]: e.target.value})}
+                            error={loginProcessError}
+                        />
+                    )}/>
+                );
+
+            case AuthenticationStatus.PRISTINE:
+            case AuthenticationStatus.PENDING:
+            default:
+                return (
+                    <Route {...rest} component={Pending}/>
+                );
+        }
     }
 
 };
@@ -47,12 +74,15 @@ let ProtectedRoute = class extends Component
 const mapStateToProps = (state) =>
 {
     return {
-        authenticationStatus: state.authenticationStatus
+        authenticationStatus: state.authenticationStatus,
+        loginProcess: state.loginProcess,
+        loginProcessError: state.loginProcessError
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    authenticate: () => dispatch(authenticate())
+    authenticate: () => dispatch(authenticate()),
+    login: (arg) => dispatch(login(arg))
 });
 
 ProtectedRoute = connect(mapStateToProps, mapDispatchToProps)(ProtectedRoute);

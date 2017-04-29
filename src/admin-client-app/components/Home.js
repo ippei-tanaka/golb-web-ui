@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
-import Menu from './Menu';
+import Header from './Header';
 
 const Home = (props) => {
     return (
         <div>
-            <Menu/>
+            <Header/>
             Home
         </div>
     );
