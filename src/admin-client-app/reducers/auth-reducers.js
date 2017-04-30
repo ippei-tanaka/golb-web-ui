@@ -11,7 +11,7 @@ import {
     AuthenticationStatus,
     LoginProcess,
     LogoutProcess
-} from '../actions/auth-actions';
+} from '../action-creators/auth-action-creators';
 
 export const authenticationStatus = (state = AuthenticationStatus.PRISTINE, action) =>
 {

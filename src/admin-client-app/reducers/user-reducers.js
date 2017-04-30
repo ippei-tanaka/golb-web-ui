@@ -2,7 +2,7 @@ import {
     USER_LOAD_REQUEST,
     USER_LOAD_FAILURE,
     USER_LOAD_SUCCESS
-} from '../actions/user-actions';
+} from '../action-creators/user-action-creators';
 
 export const users = (state = [], action) =>
 {

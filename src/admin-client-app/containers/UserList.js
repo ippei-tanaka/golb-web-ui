@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Header from '../components/Header';
-import {loadUsers} from '../actions/user-actions';
+import {loadUsers} from '../action-creators/user-action-creators';
 
 let UserList = class extends Component
 {
