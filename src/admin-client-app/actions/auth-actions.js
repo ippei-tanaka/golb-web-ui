@@ -1,18 +1,18 @@
-import 'whatwg-fetch';
+import fetch from './fetch';
 
 /*
  * action types
  */
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
-export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
-export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
-export const AUTHENTICATION_REQUEST = 'AUTHENTICATION_REQUEST';
-export const FOUND_UNAUTHENTICATED = 'FOUND_UNAUTHENTICATED';
-export const FOUND_AUTHENTICATED = 'FOUND_AUTHENTICATED';
+export const LOGIN_REQUEST = Symbol('LOGIN_REQUEST');
+export const LOGIN_FAILURE = Symbol('LOGIN_FAILURE');
+export const LOGIN_SUCCESS = Symbol('LOGIN_SUCCESS');
+export const LOGOUT_REQUEST = Symbol('LOGOUT_REQUEST');
+export const LOGOUT_FAILURE = Symbol('LOGOUT_FAILURE');
+export const LOGOUT_SUCCESS = Symbol('LOGOUT_SUCCESS');
+export const AUTHENTICATION_REQUEST = Symbol('AUTHENTICATION_REQUEST');
+export const FOUND_UNAUTHENTICATED = Symbol('FOUND_UNAUTHENTICATED');
+export const FOUND_AUTHENTICATED = Symbol('FOUND_AUTHENTICATED');
 
 
 /*
@@ -45,23 +45,7 @@ export const LogoutProcess = {
  * fetch functions
  */
 
-const wrappedFetch = (url, options) =>
-{
-    return fetch(url, {
-        credentials: 'include',
-        ...options
-    }).then(async response =>
-    {
-        if (response.status >= 400)
-        {
-            throw await response.json();
-        }
-
-        return await response.json();
-    });
-};
-
-const loginRequest = (credentials) => wrappedFetch(
+const loginRequest = (credentials) => fetch(
     "http://localhost:3000/admin-api/login",
     {
         method: "POST",
@@ -71,13 +55,13 @@ const loginRequest = (credentials) => wrappedFetch(
         }
     });
 
-const logoutRequest = () => wrappedFetch(
+const logoutRequest = () => fetch(
     "http://localhost:3000/admin-api/logout",
     {
         method: "GET"
     });
 
-const getMe = () => wrappedFetch(
+const getMe = () => fetch(
     "http://localhost:3000/admin-api/users/me",
     {
         method: "GET"
@@ -100,11 +84,9 @@ export const authenticate = () =>
 
         try
         {
-            const me = await getMe();
-
             dispatch({
                 type: FOUND_AUTHENTICATED,
-                payload: me
+                payload: await getMe()
             });
         }
         catch (error)

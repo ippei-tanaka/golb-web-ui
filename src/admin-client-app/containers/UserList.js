@@ -1,47 +1,64 @@
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Header from '../components/Header';
+import {loadUsers} from '../actions/user-actions';
 
-let UserList = () =>
+let UserList = class extends Component
 {
-    return (
-        <div>
-            <Header/>
+    componentDidMount ()
+    {
+        this.props.loadUsers();
+    }
 
-            <h2>User List</h2>
-            <table>
-                <thead>
-                <tr>
-                    <td>#</td>
-                    <td>Display Name</td>
-                    <td>Email</td>
-                    <td>Slug</td>
-                    <td>Created</td>
-                    <td>Updated</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>dd</td>
-                    <td>dd</td>
-                    <td>dd</td>
-                    <td>dd</td>
-                    <td>dd</td>
-                    <td>dd</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    );
+    render ()
+    {
+        const {users} = this.props;
+
+        return (
+            <div>
+                <Header/>
+
+                <h2>User List</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <td></td>
+                        <td>Display Name</td>
+                        <td>Email</td>
+                        <td>Slug</td>
+                        <td>Created</td>
+                        <td>Updated</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {users.map((user, index) => (
+                        <tr key={user._id}>
+                            <td>{index + 1}</td>
+                            <td>{user.display_name}</td>
+                            <td>{user.email}</td>
+                            <td>{user.slug}</td>
+                            <td>{user.created_date}</td>
+                            <td>{user.updated_date}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
 };
 
 const mapStateToProps = (state) =>
 {
     return {
-        loginProcessError: state.loginProcessError
+        users: state.users
     };
 };
 
-UserList = connect(mapStateToProps)(UserList);
+const mapDispatchToProps = dispatch => ({
+    loadUsers: () => dispatch(loadUsers()),
+});
+
+UserList = connect(mapStateToProps, mapDispatchToProps)(UserList);
 
 export default UserList;

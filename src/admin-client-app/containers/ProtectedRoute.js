@@ -3,8 +3,7 @@ import {connect} from 'react-redux';
 import {Route} from 'react-router-dom';
 import Pending from '../components/Pending';
 import LoginForm from '../components/LoginForm';
-import {AuthenticationStatus} from '../actions';
-import {authenticate, login} from '../actions';
+import {AuthenticationStatus, authenticate, login} from '../actions/auth-actions';
 
 let ProtectedRoute = class extends Component
 {

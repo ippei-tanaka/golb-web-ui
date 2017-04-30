@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {logout} from '../actions';
+import {logout} from '../actions/auth-actions';
 
 let Header = ({dispatch, loggedInUser}) =>
 {
