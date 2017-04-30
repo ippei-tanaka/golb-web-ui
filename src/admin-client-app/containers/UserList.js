@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Header from './Header';
 import {loadUsers} from '../action-creators/user-action-creators';
+import {Link} from 'react-router-dom';
 
 let UserList = class extends Component
 {
@@ -43,6 +44,7 @@ let UserList = class extends Component
                     ))}
                     </tbody>
                 </table>
+                <Link to="/users/new">create a new user</Link>
             </div>
         );
     }
