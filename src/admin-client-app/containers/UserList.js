@@ -1,14 +1,14 @@
 import React, {PropTypes} from 'react';
-import Header from './Header';
+import {connect} from 'react-redux';
+import Header from '../components/Header';
 
-const List = ({model}) =>
+let UserList = () =>
 {
     return (
         <div>
             <Header/>
 
-            <h2>{model} List</h2>
-
+            <h2>User List</h2>
             <table>
                 <thead>
                 <tr>
@@ -35,4 +35,13 @@ const List = ({model}) =>
     );
 };
 
-export default List;
+const mapStateToProps = (state) =>
+{
+    return {
+        loginProcessError: state.loginProcessError
+    };
+};
+
+UserList = connect(mapStateToProps)(UserList);
+
+export default UserList;

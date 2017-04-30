@@ -6,8 +6,8 @@ import {createBrowserHistory} from 'history';
 import {Switch} from 'react-router-dom';
 import Home from './Home';
 import Dashboard from './Dashboard';
-import List from './List';
 import NotFound from './NotFound';
+import UserList from '../containers/UserList';
 import ProtectedRoute from '../containers/ProtectedRoute';
 
 const Root = ({store, basename}) =>
@@ -20,7 +20,7 @@ const Root = ({store, basename}) =>
                 <Switch>
                     <ProtectedRoute path="/" exact component={Home}/>
                     <ProtectedRoute path="/dashboard" component={Dashboard}/>
-                    <ProtectedRoute path="/users" component={List} model="User" />
+                    <ProtectedRoute path="/users" component={UserList} />
                     <ProtectedRoute path="*" component={NotFound}/>
                 </Switch>
             </BrowserRouter>

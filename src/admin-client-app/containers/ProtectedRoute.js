@@ -6,7 +6,8 @@ import LoginForm from '../components/LoginForm';
 import {AuthenticationStatus} from '../actions';
 import {authenticate, login} from '../actions';
 
-let ProtectedRoute = class extends Component {
+let ProtectedRoute = class extends Component
+{
     constructor (props)
     {
         super(props);
