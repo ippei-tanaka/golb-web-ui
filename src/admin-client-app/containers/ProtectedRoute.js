@@ -28,9 +28,12 @@ let ProtectedRoute = class extends Component {
         const {
             component: Component,
             authenticationStatus,
-            loginProcess,
             loginProcessError,
             login,
+            loginProcess,
+            authenticate,
+            computedMatch,
+            path,
             ...rest
         } = this.props;
 
@@ -40,7 +43,9 @@ let ProtectedRoute = class extends Component {
         {
             case AuthenticationStatus.AUTHENTICATED:
                 return (
-                    <Route {...rest} component={Component}/>
+                    <Route {...rest} render={props => (
+                        <Component {...rest} {...props} />
+                    )} />
                 );
 
             case AuthenticationStatus.UNAUTHENTICATED:

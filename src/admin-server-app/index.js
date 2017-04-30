@@ -2,14 +2,14 @@ import express from 'express';
 
 export default class {
 
-    constructor (config)
+    constructor ({adminDocRoot})
     {
         const app = express();
 
-        app.use(express.static(config.adminDocRoot));
+        app.use(express.static(adminDocRoot));
 
         app.get("*", (request, response) => {
-            response.sendFile('index.html', {root: config.adminDocRoot});
+            response.sendFile('index.html', {root: adminDocRoot});
         });
 
         // adding class methods to the express app
