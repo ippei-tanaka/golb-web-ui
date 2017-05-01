@@ -4,7 +4,8 @@ import {
     USER_LOAD_SUCCESS,
     USER_CREATE_REQUEST,
     USER_CREATE_FAILURE,
-    USER_CREATE_SUCCESS
+    USER_CREATE_SUCCESS,
+    USER_CREATE_ERROR_CLEAR
 } from '../action-creators/user-action-creators';
 
 export const users = (state = [], action) =>
@@ -25,6 +26,9 @@ export const userCreateError = (state = null, action) =>
     {
         case USER_CREATE_FAILURE:
             return action.payload;
+
+        case USER_CREATE_ERROR_CLEAR:
+            return null;
 
         default:
             return state;

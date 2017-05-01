@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import Header from './Header';
 import UserForm from '../components/UserForm';
-import {createUser} from '../action-creators/user-action-creators';
+import {createUser, clearUserCreateError} from '../action-creators/user-action-creators';
 
-let UserCreator = class extends Component
-{
+let UserCreator = class extends Component {
     constructor (props)
     {
         super(props);
@@ -19,6 +19,11 @@ let UserCreator = class extends Component
         }
     }
 
+    componentWillUnmount ()
+    {
+        this.props.clearUserCreateError();
+    }
+
     render ()
     {
         const {createUser, userCreateError} = this.props;
@@ -27,22 +32,30 @@ let UserCreator = class extends Component
             <div>
                 <Header/>
 
-                <h2>Create New User</h2>
+                <section>
+                    <h2>Create New User</h2>
 
-                <UserForm
-                    onSubmit={e => {
-                        e.preventDefault();
-                        createUser(this.state);
-                    }}
+                    <UserForm
+                        onSubmit={e =>
+                        {
+                            e.preventDefault();
+                            createUser(this.state);
+                        }}
 
-                    onChange={e => {
-                        this.setState({[e.target.name]: e.target.value});
-                    }}
+                        onChange={e =>
+                        {
+                            this.setState({[e.target.name]: e.target.value});
+                        }}
 
-                    error={userCreateError}
+                        error={userCreateError}
 
-                    {...this.state}
-                />
+                        {...this.state}
+                    />
+                </section>
+
+                <aside>
+                    <Link to="/users">user list</Link>
+                </aside>
             </div>
         );
     }
@@ -57,6 +70,7 @@ const mapStateToProps = (state) =>
 
 const mapDispatchToProps = dispatch => ({
     createUser: (user) => dispatch(createUser(user)),
+    clearUserCreateError: () => dispatch(clearUserCreateError()),
 });
 
 UserCreator = connect(mapStateToProps, mapDispatchToProps)(UserCreator);

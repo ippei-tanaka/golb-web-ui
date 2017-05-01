@@ -10,6 +10,7 @@ export const USER_LOAD_SUCCESS = Symbol('USER_LOAD_SUCCESS');
 export const USER_CREATE_REQUEST = Symbol('USER_CREATE_REQUEST');
 export const USER_CREATE_FAILURE = Symbol('USER_CREATE_FAILURE');
 export const USER_CREATE_SUCCESS = Symbol('USER_CREATE_SUCCESS');
+export const USER_CREATE_ERROR_CLEAR = Symbol('USER_CREATE_ERROR_CLEAR');
 export const USER_EDIT_REQUEST = Symbol('USER_EDIT_REQUEST');
 export const USER_EDIT_FAILURE = Symbol('USER_EDIT_FAILURE');
 export const USER_EDIT_SUCCESS = Symbol('USER_EDIT_SUCCESS');
@@ -90,6 +91,13 @@ export const createUser = (user) =>
             });
         }
     };
+};
+
+export const clearUserCreateError = () =>
+{
+    return {
+        type: USER_CREATE_ERROR_CLEAR
+    }
 };
 
 export const editUser = () =>

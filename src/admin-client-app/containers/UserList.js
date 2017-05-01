@@ -4,8 +4,7 @@ import Header from './Header';
 import {loadUsers} from '../action-creators/user-action-creators';
 import {Link} from 'react-router-dom';
 
-let UserList = class extends Component
-{
+let UserList = class extends Component {
     componentDidMount ()
     {
         this.props.loadUsers();
@@ -19,32 +18,37 @@ let UserList = class extends Component
             <div>
                 <Header/>
 
-                <h2>User List</h2>
-                <table>
-                    <thead>
-                    <tr>
-                        <td></td>
-                        <td>Display Name</td>
-                        <td>Email</td>
-                        <td>Slug</td>
-                        <td>Created</td>
-                        <td>Updated</td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {users.map((user, index) => (
-                        <tr key={user._id}>
-                            <td>{index + 1}</td>
-                            <td>{user.display_name}</td>
-                            <td>{user.email}</td>
-                            <td>{user.slug}</td>
-                            <td>{user.created_date}</td>
-                            <td>{user.updated_date}</td>
+                <section>
+                    <h2>User List</h2>
+                    <table>
+                        <thead>
+                        <tr>
+                            <td></td>
+                            <td>Display Name</td>
+                            <td>Email</td>
+                            <td>Slug</td>
+                            <td>Created</td>
+                            <td>Updated</td>
                         </tr>
-                    ))}
-                    </tbody>
-                </table>
-                <Link to="/users/new">create a new user</Link>
+                        </thead>
+                        <tbody>
+                        {users.map((user, index) => (
+                            <tr key={user._id}>
+                                <td>{index + 1}</td>
+                                <td>{user.display_name}</td>
+                                <td>{user.email}</td>
+                                <td>{user.slug}</td>
+                                <td>{user.created_date}</td>
+                                <td>{user.updated_date}</td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </section>
+
+                <aside>
+                    <Link to="/users/new">create a new user</Link>
+                </aside>
             </div>
         );
     }
