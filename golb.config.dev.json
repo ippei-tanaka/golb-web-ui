@@ -3,5 +3,8 @@
     "webPort": 3003,
     "adminRoot": "/admin",
     "adminDocRoot": "./dist-dev/client",
+    "adminApiHostname": "localhost",
+    "adminApiPort": 3000,
+    "adminApiBasename": "admin-api",
     "publicRoot": "/"
 }

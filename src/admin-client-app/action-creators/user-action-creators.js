@@ -20,13 +20,13 @@ export const USER_EDIT_SUCCESS = Symbol('USER_EDIT_SUCCESS');
  */
 
 const loadUsersRequest = (credentials) => fetch(
-    "http://localhost:3000/admin-api/users",
+    "/users",
     {
         method: "GET"
     });
 
 const createUsersRequest = (user) => fetch(
-    "http://localhost:3000/admin-api/users",
+    "/users",
     {
         method: "POST",
         body: JSON.stringify(user),

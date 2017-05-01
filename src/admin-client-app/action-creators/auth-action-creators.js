@@ -46,7 +46,7 @@ export const LogoutProcess = {
  */
 
 const loginRequest = (credentials) => fetch(
-    "http://localhost:3000/admin-api/login",
+    "/login",
     {
         method: "POST",
         body: JSON.stringify(credentials),
@@ -56,13 +56,13 @@ const loginRequest = (credentials) => fetch(
     });
 
 const logoutRequest = () => fetch(
-    "http://localhost:3000/admin-api/logout",
+    "/logout",
     {
         method: "GET"
     });
 
 const getMe = () => fetch(
-    "http://localhost:3000/admin-api/users/me",
+    "/users/me",
     {
         method: "GET"
     });

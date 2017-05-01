@@ -50,7 +50,10 @@ module.exports =
             process: {
                 env: {
                     NODE_ENV: JSON.stringify(NODE_ENV),
-                    ADMIN_ROOT: JSON.stringify(config.adminRoot)
+                    ADMIN_ROOT: JSON.stringify(config.adminRoot),
+                    ADMIN_API_HOSTNAME: JSON.stringify(config.adminApiHostname),
+                    ADMIN_API_PORT: JSON.stringify(config.adminApiPort),
+                    ADMIN_API_BASENAME: JSON.stringify(config.adminApiBasename),
                 }
             }
         }),

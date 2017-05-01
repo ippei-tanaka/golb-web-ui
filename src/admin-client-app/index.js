@@ -3,7 +3,7 @@ import {render} from 'react-dom';
 import {createStore} from './store';
 import Root from './components/Root';
 
-const { ADMIN_ROOT, NODE_ENV } = process.env;
+const { ADMIN_ROOT } = process.env;
 
 render(
     <Root store={createStore()} basename={ADMIN_ROOT} />,

@@ -1,8 +1,21 @@
 import 'whatwg-fetch';
+import url from 'url';
+import path from 'path';
 
-export default (url, options) =>
+const {
+    ADMIN_API_HOSTNAME,
+    ADMIN_API_PORT,
+    ADMIN_API_BASENAME
+} = process.env;
+
+const _url = url.parse(`http://${ADMIN_API_HOSTNAME}:${ADMIN_API_PORT}/${ADMIN_API_BASENAME}`);
+const _base_pathname = _url.pathname;
+
+export default (_path, options) =>
 {
-    return fetch(url, {
+    _url.pathname = path.resolve('/', _base_pathname, "." + path.resolve('/', _path));
+
+    return fetch(_url.format(), {
         credentials: 'include',
         ...options
     }).then(async response =>
