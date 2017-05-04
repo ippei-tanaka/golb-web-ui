@@ -9,6 +9,7 @@ import Dashboard from './Dashboard';
 import NotFound from './NotFound';
 import UserList from '../containers/UserList';
 import UserCreator from '../containers/UserCreator';
+import UserEditor from '../containers/UserEditor';
 import ProtectedRoute from '../containers/ProtectedRoute';
 
 const Root = ({store, basename}) =>
@@ -23,6 +24,7 @@ const Root = ({store, basename}) =>
                     <ProtectedRoute path="/dashboard" component={Dashboard}/>
                     <ProtectedRoute path="/users" exact component={UserList} />
                     <ProtectedRoute path="/users/new" component={UserCreator} />
+                    <ProtectedRoute path="/users/:id" component={UserEditor} />
                     <ProtectedRoute path="*" component={NotFound}/>
                 </Switch>
             </BrowserRouter>

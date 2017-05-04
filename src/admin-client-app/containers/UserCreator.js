@@ -2,77 +2,49 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Header from './Header';
-import UserForm from '../components/UserForm';
-import {createUser, clearUserCreateError} from '../action-creators/user-action-creators';
+import {Text, Form} from './form';
+import {createUser} from '../action-creators/user-action-creators';
 
-let UserCreator = class extends Component {
+let UserCreator = class extends Component
+{
     constructor (props)
     {
         super(props);
-
-        this.state =
-        {
-            email: "",
-            password: "",
-            display_name: "",
-            slug: ""
-        }
-    }
-
-    componentWillUnmount ()
-    {
-        this.props.clearUserCreateError();
+        this._token = Symbol("UserCreator");
     }
 
     render ()
     {
-        const {createUser, userCreateError} = this.props;
+        const {createUser} = this.props;
+        const {_token: token} = this;
 
         return (
             <div>
                 <Header/>
-
                 <section>
                     <h2>Create New User</h2>
-
-                    <UserForm
-                        onSubmit={e =>
-                        {
-                            e.preventDefault();
-                            createUser(this.state);
-                        }}
-
-                        onChange={e =>
-                        {
-                            this.setState({[e.target.name]: e.target.value});
-                        }}
-
-                        error={userCreateError}
-
-                        {...this.state}
-                    />
+                    <Form
+                        formId={token}
+                        onSubmit={values => createUser(values, token)}>
+                        <Text name="email" label="Email" />
+                        <Text name="password" label="Password" type="password" />
+                        <Text name="display_name" label="Display Name" />
+                        <Text name="slug" label="Slug" />
+                        <button>Submit</button>
+                    </Form>
                 </section>
-
-                <aside>
+                <nav>
                     <Link to="/users">user list</Link>
-                </aside>
+                </nav>
             </div>
         );
     }
 };
 
-const mapStateToProps = (state) =>
-{
-    return {
-        userCreateError: state.userCreateError
-    };
-};
-
 const mapDispatchToProps = dispatch => ({
-    createUser: (user) => dispatch(createUser(user)),
-    clearUserCreateError: () => dispatch(clearUserCreateError()),
+    createUser: (...args) => dispatch(createUser(...args))
 });
 
-UserCreator = connect(mapStateToProps, mapDispatchToProps)(UserCreator);
+UserCreator = connect(null, mapDispatchToProps)(UserCreator);
 
 export default UserCreator;

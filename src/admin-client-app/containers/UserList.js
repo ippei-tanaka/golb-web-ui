@@ -4,7 +4,8 @@ import Header from './Header';
 import {loadUsers} from '../action-creators/user-action-creators';
 import {Link} from 'react-router-dom';
 
-let UserList = class extends Component {
+let UserList = class extends Component
+{
     componentDidMount ()
     {
         this.props.loadUsers();
@@ -17,12 +18,12 @@ let UserList = class extends Component {
         return (
             <div>
                 <Header/>
-
                 <section>
                     <h2>User List</h2>
                     <table>
                         <thead>
                         <tr>
+                            <td></td>
                             <td></td>
                             <td>Display Name</td>
                             <td>Email</td>
@@ -35,6 +36,7 @@ let UserList = class extends Component {
                         {users.map((user, index) => (
                             <tr key={user._id}>
                                 <td>{index + 1}</td>
+                                <td><Link to={`/users/${user._id}`}>edit</Link></td>
                                 <td>{user.display_name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.slug}</td>
@@ -45,7 +47,6 @@ let UserList = class extends Component {
                         </tbody>
                     </table>
                 </section>
-
                 <aside>
                     <Link to="/users/new">create a new user</Link>
                 </aside>

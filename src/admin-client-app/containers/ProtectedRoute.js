@@ -32,7 +32,6 @@ let ProtectedRoute = class extends Component
             login,
             loginProcess,
             authenticate,
-            computedMatch,
             path,
             ...rest
         } = this.props;
