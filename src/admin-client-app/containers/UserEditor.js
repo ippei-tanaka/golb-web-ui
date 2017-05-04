@@ -24,7 +24,7 @@ let UserEditor = class extends Component
 
         if (!user)
         {
-            loadUsers();
+            loadUsers(id);
         }
 
         return (

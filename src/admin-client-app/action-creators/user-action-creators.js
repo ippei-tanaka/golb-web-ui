@@ -20,10 +20,14 @@ export const USER_EDIT_SUCCESS = Symbol('USER_EDIT_SUCCESS');
  * fetch functions
  */
 
-const loadUsersRequest = (credentials) => fetch(
-    "/users",
+const loadUsersRequest = (id = "") => fetch(
+    `/users/${id}`,
     {
         method: "GET"
+    })
+    .then(obj => {
+        if (id) return [obj];
+        return obj.items;
     });
 
 const createUsersRequest = (user) => fetch(
@@ -50,12 +54,13 @@ const editUsersRequest = (id, user) => fetch(
  * action creators
  */
 
-export const loadUsers = () =>
+export const loadUsers = (id, token) =>
 {
     return async dispatch =>
     {
         dispatch({
-            type: USER_LOAD_REQUEST
+            type: USER_LOAD_REQUEST,
+            token
         });
 
         await new Promise(resolve => setTimeout(resolve, 500));
@@ -64,13 +69,15 @@ export const loadUsers = () =>
         {
             dispatch({
                 type: USER_LOAD_SUCCESS,
-                payload: await loadUsersRequest()
+                payload: await loadUsersRequest(id),
+                token
             });
         }
         catch (error)
         {
             dispatch({
-                type: USER_LOAD_FAILURE
+                type: USER_LOAD_FAILURE,
+                token
             });
         }
     };
