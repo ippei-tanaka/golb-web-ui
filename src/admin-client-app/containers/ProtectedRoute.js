@@ -2,21 +2,22 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Route} from 'react-router-dom';
 import Pending from '../components/Pending';
-import LoginForm from '../components/LoginForm';
+import {Text, Form} from './form';
 import actionCreators, {AuthenticationStatus} from '../action-creators'
 
+const {
+    AUTHENTICATED,
+    PENDING,
+    UNAUTHENTICATED,
+    PRISTINE
+} = AuthenticationStatus;
 
 let ProtectedRoute = class extends Component
 {
     constructor (props)
     {
         super(props);
-
-        this.state =
-        {
-            email: "",
-            password: ""
-        }
+        this._token = Symbol("Login");
     }
 
     componentDidMount ()
@@ -29,47 +30,41 @@ let ProtectedRoute = class extends Component
         const {
             component: Component,
             authenticationStatus,
-            loginProcessError,
             login,
-            loginProcess,
-            authenticate,
-            path,
-            ...rest
+            computedMatch,
+            location
         } = this.props;
 
-        const {email, password} = this.state;
+        const bypassed = {computedMatch, location};
+
+        const {_token: token} = this;
 
         switch (authenticationStatus)
         {
-            case AuthenticationStatus.AUTHENTICATED:
+            case AUTHENTICATED:
                 return (
-                    <Route {...rest} render={props => (
-                        <Component {...rest} {...props} />
-                    )} />
+                    <Route {...bypassed} component={Component}/>
                 );
 
-            case AuthenticationStatus.UNAUTHENTICATED:
+            case PENDING:
+            case UNAUTHENTICATED:
+                const pending = authenticationStatus === PENDING;
                 return (
-                    <Route {...rest} render={props => (
-                        <LoginForm
-                            email={email}
-                            password={password}
-                            onSubmit={e =>
-                            {
-                                e.preventDefault();
-                                login({email, password});
-                            }}
-                            onChange={e => this.setState({[e.target.name]: e.target.value})}
-                            error={loginProcessError}
-                        />
+                    <Route {...bypassed} render={props => (
+                        <Form
+                            formId={token}
+                            onSubmit={values => login(values, token)}>
+                            <Text name="email" label="Email" disabled={pending}/>
+                            <Text name="password" label="Password" type="password" disabled={pending}/>
+                            <button disabled={pending}>Login</button>
+                        </Form>
                     )}/>
                 );
 
-            case AuthenticationStatus.PRISTINE:
-            case AuthenticationStatus.PENDING:
+            case PRISTINE:
             default:
                 return (
-                    <Route {...rest} component={Pending}/>
+                    <Route {...bypassed} component={Pending}/>
                 );
         }
     }

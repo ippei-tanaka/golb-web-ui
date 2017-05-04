@@ -8,6 +8,10 @@ import {
     USER_CREATE_FAILURE
 } from '../action-creators/user-action-creators';
 
+import {
+    LOGIN_FAILURE
+} from '../action-creators/auth-action-creators';
+
 export const formData = (state = {}, action) =>
 {
     switch (action.type)
@@ -36,6 +40,7 @@ export const formError = (state = {}, action) =>
     switch (action.type)
     {
         case USER_CREATE_FAILURE:
+        case LOGIN_FAILURE:
             return {...state, [action.token]: action.payload.message};
 
         case FORM_CLEAR:

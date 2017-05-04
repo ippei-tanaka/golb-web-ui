@@ -98,25 +98,32 @@ export const authenticate = () =>
     };
 };
 
-export const login = ({email, password}) =>
+export const login = ({email, password}, token) =>
 {
     return async dispatch =>
     {
-        dispatch({type: LOGIN_REQUEST});
+        dispatch({
+            type: LOGIN_REQUEST,
+            token
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 500));
 
         try
         {
             await loginRequest({email, password});
 
             dispatch({
-                type: LOGIN_SUCCESS
+                type: LOGIN_SUCCESS,
+                token
             });
         }
         catch (error)
         {
             dispatch({
                 type: LOGIN_FAILURE,
-                payload: error
+                payload: error,
+                token
             });
         }
 
@@ -124,25 +131,32 @@ export const login = ({email, password}) =>
     }
 };
 
-export const logout = () =>
+export const logout = (token) =>
 {
     return async dispatch =>
     {
-        dispatch({type: LOGOUT_REQUEST});
+        dispatch({
+            type: LOGOUT_REQUEST,
+            token
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 500));
 
         try
         {
             await logoutRequest();
 
             dispatch({
-                type: LOGOUT_SUCCESS
+                type: LOGOUT_SUCCESS,
+                token
             });
         }
         catch (error)
         {
             dispatch({
                 type: LOGOUT_FAILURE,
-                payload: error
+                payload: error,
+                token
             });
         }
 

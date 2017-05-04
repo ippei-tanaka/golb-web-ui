@@ -5,14 +5,6 @@ import {createForm, update, clear} from '../../action-creators/form-action-creat
 
 let Form = class extends Component
 {
-    constructor (props)
-    {
-        super(props);
-
-        const {formId, createForm} = this.props;
-        createForm(formId);
-    }
-
     render ()
     {
         const {children} = this.props;
@@ -20,6 +12,12 @@ let Form = class extends Component
         return (
             <form onSubmit={this.submit.bind(this)}>{children}</form>
         );
+    }
+
+    componentWillMount ()
+    {
+        const {formId, createForm} = this.props;
+        createForm(formId);
     }
 
     componentWillUnmount ()

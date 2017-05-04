@@ -9,7 +9,8 @@ class Text extends Component
             name,
             placeholder = "",
             label = "",
-            type = "text"
+            type = "text",
+            disabled = false
         } = this.props;
 
         const {
@@ -29,6 +30,7 @@ class Text extends Component
                     placeholder={placeholder}
                     value={values[name] || ""}
                     onChange={e => update(name, e.target.value)}
+                    disabled={disabled}
                 />
                 {messages.length > 0 ? (
                     <ul>
@@ -47,7 +49,8 @@ class Text extends Component
             name: PropTypes.string.isRequired,
             placeholder: PropTypes.string,
             label: PropTypes.string,
-            type: PropTypes.string
+            type: PropTypes.string,
+            disabled: PropTypes.bool
         };
     }
 

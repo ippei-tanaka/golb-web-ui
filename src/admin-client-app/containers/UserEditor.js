@@ -7,18 +7,9 @@ import actionCreators from '../action-creators'
 
 let UserEditor = class extends Component
 {
-    constructor (props)
+    componentWillMount ()
     {
-        super(props);
-
-        const {match} = this.props;
-        const id = match.params.id;
-        this._token = Symbol("UserEditor" + id);
-    }
-
-    render ()
-    {
-        const {editUser, loadUsers, users, match, _token: token} = this.props;
+        const {match, users, loadUsers} = this.props;
         const id = match.params.id;
         const user = users.find(u => u._id === id);
 
@@ -26,6 +17,15 @@ let UserEditor = class extends Component
         {
             loadUsers(id);
         }
+
+        this._token = Symbol("UserEditor" + id);
+    }
+
+    render ()
+    {
+        const {editUser, users, match, _token: token} = this.props;
+        const id = match.params.id;
+        const user = users.find(u => u._id === id);
 
         return (
             <div>

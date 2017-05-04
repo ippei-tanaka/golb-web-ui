@@ -6,7 +6,7 @@ import actionCreators from '../action-creators'
 
 let UserList = class extends Component
 {
-    componentDidMount ()
+    componentWillMount ()
     {
         this.props.loadUsers();
     }
