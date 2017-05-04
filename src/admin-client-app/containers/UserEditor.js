@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Header from './Header';
 import {Text, Form} from './form';
-import {editUser, loadUsers} from '../action-creators/user-action-creators';
+import actionCreators from '../action-creators'
 
 let UserEditor = class extends Component
 {
@@ -54,18 +54,6 @@ let UserEditor = class extends Component
     }
 };
 
-const mapStateToProps = (state) =>
-{
-    return {
-        users: state.users
-    };
-};
-
-const mapDispatchToProps = dispatch => ({
-    loadUsers: (...args) => dispatch(loadUsers(...args)),
-    editUser: (...args) => dispatch(editUser(...args))
-});
-
-UserEditor = connect(mapStateToProps, mapDispatchToProps)(UserEditor);
+UserEditor = connect(s => s, actionCreators)(UserEditor);
 
 export default UserEditor;

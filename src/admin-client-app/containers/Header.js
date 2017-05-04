@@ -1,9 +1,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {logout} from '../action-creators/auth-action-creators';
+import actionCreators from '../action-creators'
 
-let Header = ({dispatch, loggedInUser}) =>
+let Header = ({logout, loggedInUser}) =>
 {
     return (
         <header>
@@ -14,7 +14,7 @@ let Header = ({dispatch, loggedInUser}) =>
                 <li><a href="#" onClick={e =>
                 {
                     e.preventDefault();
-                    dispatch(logout());
+                    logout();
                 }}>Logout</a></li>
             </ul>
             <p>Hello, {loggedInUser.display_name}!</p>
@@ -22,13 +22,6 @@ let Header = ({dispatch, loggedInUser}) =>
     );
 };
 
-const mapStateToProps = (state) =>
-{
-    return {
-        loggedInUser: state.loggedInUser
-    };
-};
-
-Header = connect(mapStateToProps)(Header);
+Header = connect(s => s, actionCreators)(Header);
 
 export default Header;

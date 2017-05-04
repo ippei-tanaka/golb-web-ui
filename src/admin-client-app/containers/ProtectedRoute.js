@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {Route} from 'react-router-dom';
 import Pending from '../components/Pending';
 import LoginForm from '../components/LoginForm';
-import {AuthenticationStatus, authenticate, login} from '../action-creators/auth-action-creators';
+import actionCreators, {AuthenticationStatus} from '../action-creators'
+
 
 let ProtectedRoute = class extends Component
 {
@@ -75,20 +76,6 @@ let ProtectedRoute = class extends Component
 
 };
 
-const mapStateToProps = (state) =>
-{
-    return {
-        authenticationStatus: state.authenticationStatus,
-        loginProcess: state.loginProcess,
-        loginProcessError: state.loginProcessError
-    };
-};
-
-const mapDispatchToProps = dispatch => ({
-    authenticate: () => dispatch(authenticate()),
-    login: (arg) => dispatch(login(arg))
-});
-
-ProtectedRoute = connect(mapStateToProps, mapDispatchToProps)(ProtectedRoute);
+ProtectedRoute = connect(s => s, actionCreators)(ProtectedRoute);
 
 export default ProtectedRoute;

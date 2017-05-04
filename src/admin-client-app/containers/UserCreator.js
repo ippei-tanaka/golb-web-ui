@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Header from './Header';
 import {Text, Form} from './form';
-import {createUser} from '../action-creators/user-action-creators';
+import actionCreators from '../action-creators'
 
 let UserCreator = class extends Component
 {
@@ -41,10 +41,6 @@ let UserCreator = class extends Component
     }
 };
 
-const mapDispatchToProps = dispatch => ({
-    createUser: (...args) => dispatch(createUser(...args))
-});
-
-UserCreator = connect(null, mapDispatchToProps)(UserCreator);
+UserCreator = connect(null, actionCreators)(UserCreator);
 
 export default UserCreator;

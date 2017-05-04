@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Header from './Header';
-import {loadUsers} from '../action-creators/user-action-creators';
 import {Link} from 'react-router-dom';
+import actionCreators from '../action-creators'
 
 let UserList = class extends Component
 {
@@ -55,17 +55,6 @@ let UserList = class extends Component
     }
 };
 
-const mapStateToProps = (state) =>
-{
-    return {
-        users: state.users
-    };
-};
-
-const mapDispatchToProps = dispatch => ({
-    loadUsers: () => dispatch(loadUsers()),
-});
-
-UserList = connect(mapStateToProps, mapDispatchToProps)(UserList);
+UserList = connect(s => s, actionCreators)(UserList);
 
 export default UserList;
