@@ -125,9 +125,11 @@ export const login = ({email, password}, token) =>
                 payload: error,
                 token
             });
+
+            return Promise.reject(error);
         }
 
-        dispatch(authenticate());
+        return Promise.resolve();
     }
 };
 
@@ -158,8 +160,10 @@ export const logout = (token) =>
                 payload: error,
                 token
             });
+
+            return Promise.reject(error);
         }
 
-        dispatch(authenticate());
+        return Promise.resolve();
     }
 };

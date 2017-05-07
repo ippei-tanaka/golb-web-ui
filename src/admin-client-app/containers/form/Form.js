@@ -5,6 +5,18 @@ import {createForm, update, clear} from '../../action-creators/form-action-creat
 
 let Form = class extends Component
 {
+    componentWillMount ()
+    {
+        const {formId, createForm, initialValues} = this.props;
+        createForm(formId, initialValues);
+    }
+
+    componentWillUnmount ()
+    {
+        const {formId, clear} = this.props;
+        clear(formId);
+    }
+
     render ()
     {
         const {children} = this.props;
@@ -14,44 +26,13 @@ let Form = class extends Component
         );
     }
 
-    componentWillMount ()
+    getChildContext ()
     {
-        const {formId, createForm} = this.props;
-        createForm(formId);
-    }
-
-    componentWillUnmount ()
-    {
-        const {formId, clear} = this.props;
-        clear(formId);
-    }
-
-    static get propTypes ()
-    {
-        return {
-            children: PropTypes.node.isRequired,
-            onSubmit: PropTypes.func.isRequired,
-            initialValues: PropTypes.object,
-            formId: PropTypes.symbol
-        }
-    }
-
-    static get childContextTypes ()
-    {
-        return {
-            update: PropTypes.func,
-            values: PropTypes.object,
-            errorMessages: PropTypes.object
-        }
-    }
-
-    getChildContext()
-    {
-        const {data, update, error, initialValues, formId} = this.props;
+        const {data, update, error, formId} = this.props;
 
         return {
-            update: (name, value) => update(name, value, formId),
-            values: {...initialValues, ...data[formId]},
+            update: (name, value) => update(formId, name, value),
+            values: {...data[formId]},
             errorMessages: error[formId]
         };
     }
@@ -62,6 +43,20 @@ let Form = class extends Component
         event.preventDefault();
         onSubmit(data[formId]);
     }
+};
+
+Form.propTypes =
+{
+    children: PropTypes.node.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    initialValues: PropTypes.object,
+    formId: PropTypes.symbol
+};
+
+Form.childContextTypes = {
+    update: PropTypes.func,
+    values: PropTypes.object,
+    errorMessages: PropTypes.object
 };
 
 const mapStateToProps = (state) =>

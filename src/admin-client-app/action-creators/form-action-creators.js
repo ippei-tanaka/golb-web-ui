@@ -10,15 +10,16 @@ export const FORM_CLEAR = Symbol('FORM_CLEAR');
  * action creators
  */
 
-export const createForm = (formId) =>
+export const createForm = (formId, initialValues = {}) =>
 {
     return {
         type: FORM_CREATE,
+        payload: initialValues,
         formId
     }
 };
 
-export const update = (name, value, formId) =>
+export const update = (formId, name, value) =>
 {
     return {
         type: FORM_UPDATE,

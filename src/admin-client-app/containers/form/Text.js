@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-class Text extends Component
-{
+class Text extends Component {
     render ()
     {
         const {
@@ -42,26 +41,22 @@ class Text extends Component
             </div>
         );
     }
-
-    static get propTypes ()
-    {
-        return {
-            name: PropTypes.string.isRequired,
-            placeholder: PropTypes.string,
-            label: PropTypes.string,
-            type: PropTypes.string,
-            disabled: PropTypes.bool
-        };
-    }
-
-    static get contextTypes ()
-    {
-        return {
-            update: PropTypes.func.isRequired,
-            values: PropTypes.object.isRequired,
-            errorMessages: PropTypes.object
-        }
-    }
 }
+
+Text.propTypes =
+{
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
+    label: PropTypes.string,
+    type: PropTypes.string,
+    disabled: PropTypes.bool
+};
+
+Text.contextTypes =
+{
+    update: PropTypes.func.isRequired,
+    values: PropTypes.object.isRequired,
+    errorMessages: PropTypes.object
+};
 
 export default Text;

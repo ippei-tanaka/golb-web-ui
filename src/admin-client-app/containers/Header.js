@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import actionCreators from '../action-creators'
 
-let Header = ({logout, loggedInUser}) =>
+let Header = ({logout, loggedInUser, authenticate}) =>
 {
     return (
         <header>
@@ -14,7 +14,7 @@ let Header = ({logout, loggedInUser}) =>
                 <li><a href="#" onClick={e =>
                 {
                     e.preventDefault();
-                    logout();
+                    logout().then(authenticate);
                 }}>Logout</a></li>
             </ul>
             <p>Hello, {loggedInUser.display_name}!</p>

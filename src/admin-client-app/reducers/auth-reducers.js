@@ -64,24 +64,6 @@ export const loginProcess = (state = LoginProcess.PRISTINE, action) =>
     }
 };
 
-export const loginProcessError = (state = null, action) =>
-{
-    switch (action.type)
-    {
-        case LOGIN_REQUEST:
-            return null;
-
-        case LOGIN_FAILURE:
-            return action.payload;
-
-        case LOGIN_SUCCESS:
-            return null;
-
-        default:
-            return state;
-    }
-};
-
 export const logoutProcess = (state = LogoutProcess.PRISTINE, action) =>
 {
     switch (action.type)
@@ -94,24 +76,6 @@ export const logoutProcess = (state = LogoutProcess.PRISTINE, action) =>
 
         case LOGOUT_SUCCESS:
             return LogoutProcess.SUCCEEDED;
-
-        default:
-            return state;
-    }
-};
-
-export const logoutProcessError = (state = null, action) =>
-{
-    switch (action.type)
-    {
-        case LOGOUT_REQUEST:
-            return null;
-
-        case LOGOUT_FAILURE:
-            return action.payload;
-
-        case LOGOUT_SUCCESS:
-            return null;
 
         default:
             return state;

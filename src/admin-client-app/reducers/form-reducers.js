@@ -17,7 +17,7 @@ export const formData = (state = {}, action) =>
     switch (action.type)
     {
         case FORM_CREATE:
-            return {[action.formId]: {}};
+            return {[action.formId]: action.payload};
 
         case FORM_UPDATE:
             const newData = {...state[action.formId], ...action.payload};

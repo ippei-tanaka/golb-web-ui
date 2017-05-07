@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Route} from 'react-router-dom';
 import Pending from '../components/Pending';
-import {Text, Form} from './form';
-import actionCreators, {AuthenticationStatus} from '../action-creators'
+import Login from './Login';
+import actionCreators, {AuthenticationStatus, LoginProcess} from '../action-creators'
 
 const {
     AUTHENTICATED,
@@ -14,13 +14,7 @@ const {
 
 let ProtectedRoute = class extends Component
 {
-    constructor (props)
-    {
-        super(props);
-        this._token = Symbol("Login");
-    }
-
-    componentDidMount ()
+    componentWillMount ()
     {
         this.props.authenticate();
     }
@@ -30,14 +24,12 @@ let ProtectedRoute = class extends Component
         const {
             component: Component,
             authenticationStatus,
-            login,
+            path,
             computedMatch,
             location
         } = this.props;
 
-        const bypassed = {computedMatch, location};
-
-        const {_token: token} = this;
+        const bypassed = {path, computedMatch, location};
 
         switch (authenticationStatus)
         {
@@ -46,21 +38,16 @@ let ProtectedRoute = class extends Component
                     <Route {...bypassed} component={Component}/>
                 );
 
-            case PENDING:
             case UNAUTHENTICATED:
-                const pending = authenticationStatus === PENDING;
                 return (
                     <Route {...bypassed} render={props => (
-                        <Form
-                            formId={token}
-                            onSubmit={values => login(values, token)}>
-                            <Text name="email" label="Email" disabled={pending}/>
-                            <Text name="password" label="Password" type="password" disabled={pending}/>
-                            <button disabled={pending}>Login</button>
-                        </Form>
+                        <Login {...props}
+                               onLoginSucceed={() => this.props.authenticate()}
+                        />
                     )}/>
                 );
 
+            case PENDING:
             case PRISTINE:
             default:
                 return (
