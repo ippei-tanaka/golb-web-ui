@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-class Text extends Component {
+class Text extends Component
+{
     render ()
     {
         const {
@@ -13,7 +14,7 @@ class Text extends Component {
         } = this.props;
 
         const {
-            values,
+            entries,
             update,
             errorMessages = {}
         } = this.context;
@@ -27,7 +28,7 @@ class Text extends Component {
                     type={type}
                     name={name}
                     placeholder={placeholder}
-                    value={values[name] || ""}
+                    value={entries[name] || ""}
                     onChange={e => update(name, e.target.value)}
                     disabled={disabled}
                 />
@@ -55,7 +56,7 @@ Text.propTypes =
 Text.contextTypes =
 {
     update: PropTypes.func.isRequired,
-    values: PropTypes.object.isRequired,
+    entries: PropTypes.object.isRequired,
     errorMessages: PropTypes.object
 };
 

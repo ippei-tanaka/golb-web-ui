@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {createForm, update, clear} from '../../action-creators/form-action-creators';
@@ -22,7 +23,7 @@ let Form = class extends Component
         const {children} = this.props;
 
         return (
-            <form onSubmit={this.submit.bind(this)}>{children}</form>
+            <form ref="formElement" onSubmit={this.submit.bind(this)}>{children}</form>
         );
     }
 
@@ -32,16 +33,26 @@ let Form = class extends Component
 
         return {
             update: (name, value) => update(formId, name, value),
-            values: {...data[formId]},
-            errorMessages: error[formId]
+            entries: {...data[formId]},
+            errorMessages: {...error[formId]}
         };
     }
 
     submit (event)
     {
-        const {onSubmit, data, formId} = this.props;
+        const {onSubmit, data, formId, children} = this.props;
         event.preventDefault();
-        onSubmit(data[formId]);
+
+        const formData = new FormData(this.refs.formElement);
+        const entries = data[formId];
+        const submitted = {};
+
+        for (let key of formData.keys())
+        {
+            submitted[key] = entries[key];
+        }
+
+        onSubmit(submitted);
     }
 };
 
@@ -55,7 +66,7 @@ Form.propTypes =
 
 Form.childContextTypes = {
     update: PropTypes.func,
-    values: PropTypes.object,
+    entries: PropTypes.object,
     errorMessages: PropTypes.object
 };
 
