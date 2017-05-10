@@ -31,6 +31,12 @@ const loadUsersRequest = () => fetch(
     })
     .then(obj => obj.items);
 
+const loadUserRequest = (id) => fetch(
+    `/users/${id}`,
+    {
+        method: "GET"
+    });
+
 const createUsersRequest = (user) => fetch(
     "/users",
     {
@@ -99,7 +105,8 @@ export const createUser = (user) =>
 
         try
         {
-            const payload = await createUsersRequest(user);
+            const {_id} = await createUsersRequest(user);
+            const payload = await loadUserRequest(_id);
 
             dispatch({
                 type: USER_CREATE_SUCCESS,
@@ -168,7 +175,8 @@ export const deleteUser = (id) =>
             await deleteUserRequest(id);
 
             dispatch({
-                type: USER_DELETE_SUCCESS
+                type: USER_DELETE_SUCCESS,
+                payload: {_id: id}
             });
 
             return Promise.resolve();

@@ -1,5 +1,6 @@
 import {
-    USER_LOAD_SUCCESS
+    USER_LOAD_SUCCESS,
+    USER_DELETE_SUCCESS
 } from '../action-creators/user-action-creators';
 
 export const users = (state = {}, action) =>
@@ -15,6 +16,11 @@ export const users = (state = {}, action) =>
             }
 
             return {...state, ...users};
+
+        case USER_DELETE_SUCCESS:
+            const newState = {...state};
+            delete newState[action.payload._id];
+            return newState;
 
         default:
             return state;

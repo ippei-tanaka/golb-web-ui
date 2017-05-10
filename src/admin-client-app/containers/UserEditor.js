@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import Header from './Header';
 import {Text, Form} from './form';
 import actionCreators from '../action-creators'
@@ -37,9 +36,6 @@ let UserEditor = class extends Component
                         <div>loading...</div>
                     )}
                 </section>
-                <nav>
-                    <Link to="/users">user list</Link>
-                </nav>
             </div>
         );
     }
