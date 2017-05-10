@@ -1,21 +1,15 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {createForm, update, clear} from '../../action-creators/form-action-creators';
 
-let Form = class extends Component
-{
-    componentWillMount ()
+let Form = class extends Component {
+    constructor (props)
     {
-        const {formId, createForm, initialValues} = this.props;
-        createForm(formId, initialValues);
-    }
+        super(props);
 
-    componentWillUnmount ()
-    {
-        const {formId, clear} = this.props;
-        clear(formId);
+        this.state = {
+            entries: {...props.initialEntries},
+            error: {}
+        };
     }
 
     render ()
@@ -29,30 +23,46 @@ let Form = class extends Component
 
     getChildContext ()
     {
-        const {data, update, error, formId} = this.props;
-
         return {
-            update: (name, value) => update(formId, name, value),
-            entries: {...data[formId]},
-            errorMessages: {...error[formId]}
+            update: (name, value) => this.setState(s => {s.entries[name] = value}),
+            entries: this.state.entries,
+            errorMessages: this.state.error
         };
     }
 
     submit (event)
     {
-        const {onSubmit, data, formId, children} = this.props;
         event.preventDefault();
 
+        const {onSubmit, onSubmissionSucceed, onSubmissionFail} = this.props;
         const formData = new FormData(this.refs.formElement);
-        const entries = data[formId];
         const submitted = {};
+        const entries = this.state.entries;
 
         for (let key of formData.keys())
         {
             submitted[key] = entries[key];
         }
 
-        onSubmit(submitted);
+        const obj = onSubmit(submitted);
+
+        if (obj instanceof Promise)
+        {
+            obj
+                .then(() =>
+                {
+                    this.setState(s => {s.error = {}});
+                    onSubmissionSucceed();
+                })
+                .catch(error =>
+                {
+                    if (error && error.message)
+                    {
+                        this.setState(s => {s.error = error.message});
+                    }
+                    onSubmissionFail();
+                });
+        }
     }
 };
 
@@ -60,8 +70,14 @@ Form.propTypes =
 {
     children: PropTypes.node.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    initialValues: PropTypes.object,
-    formId: PropTypes.symbol
+    onSubmissionSucceed: PropTypes.func,
+    onSubmissionFail: PropTypes.func,
+    initialEntries: PropTypes.object
+};
+
+Form.defaultProps = {
+    onSubmissionSucceed: () => {},
+    onSubmissionFail: () => {}
 };
 
 Form.childContextTypes = {
@@ -69,21 +85,5 @@ Form.childContextTypes = {
     entries: PropTypes.object,
     errorMessages: PropTypes.object
 };
-
-const mapStateToProps = (state) =>
-{
-    return {
-        data: state.formData,
-        error: state.formError
-    };
-};
-
-const mapDispatchToProps = dispatch => ({
-    createForm: (...args) => dispatch(createForm(...args)),
-    update: (...args) => dispatch(update(...args)),
-    clear: (...args) => dispatch(clear(...args))
-});
-
-Form = connect(mapStateToProps, mapDispatchToProps)(Form);
 
 export default Form;

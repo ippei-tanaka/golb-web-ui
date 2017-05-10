@@ -7,16 +7,9 @@ import actionCreators from '../action-creators'
 
 let UserCreator = class extends Component
 {
-    constructor (props)
-    {
-        super(props);
-        this._token = Symbol("UserCreator");
-    }
-
     render ()
     {
-        const {createUser} = this.props;
-        const {_token: token} = this;
+        const {createUser, history} = this.props;
 
         return (
             <div>
@@ -24,8 +17,8 @@ let UserCreator = class extends Component
                 <section>
                     <h2>Create New User</h2>
                     <Form
-                        formId={token}
-                        onSubmit={values => createUser(values, token)}>
+                        onSubmit={values => createUser(values)}
+                        onSubmissionSucceed={() => history.push('/users')}>
                         <Text name="email" label="Email" />
                         <Text name="password" label="Password" type="password" />
                         <Text name="display_name" label="Display Name" />

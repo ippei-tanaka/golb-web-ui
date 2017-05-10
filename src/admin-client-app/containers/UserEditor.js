@@ -17,13 +17,11 @@ let UserEditor = class extends Component
         {
             loadUsers(id);
         }
-
-        this._token = Symbol("UserEditor" + id);
     }
 
     render ()
     {
-        const {editUser, users, match, _token: token} = this.props;
+        const {editUser, users, match, history} = this.props;
         const id = match.params.id;
         const user = users.find(u => u._id === id);
 
@@ -34,9 +32,9 @@ let UserEditor = class extends Component
                     <h2>Edit User</h2>
                     {user ? (
                         <Form
-                            formId={token}
-                            initialValues={user}
-                            onSubmit={values => editUser(id, values, token)}>
+                            initialEntries={user}
+                            onSubmit={values => editUser(id, values)}
+                            onSubmissionSucceed={() => history.push('/users')}>
                             <Text name="email" label="Email" />
                             <Text name="display_name" label="Display Name" />
                             <Text name="slug" label="Slug" />

@@ -54,13 +54,12 @@ const editUsersRequest = (id, user) => fetch(
  * action creators
  */
 
-export const loadUsers = (id, token) =>
+export const loadUsers = (id) =>
 {
     return async dispatch =>
     {
         dispatch({
             type: USER_LOAD_REQUEST,
-            token
         });
 
         await new Promise(resolve => setTimeout(resolve, 500));
@@ -69,76 +68,80 @@ export const loadUsers = (id, token) =>
         {
             dispatch({
                 type: USER_LOAD_SUCCESS,
-                payload: await loadUsersRequest(id),
-                token
+                payload: await loadUsersRequest(id)
             });
         }
         catch (error)
         {
             dispatch({
-                type: USER_LOAD_FAILURE,
-                token
+                type: USER_LOAD_FAILURE
             });
         }
     };
 };
 
-export const createUser = (user, token) =>
+export const createUser = (user) =>
 {
     return async dispatch =>
     {
         dispatch({
             type: USER_CREATE_REQUEST,
-            token
         });
 
         await new Promise(resolve => setTimeout(resolve, 500));
 
         try
         {
+            const payload = await createUsersRequest(user);
+
             dispatch({
                 type: USER_CREATE_SUCCESS,
-                payload: await createUsersRequest(user),
-                token
+                payload
             });
+
+            return Promise.resolve(payload);
         }
         catch (error)
         {
             dispatch({
                 type: USER_CREATE_FAILURE,
                 payload: error,
-                token
             });
+
+            return Promise.reject(error);
         }
     };
 };
 
-export const editUser = (id, user, token) =>
+export const editUser = (id, user) =>
 {
     return async dispatch =>
     {
         dispatch({
-            type: USER_EDIT_REQUEST,
-            token
+            type: USER_EDIT_REQUEST
         });
 
         await new Promise(resolve => setTimeout(resolve, 500));
 
         try
         {
+            const payload = await editUsersRequest(id, user);
+
             dispatch({
                 type: USER_EDIT_SUCCESS,
-                payload: await editUsersRequest(id, user),
-                token
+                payload
             });
+
+            return Promise.resolve(payload);
         }
         catch (error)
         {
             dispatch({
                 type: USER_EDIT_FAILURE,
-                payload: error,
-                token
+                payload: error
             });
+
+            return Promise.reject(error);
         }
     };
 };

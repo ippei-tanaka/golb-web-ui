@@ -26,7 +26,8 @@ let ProtectedRoute = class extends Component
             authenticationStatus,
             path,
             computedMatch,
-            location
+            location,
+            authenticate
         } = this.props;
 
         const bypassed = {path, computedMatch, location};
@@ -41,9 +42,7 @@ let ProtectedRoute = class extends Component
             case UNAUTHENTICATED:
                 return (
                     <Route {...bypassed} render={props => (
-                        <Login {...props}
-                               onLoginSucceed={() => this.props.authenticate()}
-                        />
+                        <Login {...props} onLoginSucceed={authenticate}/>
                     )}/>
                 );
 

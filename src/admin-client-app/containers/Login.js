@@ -34,7 +34,9 @@ let Login = class extends Component
         return (
             <Form
                 formId={token}
-                onSubmit={values => login(values, token).then(onLoginSucceed).catch(onLoginFail)}>
+                onSubmit={values => login(values, token)}
+                onSubmissionSucceed={onLoginSucceed}
+                onSubmissionFail={onLoginFail}>
                 <Text name="email" label="Email" disabled={pending}/>
                 <Text name="password" label="Password" type="password" disabled={pending}/>
                 <button disabled={pending}>Login</button>

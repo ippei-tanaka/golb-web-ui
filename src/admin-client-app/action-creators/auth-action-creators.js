@@ -98,13 +98,12 @@ export const authenticate = () =>
     };
 };
 
-export const login = ({email, password}, token) =>
+export const login = ({email, password}) =>
 {
     return async dispatch =>
     {
         dispatch({
-            type: LOGIN_REQUEST,
-            token
+            type: LOGIN_REQUEST
         });
 
         await new Promise(resolve => setTimeout(resolve, 500));
@@ -114,32 +113,29 @@ export const login = ({email, password}, token) =>
             await loginRequest({email, password});
 
             dispatch({
-                type: LOGIN_SUCCESS,
-                token
+                type: LOGIN_SUCCESS
             });
+
+            return Promise.resolve();
         }
         catch (error)
         {
             dispatch({
                 type: LOGIN_FAILURE,
-                payload: error,
-                token
+                payload: error
             });
 
             return Promise.reject(error);
         }
-
-        return Promise.resolve();
     }
 };
 
-export const logout = (token) =>
+export const logout = () =>
 {
     return async dispatch =>
     {
         dispatch({
-            type: LOGOUT_REQUEST,
-            token
+            type: LOGOUT_REQUEST
         });
 
         await new Promise(resolve => setTimeout(resolve, 500));
@@ -149,21 +145,19 @@ export const logout = (token) =>
             await logoutRequest();
 
             dispatch({
-                type: LOGOUT_SUCCESS,
-                token
+                type: LOGOUT_SUCCESS
             });
+
+            return Promise.resolve();
         }
         catch (error)
         {
             dispatch({
                 type: LOGOUT_FAILURE,
                 payload: error,
-                token
             });
 
             return Promise.reject(error);
         }
-
-        return Promise.resolve();
     }
 };
