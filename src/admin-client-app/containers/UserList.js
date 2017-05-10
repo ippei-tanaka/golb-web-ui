@@ -25,6 +25,7 @@ let UserList = class extends Component
                         <tr>
                             <td></td>
                             <td></td>
+                            <td></td>
                             <td>Display Name</td>
                             <td>Email</td>
                             <td>Slug</td>
@@ -37,6 +38,10 @@ let UserList = class extends Component
                             <tr key={user._id}>
                                 <td>{index + 1}</td>
                                 <td><Link to={`/users/${user._id}`}>edit</Link></td>
+                                <td><a href="#"
+                                       data-user-id={user._id}
+                                       data-user-display-name={user.display_name}
+                                       onClick={this.onClickDelete.bind(this)}>delete</a></td>
                                 <td>{user.display_name}</td>
                                 <td>{user.email}</td>
                                 <td>{user.slug}</td>
@@ -52,6 +57,18 @@ let UserList = class extends Component
                 </aside>
             </div>
         );
+    }
+
+    onClickDelete (event)
+    {
+        event.preventDefault();
+        const {deleteUser} = this.props;
+        const id = event.target.getAttribute('data-user-id');
+        const displayName = event.target.getAttribute('data-user-display-name');
+        if (window.confirm(`Do you want to delete ${displayName}?`))
+        {
+            deleteUser(id).catch(error => alert(error.message.reduce((i, j) => i + ', ' + j)));
+        }
     }
 };
 

@@ -16,6 +16,10 @@ export const USER_EDIT_REQUEST = Symbol('USER_EDIT_REQUEST');
 export const USER_EDIT_FAILURE = Symbol('USER_EDIT_FAILURE');
 export const USER_EDIT_SUCCESS = Symbol('USER_EDIT_SUCCESS');
 
+export const USER_DELETE_REQUEST = Symbol('USER_DELETE_REQUEST');
+export const USER_DELETE_FAILURE = Symbol('USER_DELETE_FAILURE');
+export const USER_DELETE_SUCCESS = Symbol('USER_DELETE_SUCCESS');
+
 /*
  * fetch functions
  */
@@ -48,6 +52,12 @@ const editUsersRequest = (id, user) => fetch(
         headers: {
             "Content-Type": "application/json"
         }
+    });
+
+const deleteUserRequest = (id) => fetch(
+    `/users/${id}`,
+    {
+        method: "DELETE"
     });
 
 /*
@@ -138,6 +148,38 @@ export const editUser = (id, user) =>
         {
             dispatch({
                 type: USER_EDIT_FAILURE,
+                payload: error
+            });
+
+            return Promise.reject(error);
+        }
+    };
+};
+
+export const deleteUser = (id) =>
+{
+    return async dispatch =>
+    {
+        dispatch({
+            type: USER_DELETE_REQUEST
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        try
+        {
+            await deleteUserRequest(id);
+
+            dispatch({
+                type: USER_DELETE_SUCCESS
+            });
+
+            return Promise.resolve();
+        }
+        catch (error)
+        {
+            dispatch({
+                type: USER_DELETE_FAILURE,
                 payload: error
             });
 

@@ -56,7 +56,7 @@ let Form = class extends Component {
                 })
                 .catch(error =>
                 {
-                    if (error && error.message)
+                    if (error && error.message && !Array.isArray(error.message))
                     {
                         this.setState(s => {s.error = error.message});
                     }
