@@ -9,21 +9,14 @@ let UserEditor = class extends Component
 {
     componentWillMount ()
     {
-        const {match, users, loadUsers} = this.props;
-        const id = match.params.id;
-        const user = users.find(u => u._id === id);
-
-        if (!user)
-        {
-            loadUsers(id);
-        }
+        this.props.loadUsers();
     }
 
     render ()
     {
         const {editUser, users, match, history} = this.props;
         const id = match.params.id;
-        const user = users.find(u => u._id === id);
+        const user = users[id];
 
         return (
             <div>

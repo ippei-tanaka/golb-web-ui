@@ -24,15 +24,12 @@ export const USER_DELETE_SUCCESS = Symbol('USER_DELETE_SUCCESS');
  * fetch functions
  */
 
-const loadUsersRequest = (id = "") => fetch(
-    `/users/${id}`,
+const loadUsersRequest = () => fetch(
+    `/users`,
     {
         method: "GET"
     })
-    .then(obj => {
-        if (id) return [obj];
-        return obj.items;
-    });
+    .then(obj => obj.items);
 
 const createUsersRequest = (user) => fetch(
     "/users",
@@ -64,7 +61,7 @@ const deleteUserRequest = (id) => fetch(
  * action creators
  */
 
-export const loadUsers = (id) =>
+export const loadUsers = () =>
 {
     return async dispatch =>
     {
@@ -78,7 +75,7 @@ export const loadUsers = (id) =>
         {
             dispatch({
                 type: USER_LOAD_SUCCESS,
-                payload: await loadUsersRequest(id)
+                payload: await loadUsersRequest()
             });
         }
         catch (error)
