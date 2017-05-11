@@ -10,6 +10,9 @@ import NotFound from './NotFound';
 import UserList from '../containers/UserList';
 import UserCreator from '../containers/UserCreator';
 import UserEditor from '../containers/UserEditor';
+import CategoryList from '../containers/CategoryList';
+import CategoryCreator from '../containers/CategoryCreator';
+import CategoryEditor from '../containers/CategoryEditor';
 import ProtectedRoute from '../containers/ProtectedRoute';
 
 const Root = ({store, basename}) =>
@@ -25,6 +28,9 @@ const Root = ({store, basename}) =>
                     <ProtectedRoute path="/users" exact component={UserList} />
                     <ProtectedRoute path="/users/new" component={UserCreator} />
                     <ProtectedRoute path="/users/:id" component={UserEditor} />
+                    <ProtectedRoute path="/categories" exact component={CategoryList} />
+                    <ProtectedRoute path="/categories/new" component={CategoryCreator} />
+                    <ProtectedRoute path="/categories/:id" component={CategoryEditor} />
                     <ProtectedRoute path="*" component={NotFound}/>
                 </Switch>
             </BrowserRouter>
