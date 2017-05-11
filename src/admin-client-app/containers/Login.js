@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Text, Form} from './form';
+import {Text, Form} from '../components/form';
 import actionCreators, {LoginProcess} from '../action-creators'
 
 const {

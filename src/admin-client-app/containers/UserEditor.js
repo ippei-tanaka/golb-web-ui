@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Header from './Header';
-import {Text, Form} from './form';
+import {Text, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
 let UserEditor = class extends Component
