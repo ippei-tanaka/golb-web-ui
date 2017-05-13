@@ -13,6 +13,9 @@ import UserEditor from '../containers/UserEditor';
 import CategoryList from '../containers/CategoryList';
 import CategoryCreator from '../containers/CategoryCreator';
 import CategoryEditor from '../containers/CategoryEditor';
+import PostList from '../containers/PostList';
+import PostCreator from '../containers/PostCreator';
+import PostEditor from '../containers/PostEditor';
 import ProtectedRoute from '../containers/ProtectedRoute';
 
 const Root = ({store, basename}) =>
@@ -31,6 +34,9 @@ const Root = ({store, basename}) =>
                     <ProtectedRoute path="/categories" exact component={CategoryList} />
                     <ProtectedRoute path="/categories/new" component={CategoryCreator} />
                     <ProtectedRoute path="/categories/:id" component={CategoryEditor} />
+                    <ProtectedRoute path="/posts" exact component={PostList} />
+                    <ProtectedRoute path="/posts/new" component={PostCreator} />
+                    <ProtectedRoute path="/posts/:id" component={PostEditor} />
                     <ProtectedRoute path="*" component={NotFound}/>
                 </Switch>
             </BrowserRouter>
