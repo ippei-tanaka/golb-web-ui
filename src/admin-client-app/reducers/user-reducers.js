@@ -1,5 +1,7 @@
 import {
     USER_LOAD_SUCCESS,
+    USER_CREATE_SUCCESS,
+    USER_EDIT_SUCCESS,
     USER_DELETE_SUCCESS
 } from '../action-creators/user-action-creators';
 
@@ -16,6 +18,14 @@ export const users = (state = {}, action) =>
             }
 
             return {...state, ...users};
+
+        case USER_CREATE_SUCCESS:
+            const newUser = action.payload;
+            return {...state, [newUser._id]: newUser};
+
+        case USER_EDIT_SUCCESS:
+            const editedUser = action.payload;
+            return {...state, [editedUser._id]: editedUser};
 
         case USER_DELETE_SUCCESS:
             const newState = {...state};

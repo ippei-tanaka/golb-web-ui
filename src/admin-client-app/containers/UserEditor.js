@@ -8,7 +8,13 @@ let UserEditor = class extends Component
 {
     componentWillMount ()
     {
-        this.props.loadUsers();
+        const {loadUsers, users, match} = this.props;
+        const id = match.params.id;
+
+        if (!users[id])
+        {
+            loadUsers();
+        }
     }
 
     render ()

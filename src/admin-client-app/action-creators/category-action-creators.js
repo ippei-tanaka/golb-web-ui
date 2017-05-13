@@ -139,7 +139,8 @@ export const editCategory = (id, category) =>
 
         try
         {
-            const payload = await editCategoriesRequest(id, category);
+            await editCategoriesRequest(id, category);
+            const payload = await loadCategoryRequest(id);
 
             dispatch({
                 type: CATEGORY_EDIT_SUCCESS,

@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-let Form = class extends Component
-{
+let Form = class extends Component {
     constructor (props)
     {
         super(props);
@@ -11,6 +10,8 @@ let Form = class extends Component
             entries: {...props.initialEntries},
             error: {}
         };
+
+        this._isMounted = true;
     }
 
     render ()
@@ -35,7 +36,6 @@ let Form = class extends Component
     {
         event.preventDefault();
 
-        const {onSubmit, onSubmissionSucceed, onSubmissionFail} = this.props;
         const formData = new FormData(this.refs.formElement);
         const submitted = {};
         const entries = this.state.entries;
@@ -45,25 +45,40 @@ let Form = class extends Component
             submitted[key] = entries[key];
         }
 
-        const obj = onSubmit(submitted);
+        const obj = this.props.onSubmit(submitted);
 
         if (obj instanceof Promise)
         {
             obj
-                .then(() =>
-                {
-                    this.setState(s => {s.error = {}});
-                    onSubmissionSucceed();
-                })
-                .catch(error =>
-                {
-                    if (error && error.message && !Array.isArray(error.message))
-                    {
-                        this.setState(s => {s.error = error.message});
-                    }
-                    onSubmissionFail();
-                });
+                .then(this._submissionDidSucceed.bind(this))
+                .catch(this._submissionDidFail.bind(this));
         }
+    }
+
+    _submissionDidSucceed ()
+    {
+        if (!this._isMounted) return;
+
+        this.setState(s => {s.error = {}});
+
+        this.props.onSubmissionSucceed();
+    }
+
+    _submissionDidFail (error)
+    {
+        if (!this._isMounted) return;
+
+        if (error && error.message && !Array.isArray(error.message))
+        {
+            this.setState(s => {s.error = error.message});
+        }
+
+        this.props.onSubmissionFail();
+    }
+
+    componentWillUnmount ()
+    {
+        this._isMounted = false;
     }
 };
 

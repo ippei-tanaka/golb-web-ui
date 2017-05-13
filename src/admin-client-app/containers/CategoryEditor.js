@@ -8,7 +8,13 @@ let CategoryEditor = class extends Component
 {
     componentWillMount ()
     {
-        this.props.loadCategories();
+        const {loadCategories, categories, match} = this.props;
+        const id = match.params.id;
+
+        if (!categories[id])
+        {
+            loadCategories();
+        }
     }
 
     render ()

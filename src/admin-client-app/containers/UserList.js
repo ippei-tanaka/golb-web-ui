@@ -11,7 +11,12 @@ let UserList = class extends Component
 {
     componentWillMount ()
     {
-        this.props.loadUsers();
+        const {users, loadUsers} = this.props;
+
+        if (Object.keys(users).length === 0)
+        {
+            loadUsers();
+        }
     }
 
     render ()

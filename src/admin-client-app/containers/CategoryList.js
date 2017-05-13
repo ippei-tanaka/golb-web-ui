@@ -11,7 +11,12 @@ let CategoryList = class extends Component
 {
     componentWillMount ()
     {
-        this.props.loadCategories();
+        const {categories, loadCategories} = this.props;
+
+        if (Object.keys(categories).length === 0)
+        {
+            loadCategories();
+        }
     }
 
     render ()

@@ -139,7 +139,8 @@ export const editUser = (id, user) =>
 
         try
         {
-            const payload = await editUsersRequest(id, user);
+            await editUsersRequest(id, user);
+            const payload = await loadUserRequest(id);
 
             dispatch({
                 type: USER_EDIT_SUCCESS,
