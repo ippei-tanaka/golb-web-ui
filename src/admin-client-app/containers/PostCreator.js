@@ -36,13 +36,13 @@ let PostCreator = class extends Component
                         <Text name="title" label="Title" />
                         <Text name="slug" label="Slug" />
                         <Select name="author_id" label="Author">
-                            <option key="0">(None)</option>
+                            <option key="0" value="">(None)</option>
                             {Object.keys(users).map(userId => (
                                 <option key={userId} value={userId}>{users[userId].display_name}</option>
                             ))}
                         </Select>
                         <Select name="category_id" label="Category">
-                            <option key="0">(None)</option>
+                            <option key="0" value="">(None)</option>
                             {Object.keys(categories).map(categoryId => (
                                 <option key={categoryId} value={categoryId}>{categories[categoryId].name}</option>
                             ))}
