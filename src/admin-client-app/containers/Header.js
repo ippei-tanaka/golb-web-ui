@@ -13,6 +13,7 @@ let Header = ({logout, loggedInUser, authenticate}) =>
                 <li><Link to="/users">User List</Link></li>
                 <li><Link to="/categories">Category List</Link></li>
                 <li><Link to="/posts">Post List</Link></li>
+                <li><Link to="/settings">Settings</Link></li>
                 <li><a href="#" onClick={e =>
                 {
                     e.preventDefault();
