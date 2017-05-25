@@ -10,6 +10,7 @@ import NotFound from './NotFound';
 import UserList from '../containers/UserList';
 import UserCreator from '../containers/UserCreator';
 import UserEditor from '../containers/UserEditor';
+import UserPasswordEditor from '../containers/UserPasswordEditor';
 import CategoryList from '../containers/CategoryList';
 import CategoryCreator from '../containers/CategoryCreator';
 import CategoryEditor from '../containers/CategoryEditor';
@@ -31,7 +32,8 @@ const Root = ({store, basename}) =>
                     <ProtectedRoute path="/dashboard" component={Dashboard}/>
                     <ProtectedRoute path="/users" exact component={UserList} />
                     <ProtectedRoute path="/users/new" component={UserCreator} />
-                    <ProtectedRoute path="/users/:id" component={UserEditor} />
+                    <ProtectedRoute path="/users/:id" exact component={UserEditor} />
+                    <ProtectedRoute path="/users/:id/password" component={UserPasswordEditor} />
                     <ProtectedRoute path="/categories" exact component={CategoryList} />
                     <ProtectedRoute path="/categories/new" component={CategoryCreator} />
                     <ProtectedRoute path="/categories/:id" component={CategoryEditor} />

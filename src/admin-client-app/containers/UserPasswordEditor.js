@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import Header from './Header';
 import {Text, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
-let UserEditor = class extends Component
+let UserPasswordEditor = class extends Component
 {
     componentWillMount ()
     {
@@ -20,7 +19,7 @@ let UserEditor = class extends Component
 
     render ()
     {
-        const {editUser, users, match, history} = this.props;
+        const {editUserPassword, users, match, history} = this.props;
         const id = match.params.id;
         const user = users[id];
 
@@ -28,27 +27,25 @@ let UserEditor = class extends Component
             <div>
                 <Header/>
                 <section>
-                    <h2>Edit User</h2>
+                    <h2>Edit User Password</h2>
                     {user ? (
                         <Form
-                            initialEntries={user}
-                            onSubmit={values => editUser(id, values)}
-                            onSubmissionSucceed={() => history.push('/users')}>
-                            <Text name="email" label="Email" />
-                            <Text name="display_name" label="Display Name" />
-                            <Text name="slug" label="Slug" />
+                            onSubmit={values => editUserPassword(id, values)}
+                            onSubmissionSucceed={() => history.push(`/users/${id}`)}>
+                            <Text name="old_password" label="Current Password" type="password" />
+                            <Text name="password" label="New Password" type="password" />
+                            <Text name="password_confirmed" label="New Password Confirmed" type="password" />
                             <button>Submit</button>
                         </Form>
                     ) : (
                         <div>loading...</div>
                     )}
                 </section>
-                <nav><Link to={`/users/${id}/password`}>Edit Password</Link></nav>
             </div>
         );
     }
 };
 
-UserEditor = connect(s => s, actionCreators)(UserEditor);
+UserPasswordEditor = connect(s => s, actionCreators)(UserPasswordEditor);
 
-export default UserEditor;
+export default UserPasswordEditor;

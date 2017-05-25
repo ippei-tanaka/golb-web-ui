@@ -20,6 +20,11 @@ export const USER_DELETE_REQUEST = Symbol('USER_DELETE_REQUEST');
 export const USER_DELETE_FAILURE = Symbol('USER_DELETE_FAILURE');
 export const USER_DELETE_SUCCESS = Symbol('USER_DELETE_SUCCESS');
 
+export const USER_PASSWORD_EDIT_REQUEST = Symbol('USER_PASSWORD_EDIT_REQUEST');
+export const USER_PASSWORD_EDIT_FAILURE = Symbol('USER_PASSWORD_EDIT_FAILURE');
+export const USER_PASSWORD_EDIT_SUCCESS = Symbol('USER_PASSWORD_EDIT_SUCCESS');
+
+
 /*
  * fetch functions
  */
@@ -61,6 +66,16 @@ const deleteUserRequest = (id) => fetch(
     `/users/${id}`,
     {
         method: "DELETE"
+    });
+
+const editUserPasswordRequest = (id, values) => fetch(
+    `/users/${id}/password`,
+    {
+        method: "PUT",
+        body: JSON.stringify(values),
+        headers: {
+            "Content-Type": "application/json"
+        }
     });
 
 /*
@@ -186,6 +201,38 @@ export const deleteUser = (id) =>
         {
             dispatch({
                 type: USER_DELETE_FAILURE,
+                payload: error
+            });
+
+            return Promise.reject(error);
+        }
+    };
+};
+
+export const editUserPassword = (id, values) =>
+{
+    return async dispatch =>
+    {
+        dispatch({
+            type: USER_PASSWORD_EDIT_REQUEST
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        try
+        {
+            await editUserPasswordRequest(id, values);
+
+            dispatch({
+                type: USER_PASSWORD_EDIT_SUCCESS
+            });
+
+            return Promise.resolve();
+        }
+        catch (error)
+        {
+            dispatch({
+                type: USER_PASSWORD_EDIT_FAILURE,
                 payload: error
             });
 
