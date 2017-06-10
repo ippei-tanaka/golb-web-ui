@@ -70,12 +70,16 @@ let PostList = class extends Component
                             <td><Link to={`/posts/?sort=author_id&order=${reverseOrder}`}>Author</Link></td>
                             <td><Link to={`/posts/?sort=category_id&order=${reverseOrder}`}>Category</Link></td>
                             <td><Link to={`/posts/?sort=slug&order=${reverseOrder}`}>Slug</Link></td>
+                            <td><Link to={`/posts/?sort=is_draft&order=${reverseOrder}`}>Draft</Link></td>
+                            <td><Link to={`/posts/?sort=published_date&order=${reverseOrder}`}>Published Date</Link></td>
                             <td><Link to={`/posts/?sort=created_date&order=${reverseOrder}`}>Created</Link></td>
                             <td><Link to={`/posts/?sort=updated_date&order=${reverseOrder}`}>Updated</Link></td>
                         </tr>
                         </thead>
                         <tbody>
-                        {processedPosts.map(({_id, title, slug, author_id, category_id, created_date, updated_date}, index) =>
+                        {processedPosts.map(({
+                            _id, title, slug, author_id, category_id,
+                            is_draft, published_date, created_date, updated_date}, index) =>
                         {
                             return (
                                 <tr key={_id}>
@@ -89,6 +93,8 @@ let PostList = class extends Component
                                     <td>{this.getRelatedValue(users, author_id, 'display_name')}</td>
                                     <td>{this.getRelatedValue(categories, category_id, 'name')}</td>
                                     <td>{slug}</td>
+                                    <td>{is_draft}</td>
+                                    <td>{published_date}</td>
                                     <td>{created_date}</td>
                                     <td>{updated_date}</td>
                                 </tr>

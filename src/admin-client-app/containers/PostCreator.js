@@ -48,6 +48,8 @@ let PostCreator = class extends Component
                             ))}
                         </Select>
                         <TextArea name="content" label="Content" placeholder="Love" />
+                        <Text name="is_draft" label="Draft" />
+                        <Text name="published_date" label="Draft" type="date" />
                         <button>Submit</button>
                     </Form>
                 </section>

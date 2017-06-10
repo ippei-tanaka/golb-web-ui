@@ -1,21 +1,22 @@
 const path = require('path');
-const fs = require('fs');
 const webpack = require('webpack');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const DefinePlugin = webpack.DefinePlugin;
 
-const {NODE_ENV, GOLB_CONFIG} = process.env;
-const cwd = process.cwd();
-const config = JSON.parse(fs.readFileSync(path.resolve(cwd, GOLB_CONFIG || "config.json"), 'utf8'));
+const {NODE_ENV} = process.env;
 
-const srcDir = path.resolve(__dirname, "./src/admin-client-app");
+const cwd = process.cwd();
+
+const config = require('./config-loader').load();
+
+const adminClientAppSrcDir = path.resolve(__dirname, "./src/admin-client-app");
 
 module.exports =
 {
     entry: {
-        app: srcDir,
+        app: adminClientAppSrcDir,
         vendor: [
             'react',
             'react-dom',
@@ -53,13 +54,13 @@ module.exports =
                     ADMIN_ROOT: JSON.stringify(config.adminRoot),
                     ADMIN_API_HOSTNAME: JSON.stringify(config.adminApiHostname),
                     ADMIN_API_PORT: JSON.stringify(config.adminApiPort),
-                    ADMIN_API_BASENAME: JSON.stringify(config.adminApiBasename),
+                    ADMIN_API_BASENAME: JSON.stringify(config.adminApiBasename)
                 }
             }
         }),
         new HtmlWebpackPlugin({
             title: 'Golb Admin App',
-            template: path.resolve(srcDir, 'index.ejs')
+            template: path.resolve(adminClientAppSrcDir, 'index.ejs')
         })
     ],
 

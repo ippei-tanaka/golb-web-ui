@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "dev-server": "babel-node scripts/run-server.js -c golb.config.dev.json",
+    "dev-server": "GOLB_CONFIG=golb.config.dev.json NODE_ENV=development babel-node scripts/run-server.js -c golb.config.dev.json",
     "webpack-dev": "GOLB_CONFIG=golb.config.dev.json NODE_ENV=development webpack --config webpack.dev.config.js -w",
     "test": "mocha $(find test -name '*.test.js') --compilers js:babel-core/register",
     "compile": "NODE_ENV=production npm-run-all compile:*",
@@ -30,6 +30,7 @@
     "express": "^4.15.2",
     "history": "^4.6.1",
     "html-webpack-plugin": "^2.28.0",
+    "node-fetch": "^1.7.0",
     "npm-run-all": "^4.0.2",
     "paginator": "^1.0.0",
     "prop-types": "^15.5.8",
