@@ -1,0 +1,12 @@
+.module-post {
+    background-color: darkorange;
+
+    @at-root{
+        .m-pst-title
+        {
+            color: white;
+        }
+    }
+
+}
+

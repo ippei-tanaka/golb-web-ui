@@ -7,6 +7,7 @@ const renderDocument = (title, html, preloadedState) => (
     <html>
       <head>
         <title>${title}</title>
+        <link href="index.bundle.css" media="all" rel="stylesheet" />
       </head>
       <body>
         <div id="root">${html}</div>

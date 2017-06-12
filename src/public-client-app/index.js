@@ -6,4 +6,3 @@ render(
     <Root {...__PRELOADED_STATE__} />,
     document.getElementById("root")
 );
-

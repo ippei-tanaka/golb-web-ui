@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Post.css";
 
 const getOrdinal = (number) =>
 {
@@ -46,10 +47,10 @@ const Post = ({
     const date = new Date(updated_date || created_date);
 
     return (
-        <article>
-            <h1>{title}</h1>
-            <time>{getOrdinal(date.getDate())} {monthNames[date.getMonth()]}, {date.getFullYear()}</time>
-            <div>{content}</div>
+        <article className="module-post">
+            <h1 className="m-pst-title">{title}</h1>
+            <time className="m-pst-time">{getOrdinal(date.getDate())} {monthNames[date.getMonth()]}, {date.getFullYear()}</time>
+            <div className="m-pst-content">{content}</div>
         </article>
     );
 };

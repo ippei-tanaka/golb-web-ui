@@ -27,13 +27,28 @@ module.exports =
         loaders: [
             {
                 test: /\.jsx?$/,
-                loader: 'babel-loader',
+                use: ['babel-loader'],
                 exclude: /node_modules/
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                    loader: 'css-loader?importLoaders=1!postcss-loader'
+                use: ExtractTextPlugin.extract({
+                    //use: 'css-loader?importLoaders=1!postcss-loader'
+                    //use: 'css-loader'
+                    use: [
+                        //{
+                        //    loader: 'style-loader',
+                        //},
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1,
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader'
+                        }
+                    ]
                 }),
             },
         ]
@@ -44,7 +59,7 @@ module.exports =
             name: "vendor",
             filename: "vendor.bundle.js"
         }),
-        new ExtractTextPlugin('[name].bundle.css')
+        new ExtractTextPlugin('index.bundle.css')
     ],
 
     devtool: NODE_ENV === "development" ? 'inline-source-map' : false
