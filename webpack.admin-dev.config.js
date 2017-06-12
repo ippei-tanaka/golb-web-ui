@@ -40,11 +40,14 @@ module.exports =
                 exclude: /node_modules/
             },
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                    loader: 'css-loader?importLoaders=1!postcss-loader'
-                }),
-            },
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    use: [
+                        {loader: 'css-loader'},
+                        {loader: 'sass-loader'}
+                    ]
+                })
+            }
         ]
     },
 
@@ -68,7 +71,7 @@ module.exports =
             title: 'Golb Admin App',
             template: path.resolve(adminClientAppSrcDir, 'index.ejs')
         }),
-        new ExtractTextPlugin('[name].bundle.css')
+        new ExtractTextPlugin('index.bundle.css')
     ],
 
     devtool: NODE_ENV === "development" ? 'inline-source-map' : false

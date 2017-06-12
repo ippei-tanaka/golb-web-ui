@@ -27,30 +27,18 @@ module.exports =
         loaders: [
             {
                 test: /\.jsx?$/,
-                use: ['babel-loader'],
+                loader: 'babel-loader',
                 exclude: /node_modules/
             },
             {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
-                    //use: 'css-loader?importLoaders=1!postcss-loader'
-                    //use: 'css-loader'
                     use: [
-                        //{
-                        //    loader: 'style-loader',
-                        //},
-                        {
-                            loader: 'css-loader',
-                            //options: {
-                            //    importLoaders: 1,
-                            // }
-                        },
-                        {
-                            loader: 'sass-loader'
-                        }
+                        {loader: 'css-loader'},
+                        {loader: 'sass-loader'}
                     ]
-                }),
-            },
+                })
+            }
         ]
     },
 
