@@ -1,0 +1,25 @@
+//@import "./Reset.scss";
+
+body
+{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+}
+
+a
+{
+    color: #0f3253;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #1d61a1;
+    text-decoration: underline;
+}
+
+.module-header
+{
+    background-color: #f0f0f0;
+    padding: 20px;
+}

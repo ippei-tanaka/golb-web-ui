@@ -31,7 +31,7 @@ module.exports =
                 exclude: /node_modules/
             },
             {
-                test: /\.css$/,
+                test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
                     //use: 'css-loader?importLoaders=1!postcss-loader'
                     //use: 'css-loader'
@@ -41,12 +41,12 @@ module.exports =
                         //},
                         {
                             loader: 'css-loader',
-                            options: {
-                                importLoaders: 1,
-                            }
+                            //options: {
+                            //    importLoaders: 1,
+                            // }
                         },
                         {
-                            loader: 'postcss-loader'
+                            loader: 'sass-loader'
                         }
                     ]
                 }),

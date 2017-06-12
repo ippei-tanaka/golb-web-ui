@@ -1,14 +1,17 @@
 import React from 'react';
 import Post from './Post';
+import "./Root.scss";
 
 const Root = ({posts, settings}) => {
     return (
         <div>
-            <header>
-                <h1>{settings.name}</h1>
+            <header className="module-header">
+                <h1><a href="/">{settings.name}</a></h1>
             </header>
-            {posts.posts.map((post, index) => (
-                <Post key={post._id} {...post} />
+            {posts.map((post, index) => (
+                <section key={post._id}>
+                    <Post {...post} />
+                </section>
             ))}
         </div>
     );

@@ -21,7 +21,7 @@
                     // Set BABEL_ENV=node to activate this plugin
                     "babel-plugin-transform-require-ignore",
                     {
-                        "extensions": [".css"]
+                        "extensions": [".scss"]
                     }
                 ]
             ]

@@ -30,7 +30,22 @@ export default class {
         app.get("/", respond(async () => {
             const posts = await fetch('/posts', {method: 'get'});
             const settings = await fetch('/settings', {method: 'get'});
-            return render({posts, settings, title: settings.name});
+            return render({
+                posts: posts.posts,
+                settings,
+                title: settings.name
+            });
+        }));
+
+        app.get("/post/:slug", respond(async (request, responce) => {
+            const slug = request.params.slug;
+            const post = await fetch(`/post/${slug}`, {method: 'get'});
+            const settings = await fetch('/settings', {method: 'get'});
+            return render({
+                posts: [post],
+                settings,
+                title: settings.name
+            });
         }));
 
         // adding class methods to the express app
