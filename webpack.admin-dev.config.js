@@ -1,17 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const DefinePlugin = webpack.DefinePlugin;
-
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const {NODE_ENV} = process.env;
-
 const cwd = process.cwd();
-
 const config = require('./config-loader').load();
-
-const adminClientAppSrcDir = path.resolve(__dirname, "./src/admin-client-app");
+const adminClientAppSrcDir = path.resolve(__dirname, "./src/public-client-app");
 
 module.exports =
 {
@@ -38,7 +34,17 @@ module.exports =
 
     module: {
         loaders: [
-            {test: /\.jsx?$/, loader: 'babel-loader', exclude: /node_modules/}
+            {
+                test: /\.jsx?$/,
+                loader: 'babel-loader',
+                exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    loader: 'css-loader?importLoaders=1!postcss-loader'
+                }),
+            },
         ]
     },
 
@@ -61,7 +67,8 @@ module.exports =
         new HtmlWebpackPlugin({
             title: 'Golb Admin App',
             template: path.resolve(adminClientAppSrcDir, 'index.ejs')
-        })
+        }),
+        new ExtractTextPlugin('[name].bundle.css')
     ],
 
     devtool: NODE_ENV === "development" ? 'inline-source-map' : false
