@@ -1,0 +1,67 @@
+body
+{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+}
+
+a
+{
+    color: #1b5b97;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #2272bd;
+    text-decoration: underline;
+}
+
+table {
+    width: 100%;
+    margin: 20px 0;
+    font-size: 90%;
+
+    th, td
+    {
+        padding: 7px;
+        border: 1px solid #f0f0f0;
+    }
+
+    thead {
+        background-color: #c0c0c0;
+    }
+
+    tbody {
+        tr:nth-child(2n)
+        {
+            background-color: #e0e0e0;
+        }
+    }
+}
+
+.module-pagination
+{
+    display: flex;
+    flex-wrap: wrap;
+
+    .m-pgn-list-item
+    {
+        list-style: none;
+        margin: 20px 10px;
+    }
+}
+
+nav
+{
+    margin: 20px 10px 40px;
+}
+
+h2, form
+{
+    margin: 20px 15px;
+}
+
+.module-temp
+{
+    margin: 20px 15px;
+}

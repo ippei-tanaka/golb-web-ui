@@ -6,7 +6,7 @@ const Dashboard = (props) => {
     return (
         <div>
             <Header/>
-            Dashboard
+            <p className="module-temp">Dashboard</p>
         </div>
     );
 };

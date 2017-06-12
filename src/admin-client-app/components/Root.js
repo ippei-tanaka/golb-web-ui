@@ -19,6 +19,7 @@ import PostCreator from '../containers/PostCreator';
 import PostEditor from '../containers/PostEditor';
 import SettingEditor from '../containers/SettingEditor';
 import ProtectedRoute from '../containers/ProtectedRoute';
+import "./root.scss";
 
 const Root = ({store, basename}) =>
 {

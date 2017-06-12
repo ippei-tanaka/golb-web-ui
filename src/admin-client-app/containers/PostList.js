@@ -103,25 +103,25 @@ let PostList = class extends Component
                         </tbody>
                     </table>
                 </section>
-                <menu>
+                <menu className="module-pagination">
                     {pages > 0 ? (
-                        <li><Link to={`/posts/?sort=${sort}&order=${order}`}>&lt;&lt; Fist</Link></li>
+                        <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}`}>&lt;&lt; Fist</Link></li>
                     ) : null}
 
                     {has_previous_page ? (
-                        <li><Link to={`/posts/?sort=${sort}&order=${order}&page=${previous_page}`}>&lt; Prev</Link></li>
-                        ) : null}
+                        <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}&page=${previous_page}`}>&lt; Prev</Link></li>
+                    ) : null}
 
                     {pages > 0 ? [...(new Array(pages)).keys()].map(i =>
-                        <li key={i}><Link to={`/posts/?sort=${sort}&order=${order}&page=${first_page + i}`}>{first_page + i}</Link></li>
-                        ) : null}
+                        <li className="m-pgn-list-item" key={i}><Link to={`/users/?sort=${sort}&order=${order}&page=${first_page + i}`}>{first_page + i}</Link></li>
+                    ) : null}
 
                     {has_next_page ? (
-                        <li><Link to={`/posts/?sort=${sort}&order=${order}&page=${next_page}`}>Next &gt;</Link></li>
+                        <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}&page=${next_page}`}>Next &gt;</Link></li>
                     ) : null}
 
                     {total_pages > 0 ? (
-                        <li><Link to={`/posts/?sort=${sort}&order=${order}&page=${total_pages}`}>Last &gt;&gt;</Link></li>
+                        <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}&page=${total_pages}`}>Last &gt;&gt;</Link></li>
                     ) : null}
                 </menu>
                 <nav>

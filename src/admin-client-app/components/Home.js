@@ -5,7 +5,7 @@ const Home = (props) => {
     return (
         <div>
             <Header/>
-            Home
+            <p className="module-temp">Home</p>
         </div>
     );
 };

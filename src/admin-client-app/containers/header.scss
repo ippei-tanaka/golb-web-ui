@@ -1,0 +1,33 @@
+.module-header
+{
+    .m-hdr-list
+    {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .m-hdr-list-item
+    {
+        list-style: none;
+        margin: 1px;
+    }
+
+    .m-hdr-link
+    {
+        padding: 15px;
+        background-color: #00689A;
+        display: inline-block;
+        color: #f0f0f0;
+        text-decoration: none;
+
+        &:hover {
+            background-color: #007cb8;
+            color: #ffffff;
+        }
+    }
+
+    .m-hdr-message
+    {
+        margin: 20px 15px;
+    }
+}

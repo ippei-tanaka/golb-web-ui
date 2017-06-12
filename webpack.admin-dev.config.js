@@ -7,7 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const {NODE_ENV} = process.env;
 const cwd = process.cwd();
 const config = require('./config-loader').load();
-const adminClientAppSrcDir = path.resolve(__dirname, "./src/public-client-app");
+const adminClientAppSrcDir = path.resolve(__dirname, "./src/admin-client-app");
 
 module.exports =
 {
