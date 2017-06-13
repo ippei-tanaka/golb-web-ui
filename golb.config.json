@@ -1,14 +1,14 @@
 {
     "webHost": "localhost",
-    "webPort": 3003,
+    "webPort": 80,
     "adminRoot": "/admin",
-    "adminDocRoot": "./static-dev/admin-client",
+    "adminDocRoot": "./static/admin-client",
     "adminApiHostname": "localhost",
-    "adminApiPort": 3000,
+    "adminApiPort": 8080,
     "adminApiBasename": "admin-api",
     "publicRoot": "/",
-    "publicDocRoot": "./static-dev/public-client",
+    "publicDocRoot": "./static/public-client",
     "publicApiHostname": "localhost",
-    "publicApiPort": 3000,
+    "publicApiPort": 8080,
     "publicApiBasename": "public-api"
 }

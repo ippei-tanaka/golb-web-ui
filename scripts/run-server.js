@@ -1,4 +1,4 @@
-import {server} from '../src';
+import {start} from '../dev-tools/server';
 import path from 'path';
 import fs from 'fs';
 import {ArgumentParser} from 'argparse';
@@ -19,7 +19,7 @@ import {ArgumentParser} from 'argparse';
         )
     );
 
-    server.start(config);
+    start(config);
 
 })();
 

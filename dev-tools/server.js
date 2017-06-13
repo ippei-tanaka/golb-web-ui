@@ -1,5 +1,5 @@
 import express from 'express';
-import {AdminServerApp, PublicServerApp} from './index';
+import {AdminServerApp, PublicServerApp} from '../src';
 
 let server;
 let app;
