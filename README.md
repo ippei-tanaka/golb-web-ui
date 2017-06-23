@@ -32,7 +32,7 @@ const config =
     adminApiBasename: "/admin-api",
 };
 
-cosnt adminServerApp = new AdminServerApp(config);
+const adminServerApp = new AdminServerApp(config);
 
 const app = express();
 
@@ -62,7 +62,7 @@ const config =
     publicApiBasename: "/public-api"
 };
 
-cosnt publicServerApp = new PublicServerApp(config);
+const publicServerApp = new PublicServerApp(config);
 
 const app = express();
 
