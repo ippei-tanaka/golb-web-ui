@@ -6,8 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const {NODE_ENV} = process.env;
 const adminClientAppSrcDir = path.resolve(__dirname, "./src/admin-client-app");
 const adminServerAppSrcDir = path.resolve(__dirname, "./src/admin-server-app");
-const fs = require('fs');
-const config = JSON.parse(fs.readFileSync(path.resolve(adminServerAppSrcDir, 'admin-server.setting.json'), 'utf8'));
+const config = require(adminServerAppSrcDir + "/admin-server.setting");
 
 module.exports =
 {
@@ -27,7 +26,7 @@ module.exports =
     },
 
     output: {
-        path: path.resolve(adminServerAppSrcDir, config.adminDocRoot),
+        path: config.adminDocRoot,
         filename: 'index.bundle.js'
     },
 

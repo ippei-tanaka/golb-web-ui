@@ -2,10 +2,8 @@ import express from 'express';
 import fetch from './fetch';
 import {BAD_REQUEST, OK} from './status-codes';
 import {render} from './renderer';
-import fs from 'fs';
 import path from 'path';
-
-const config = JSON.parse(fs.readFileSync(path.resolve(__dirname, './public-server.setting.json'), 'utf8'));
+import config from './public-server.setting';
 
 const respond = (asyncFn = async () => {}) =>
 {
@@ -35,7 +33,7 @@ export default class
 
         const _fetch = fetch.bind(null, publicApiHostname, publicApiPort, publicApiBasename);
 
-        app.use(express.static(path.resolve(__dirname, config.publicDocRoot)));
+        app.use(express.static(config.publicDocRoot));
 
         app.get("/", respond(async () => {
             const posts = await _fetch('/posts', {method: 'get'});

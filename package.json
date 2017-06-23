@@ -4,13 +4,15 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "dev-server": "BABEL_ENV=node NODE_ENV=development babel-node scripts/run-server.js -c golb.config.dev.json",
-    "webpack-admin-dev": "NODE_ENV=development webpack --config webpack.admin-client.config.js -w",
-    "webpack-public-dev": "NODE_ENV=development webpack --config webpack.public-client.config.js -w",
+    "dev-server": "BABEL_ENV=node NODE_ENV=development babel-node scripts/run-server.js",
+    "webpack-dev-admin-client": "NODE_ENV=development webpack --config webpack.admin-client.config.js -w",
+    "webpack-dev-public-client": "NODE_ENV=development webpack --config webpack.public-client.config.js -w",
     "compile": "npm-run-all compile:*",
     "compile:clear": "rimraf dist",
-    "compile:build-server-apps": "BABEL_ENV=node babel ./src --out-dir dist",
-    "prepublish": "NODE_ENV=production npm run compile"
+    "compile:server-apps": "BABEL_ENV=node NODE_ENV=production babel ./src --out-dir dist --copy-files",
+    "compile:admin-client": "NODE_ENV=production webpack --config webpack.admin-client.config.js",
+    "compile:public-client": "NODE_ENV=production webpack --config webpack.public-client.config.js",
+    "prepublish": "npm run compile"
   },
   "devDependencies": {
     "argparse": "^1.0.9",

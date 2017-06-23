@@ -5,8 +5,7 @@ const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const {NODE_ENV} = process.env;
 const publicServerAppSrcDir = path.resolve(__dirname, "./src/public-server-app");
 const publicClientAppSrcDir = path.resolve(__dirname, "./src/public-client-app");
-const fs = require('fs');
-const config = JSON.parse(fs.readFileSync(path.resolve(publicServerAppSrcDir, 'public-server.setting.json'), 'utf8'));
+const config = require(publicServerAppSrcDir + "/public-server.setting");
 
 module.exports =
 {
@@ -19,7 +18,7 @@ module.exports =
     },
 
     output: {
-        path: path.resolve(publicServerAppSrcDir, config.publicDocRoot),
+        path: config.publicDocRoot,
         filename: 'index.bundle.js'
     },
 

@@ -2,9 +2,9 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import ejs from 'ejs';
+import config from './admin-server.setting';
 
-const config = JSON.parse(fs.readFileSync(path.resolve(__dirname, './admin-server.setting.json'), 'utf8'));
-const ADMIN_DOC_ROOT = path.resolve(__dirname, config.adminDocRoot);
+const ADMIN_DOC_ROOT = config.adminDocRoot;
 const ejsFile = fs.readFileSync(path.resolve(__dirname, '../admin-client-app/index.ejs'), 'utf8');
 
 export default class {
