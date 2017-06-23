@@ -6,7 +6,7 @@ const {
     ADMIN_API_HOSTNAME,
     ADMIN_API_PORT,
     ADMIN_API_BASENAME
-} = process.env;
+} = window.__GOLB_ENV__;
 
 const _url = url.parse(`http://${ADMIN_API_HOSTNAME}:${ADMIN_API_PORT}/${ADMIN_API_BASENAME}`);
 const _base_pathname = _url.pathname;

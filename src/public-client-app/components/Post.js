@@ -1,5 +1,4 @@
 import React from 'react';
-import "./Post.scss";
 import getOrdinal from "../utilities/get-ordinal";
 import getMonthName from "../utilities/get-month-name";
 

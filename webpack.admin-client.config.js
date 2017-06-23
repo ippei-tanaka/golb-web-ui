@@ -1,13 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 const DefinePlugin = webpack.DefinePlugin;
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const {NODE_ENV} = process.env;
-const cwd = process.cwd();
-const config = require('./config-loader').load();
 const adminClientAppSrcDir = path.resolve(__dirname, "./src/admin-client-app");
+const adminServerAppSrcDir = path.resolve(__dirname, "./src/admin-server-app");
+const fs = require('fs');
+const config = JSON.parse(fs.readFileSync(path.resolve(adminServerAppSrcDir, 'admin-server.setting.json'), 'utf8'));
 
 module.exports =
 {
@@ -27,8 +27,7 @@ module.exports =
     },
 
     output: {
-        path: path.resolve(cwd, config.adminDocRoot),
-        publicPath: config.adminRoot,
+        path: path.resolve(adminServerAppSrcDir, config.adminDocRoot),
         filename: 'index.bundle.js'
     },
 
@@ -59,17 +58,9 @@ module.exports =
         new DefinePlugin({
             process: {
                 env: {
-                    NODE_ENV: JSON.stringify(NODE_ENV),
-                    ADMIN_ROOT: JSON.stringify(config.adminRoot),
-                    ADMIN_API_HOSTNAME: JSON.stringify(config.adminApiHostname),
-                    ADMIN_API_PORT: JSON.stringify(config.adminApiPort),
-                    ADMIN_API_BASENAME: JSON.stringify(config.adminApiBasename)
+                    NODE_ENV: JSON.stringify(NODE_ENV)
                 }
             }
-        }),
-        new HtmlWebpackPlugin({
-            title: 'Golb Admin App',
-            template: path.resolve(adminClientAppSrcDir, 'index.ejs')
         }),
         new ExtractTextPlugin('index.bundle.css')
     ],

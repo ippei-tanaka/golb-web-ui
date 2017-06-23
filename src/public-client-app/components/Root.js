@@ -1,6 +1,5 @@
 import React from 'react';
 import Post from './Post';
-import "./Root.scss";
 
 const Root = ({posts, settings}) => {
     return (

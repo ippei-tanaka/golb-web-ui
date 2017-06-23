@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import actionCreators from '../action-creators'
-import "./header.scss";
 
 let Header = ({logout, loggedInUser, authenticate}) =>
 {

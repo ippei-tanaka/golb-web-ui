@@ -1,27 +1,20 @@
 import fetch from 'node-fetch';
-import url from 'url';
-import path from 'path';
-import {load} from '../../config-loader';
+import urlModule from 'url';
+import pathModule from 'path';
 
-const {
-    publicApiHostname,
-    publicApiPort,
-    publicApiBasename
-} = load();
-
-const _url = url.parse(`http://${publicApiHostname}:${publicApiPort}/${publicApiBasename}`);
-const _base_pathname = _url.pathname;
-
-export default (_path, options) =>
+export default (host, port, base, path, options) =>
 {
-    try {
-        _url.pathname = path.resolve('/', _base_pathname, "." + path.resolve('/', _path));
+    const url = urlModule.parse(`http://${host}:${port}/${base}`);
+    const base_pathname = url.pathname;
 
-        const fetchedURL = _url.format();
+    try {
+        url.pathname = pathModule.resolve('/', base_pathname, "." + pathModule.resolve('/', path));
+
+        const fetchedURL = url.format();
 
         return fetch(fetchedURL, {
             headers: {
-                "Origin": `${_url.protocol}//${_url.host}`
+                "Origin": `${url.protocol}//${url.host}`
             },
             ...options
         }).then(async response =>

@@ -2,6 +2,10 @@ import express from 'express';
 import fetch from './fetch';
 import {BAD_REQUEST, OK} from './status-codes';
 import {render} from './renderer';
+import fs from 'fs';
+import path from 'path';
+
+const config = JSON.parse(fs.readFileSync(path.resolve(__dirname, './public-server.setting.json'), 'utf8'));
 
 const respond = (asyncFn = async () => {}) =>
 {
@@ -19,17 +23,23 @@ const respond = (asyncFn = async () => {}) =>
     };
 };
 
-export default class {
-
-    constructor ({publicDocRoot})
+export default class
+{
+    constructor ({
+        publicApiHostname,
+        publicApiPort,
+        publicApiBasename
+    })
     {
         const app = express();
 
-        app.use(express.static(publicDocRoot));
+        const _fetch = fetch.bind(null, publicApiHostname, publicApiPort, publicApiBasename);
+
+        app.use(express.static(path.resolve(__dirname, config.publicDocRoot)));
 
         app.get("/", respond(async () => {
-            const posts = await fetch('/posts', {method: 'get'});
-            const settings = await fetch('/settings', {method: 'get'});
+            const posts = await _fetch('/posts', {method: 'get'});
+            const settings = await _fetch('/settings', {method: 'get'});
             return render({
                 posts: posts.posts,
                 settings,
@@ -39,8 +49,8 @@ export default class {
 
         app.get("/post/:slug", respond(async (request, responce) => {
             const slug = request.params.slug;
-            const post = await fetch(`/post/${slug}`, {method: 'get'});
-            const settings = await fetch('/settings', {method: 'get'});
+            const post = await _fetch(`/post/${slug}`, {method: 'get'});
+            const settings = await _fetch('/settings', {method: 'get'});
             return render({
                 posts: [post],
                 settings,

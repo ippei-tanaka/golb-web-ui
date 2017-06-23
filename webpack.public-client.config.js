@@ -2,10 +2,11 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
-const config = require('./config-loader').load();
 const {NODE_ENV} = process.env;
-const cwd = process.cwd();
+const publicServerAppSrcDir = path.resolve(__dirname, "./src/public-server-app");
 const publicClientAppSrcDir = path.resolve(__dirname, "./src/public-client-app");
+const fs = require('fs');
+const config = JSON.parse(fs.readFileSync(path.resolve(publicServerAppSrcDir, 'public-server.setting.json'), 'utf8'));
 
 module.exports =
 {
@@ -18,8 +19,7 @@ module.exports =
     },
 
     output: {
-        path: path.resolve(cwd, config.publicDocRoot),
-        publicPath: config.publicRoot,
+        path: path.resolve(publicServerAppSrcDir, config.publicDocRoot),
         filename: 'index.bundle.js'
     },
 

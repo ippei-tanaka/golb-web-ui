@@ -2,9 +2,20 @@
 <html>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
-    <title><%= htmlWebpackPlugin.options.title %></title>
+    <link href="<%= ADMIN_ROOT %>/index.bundle.css" rel="stylesheet" />
+    <title>Golb Admin Page</title>
 </head>
 <body>
     <div id="Root"></div>
+    <script>
+        window.__GOLB_ENV__ = {
+            ADMIN_ROOT: "<%= ADMIN_ROOT %>",
+            ADMIN_API_HOSTNAME: "<%= ADMIN_API_HOSTNAME %>",
+            ADMIN_API_PORT: "<%= ADMIN_API_PORT %>",
+            ADMIN_API_BASENAME: "<%= ADMIN_API_BASENAME %>"
+        };
+    </script>
+    <script src="<%= ADMIN_ROOT %>/vendor.bundle.js"></script>
+    <script src="<%= ADMIN_ROOT %>/index.bundle.js"></script>
 </body>
 </html>
