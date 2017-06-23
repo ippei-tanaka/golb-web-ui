@@ -4,7 +4,7 @@ This is the web UI for Golb, a blogging platform for Node.js.
 
 ## Installation
 
-To install this package, run:
+Golb Web UI is available on npm. To install this package, run:
 
 ```
 npm install --save golb-web-ui

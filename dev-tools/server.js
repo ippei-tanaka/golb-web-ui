@@ -1,6 +1,6 @@
 import express from 'express';
-//import {AdminServerApp, PublicServerApp} from '../src';
-import {AdminServerApp, PublicServerApp} from '../dist';
+import {AdminServerApp, PublicServerApp} from '../src';
+//import {AdminServerApp, PublicServerApp} from '../dist';
 
 let server;
 let app;
