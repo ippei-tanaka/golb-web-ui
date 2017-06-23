@@ -1,16 +1,18 @@
 import {start} from '../dev-tools/server';
-import path from 'path';
-import fs from 'fs';
-import {ArgumentParser} from 'argparse';
+import config from './server.config';
+//import path from 'path';
+//import fs from 'fs';
+//import {ArgumentParser} from 'argparse';
 
 (async () => {
 
-    const parser = new ArgumentParser();
+    //const parser = new ArgumentParser();
 
-    parser.addArgument(['-c', '--config'], {defaultValue: "config.json"});
+    //parser.addArgument(['-c', '--config'], {defaultValue: "config.json"});
 
-    const args = parser.parseArgs();
-    const cwd = process.cwd();
+    //const args = parser.parseArgs();
+    //const cwd = process.cwd();
+    /*
     const config = await new Promise(
         (resolve, reject) => fs.readFile(
             path.resolve(cwd, args.config),
@@ -18,6 +20,7 @@ import {ArgumentParser} from 'argparse';
             (err, data) => err ? reject(err) : resolve(JSON.parse(data))
         )
     );
+    */
 
     start(config);
 

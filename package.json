@@ -4,10 +4,9 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "dev-server": "GOLB_CONFIG=golb.config.dev.json BABEL_ENV=node NODE_ENV=development babel-node scripts/run-server.js -c golb.config.dev.json",
+    "dev-server": "BABEL_ENV=node NODE_ENV=development babel-node scripts/run-server.js -c golb.config.dev.json",
     "webpack-admin-dev": "NODE_ENV=development webpack --config webpack.admin-client.config.js -w",
     "webpack-public-dev": "NODE_ENV=development webpack --config webpack.public-client.config.js -w",
-    "test": "mocha $(find test -name '*.test.js') --compilers js:babel-core/register",
     "compile": "npm-run-all compile:*",
     "compile:clear": "rimraf dist",
     "compile:build-server-apps": "BABEL_ENV=node babel ./src --out-dir dist",
