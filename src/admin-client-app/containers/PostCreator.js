@@ -47,9 +47,9 @@ let PostCreator = class extends Component
                                 <option key={categoryId} value={categoryId}>{categories[categoryId].name}</option>
                             ))}
                         </Select>
-                        <TextArea name="content" label="Content" placeholder="Love" />
+                        <TextArea name="content" label="Content" placeholder="Write your post here." />
                         <Text name="is_draft" label="Draft" />
-                        <Text name="published_date" label="Draft" type="date" />
+                        <Text name="published_date" label="Published Date" type="date" />
                         <button>Submit</button>
                     </Form>
                 </section>
