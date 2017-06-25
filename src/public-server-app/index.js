@@ -2,7 +2,6 @@ import express from 'express';
 import fetch from './fetch';
 import {BAD_REQUEST, OK} from './status-codes';
 import {render} from './renderer';
-import path from 'path';
 import config from './public-server.setting';
 
 const respond = (asyncFn = async () => {}) =>
@@ -31,30 +30,13 @@ export default class
     {
         const app = express();
 
-        const _fetch = fetch.bind(null, publicApiHostname, publicApiPort, publicApiBasename);
+        this._fetch = fetch.bind(null, publicApiHostname, publicApiPort, publicApiBasename);
 
         app.use(express.static(config.publicDocRoot));
 
-        app.get("/", respond(async () => {
-            const posts = await _fetch('/posts', {method: 'get'});
-            const settings = await _fetch('/settings', {method: 'get'});
-            return render({
-                posts: posts.posts,
-                settings,
-                title: settings.name
-            });
-        }));
+        app.get("/", respond(this.homeRoute));
 
-        app.get("/post/:slug", respond(async (request, responce) => {
-            const slug = request.params.slug;
-            const post = await _fetch(`/post/${slug}`, {method: 'get'});
-            const settings = await _fetch('/settings', {method: 'get'});
-            return render({
-                posts: [post],
-                settings,
-                title: settings.name
-            });
-        }));
+        app.get("/post/:slug", respond(this.singlePostRoute));
 
         // adding class methods to the express app
 
@@ -65,6 +47,35 @@ export default class
         }
 
         return app;
+    }
+
+    get homeRoute ()
+    {
+        return async () =>
+        {
+            const posts = await this._fetch('/posts', {method: 'get'});
+            const settings = await this._fetch('/settings', {method: 'get'});
+            return render({
+                posts: posts.posts,
+                settings,
+                title: settings.name
+            });
+        }
+    }
+
+    get singlePostRoute ()
+    {
+        return async (request) =>
+        {
+            const slug = request.params.slug;
+            const post = await this._fetch(`/post/${slug}`, {method: 'get'});
+            const settings = await this._fetch('/settings', {method: 'get'});
+            return render({
+                posts: [post],
+                settings,
+                title: post.title
+            });
+        }
     }
 
 };
