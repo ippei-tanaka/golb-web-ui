@@ -93,7 +93,7 @@ let PostList = class extends Component
                                     <td>{this.getRelatedValue(users, author_id, 'display_name')}</td>
                                     <td>{this.getRelatedValue(categories, category_id, 'name')}</td>
                                     <td>{slug}</td>
-                                    <td>{is_draft}</td>
+                                    <td>{is_draft ? "yes" : "no"}</td>
                                     <td>{published_date}</td>
                                     <td>{created_date}</td>
                                     <td>{updated_date}</td>

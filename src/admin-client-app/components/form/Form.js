@@ -36,13 +36,21 @@ let Form = class extends Component {
     {
         event.preventDefault();
 
-        const formData = new FormData(this.refs.formElement);
+        const formElements = event.target.querySelectorAll('input, select, textarea, button');
         const submitted = {};
         const entries = this.state.entries;
 
-        for (let key of formData.keys())
+        for (let element of formElements)
         {
-            submitted[key] = entries[key];
+            const name = element.getAttribute('name');
+
+            if (!name) continue;
+
+            const value = entries[name];
+
+            if (typeof value === "undefined") continue;
+
+            submitted[name] = value;
         }
 
         const obj = this.props.onSubmit(submitted);

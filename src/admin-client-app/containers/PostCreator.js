@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Header from './Header';
-import {Text, TextArea, Select, Form} from '../components/form';
+import {Text, Checkbox, TextArea, Select, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
 let PostCreator = class extends Component
@@ -48,7 +48,7 @@ let PostCreator = class extends Component
                             ))}
                         </Select>
                         <TextArea name="content" label="Content" placeholder="Write your post here." />
-                        <Text name="is_draft" label="Draft" />
+                        <Checkbox name="is_draft" label="Draft" />
                         <Text name="published_date" label="Published Date" type="date" />
                         <button>Submit</button>
                     </Form>
