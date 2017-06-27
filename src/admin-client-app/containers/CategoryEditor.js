@@ -25,8 +25,8 @@ let CategoryEditor = class extends Component
 
         return (
             <Root>
-                <section>
-                    <h2>Edit Category</h2>
+                <div className="module-content">
+                    <h1 className="m-ctt-title">Edit Category</h1>
                     {category ? (
                         <Form
                             initialEntries={category}
@@ -39,7 +39,7 @@ let CategoryEditor = class extends Component
                     ) : (
                         <div>loading...</div>
                     )}
-                </section>
+                </div>
             </Root>
         );
     }

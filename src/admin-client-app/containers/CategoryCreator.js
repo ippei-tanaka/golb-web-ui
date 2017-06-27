@@ -12,8 +12,8 @@ let CategoryCreator = class extends Component
 
         return (
             <Root>
-                <section>
-                    <h2>Create New Category</h2>
+                <div className="module-content">
+                    <h1 className="m-ctt-title">Create New Category</h1>
                     <Form
                         onSubmit={values => createCategory(values)}
                         onSubmissionSucceed={() => history.push('/categories')}>
@@ -21,7 +21,7 @@ let CategoryCreator = class extends Component
                         <Text name="slug" label="Slug" />
                         <button>Submit</button>
                     </Form>
-                </section>
+                </div>
             </Root>
         );
     }

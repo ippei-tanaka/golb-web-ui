@@ -3,7 +3,11 @@ import Root from './Root';
 
 const Home = () => {
     return (
-        <Root>Home</Root>
+        <Root>
+            <div className="module-content">
+                <h1 className="m-ctt-title">Welcome to Golb Admin!</h1>
+            </div>
+        </Root>
     );
 };
 

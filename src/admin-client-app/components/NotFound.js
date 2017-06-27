@@ -5,7 +5,10 @@ const NotFound = () =>
 {
     return (
         <Root>
-            Not Found
+            <div className="module-content">
+                <h1 className="m-ctt-title">404</h1>
+                <p>The content you are looking for could not be found.</p>
+            </div>
         </Root>
     );
 };

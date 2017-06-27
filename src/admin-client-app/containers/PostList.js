@@ -57,8 +57,8 @@ let PostList = class extends Component
 
         return (
             <Root>
-                <section>
-                    <h2>Post List</h2>
+                <div className="module-content">
+                    <h1 className="m-ctt-title">Post List</h1>
                     <table>
                         <thead>
                         <tr>
@@ -101,31 +101,31 @@ let PostList = class extends Component
                         })}
                         </tbody>
                     </table>
-                </section>
-                <menu className="module-pagination">
-                    {pages > 0 ? (
-                        <li className="m-pgn-list-item"><Link to={`/posts/?sort=${sort}&order=${order}`}>&lt;&lt; Fist</Link></li>
-                    ) : null}
+                    <menu className="module-pagination">
+                        {pages > 0 ? (
+                            <li className="m-pgn-list-item"><Link to={`/posts/?sort=${sort}&order=${order}`}>&lt;&lt; Fist</Link></li>
+                        ) : null}
 
-                    {has_previous_page ? (
-                        <li className="m-pgn-list-item"><Link to={`/posts/?sort=${sort}&order=${order}&page=${previous_page}`}>&lt; Prev</Link></li>
-                    ) : null}
+                        {has_previous_page ? (
+                            <li className="m-pgn-list-item"><Link to={`/posts/?sort=${sort}&order=${order}&page=${previous_page}`}>&lt; Prev</Link></li>
+                        ) : null}
 
-                    {pages > 0 ? [...(new Array(pages)).keys()].map(i =>
-                        <li className="m-pgn-list-item" key={i}><Link to={`/posts/?sort=${sort}&order=${order}&page=${first_page + i}`}>{first_page + i}</Link></li>
-                    ) : null}
+                        {pages > 0 ? [...(new Array(pages)).keys()].map(i =>
+                            <li className="m-pgn-list-item" key={i}><Link to={`/posts/?sort=${sort}&order=${order}&page=${first_page + i}`}>{first_page + i}</Link></li>
+                        ) : null}
 
-                    {has_next_page ? (
-                        <li className="m-pgn-list-item"><Link to={`/posts/?sort=${sort}&order=${order}&page=${next_page}`}>Next &gt;</Link></li>
-                    ) : null}
+                        {has_next_page ? (
+                            <li className="m-pgn-list-item"><Link to={`/posts/?sort=${sort}&order=${order}&page=${next_page}`}>Next &gt;</Link></li>
+                        ) : null}
 
-                    {total_pages > 0 ? (
-                        <li className="m-pgn-list-item"><Link to={`/posts/?sort=${sort}&order=${order}&page=${total_pages}`}>Last &gt;&gt;</Link></li>
-                    ) : null}
-                </menu>
-                <nav>
-                    <Link to="/posts/new">create a new post</Link>
-                </nav>
+                        {total_pages > 0 ? (
+                            <li className="m-pgn-list-item"><Link to={`/posts/?sort=${sort}&order=${order}&page=${total_pages}`}>Last &gt;&gt;</Link></li>
+                        ) : null}
+                    </menu>
+                    <nav>
+                        <Link to="/posts/new">create a new post</Link>
+                    </nav>
+                </div>
             </Root>
         );
     }

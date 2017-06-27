@@ -25,21 +25,23 @@ let UserPasswordEditor = class extends Component
 
         return (
             <Root>
-                <section>
-                    <h2>Edit User Password</h2>
-                    {user ? (
-                        <Form
-                            onSubmit={values => editUserPassword(id, values)}
-                            onSubmissionSucceed={() => history.push(`/users/${id}`)}>
-                            <Text name="old_password" label="Current Password" type="password" />
-                            <Text name="password" label="New Password" type="password" />
-                            <Text name="password_confirmed" label="New Password Confirmed" type="password" />
-                            <button>Submit</button>
-                        </Form>
-                    ) : (
-                        <div>loading...</div>
-                    )}
-                </section>
+                <div className="module-content">
+                    <h1 className="m-ctt-title">Edit User Password</h1>
+                    <section>
+                        {user ? (
+                            <Form
+                                onSubmit={values => editUserPassword(id, values)}
+                                onSubmissionSucceed={() => history.push(`/users/${id}`)}>
+                                <Text name="old_password" label="Current Password" type="password" />
+                                <Text name="password" label="New Password" type="password" />
+                                <Text name="password_confirmed" label="New Password Confirmed" type="password" />
+                                <button>Submit</button>
+                            </Form>
+                        ) : (
+                            <div>loading...</div>
+                        )}
+                    </section>
+                </div>
             </Root>
         );
     }

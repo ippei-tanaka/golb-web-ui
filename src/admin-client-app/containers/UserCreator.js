@@ -12,18 +12,18 @@ let UserCreator = class extends Component
 
         return (
             <Root>
-                <section>
-                    <h2>Create New User</h2>
+                <div className="module-content">
+                    <h1 className="m-ctt-title">Create New User</h1>
                     <Form
                         onSubmit={values => createUser(values)}
                         onSubmissionSucceed={() => history.push('/users')}>
-                        <Text name="email" label="Email" />
-                        <Text name="password" label="Password" type="password" />
-                        <Text name="display_name" label="Display Name" />
-                        <Text name="slug" label="Slug" />
+                        <Text name="email" label="Email"/>
+                        <Text name="password" label="Password" type="password"/>
+                        <Text name="display_name" label="Display Name"/>
+                        <Text name="slug" label="Slug"/>
                         <button>Submit</button>
                     </Form>
-                </section>
+                </div>
             </Root>
         );
     }

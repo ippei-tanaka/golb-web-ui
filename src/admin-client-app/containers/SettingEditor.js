@@ -32,24 +32,24 @@ let SettingEditor = class extends Component
 
         return (
             <Root>
-                <section>
-                    <h2>Edit Settings</h2>
+                <div className="module-content">
+                    <h1 className="m-ctt-title">Edit Settings</h1>
                     {Object.keys(settings).length > 0 ? (
-                    <Form
-                        initialEntries={settings}
-                        onSubmit={values => editSettings(values)}
-                        onSubmissionSucceed={() => this.setState({flushMessage: "The settings saved successfully."})}>
-                        <Text name="name" label="Blog Name" />
-                        <Select name="posts_per_page" label="Posts per page">
-                            <option key="0" value="">(None)</option>
-                            <option key="1" value={1}>1</option>
-                            <option key="2" value={2}>2</option>
-                            <option key="3" value={3}>3</option>
-                            <option key="5" value={5}>5</option>
-                            <option key="10" value={10}>10</option>
-                        </Select>
-                        <button>Save</button>
-                    </Form>
+                        <Form
+                            initialEntries={settings}
+                            onSubmit={values => editSettings(values)}
+                            onSubmissionSucceed={() => this.setState({flushMessage: "The settings saved successfully."})}>
+                            <Text name="name" label="Blog Name" />
+                            <Select name="posts_per_page" label="Posts per page">
+                                <option key="0" value="">(None)</option>
+                                <option key="1" value={1}>1</option>
+                                <option key="2" value={2}>2</option>
+                                <option key="3" value={3}>3</option>
+                                <option key="5" value={5}>5</option>
+                                <option key="10" value={10}>10</option>
+                            </Select>
+                            <button>Save</button>
+                        </Form>
                     ) : (
                         <div>loading...</div>
                     )}
@@ -57,7 +57,7 @@ let SettingEditor = class extends Component
                     {flushMessage ? (
                         <div>{flushMessage}</div>
                     ) : null}
-                </section>
+                </div>
             </Root>
         );
     }

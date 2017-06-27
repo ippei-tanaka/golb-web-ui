@@ -1,4 +1,5 @@
 @import "./mixins.scss";
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
 
 %clearfix {
     *zoom: 1;
@@ -18,7 +19,7 @@ html
 
 body
 {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 15px;
     height: 100%;
 }
@@ -37,7 +38,6 @@ a:hover
 
 table {
     width: 100%;
-    margin: 20px 0;
     font-size: 90%;
 
     th, td
@@ -55,18 +55,6 @@ table {
         {
             background-color: #e0e0e0;
         }
-    }
-}
-
-.module-pagination
-{
-    display: flex;
-    flex-wrap: wrap;
-
-    .m-pgn-list-item
-    {
-        list-style: none;
-        margin: 20px 10px;
     }
 }
 
@@ -141,5 +129,27 @@ table {
     .m-mnu-message
     {
         margin: 20px 15px;
+    }
+}
+
+.module-content
+{
+    .m-ctt-title
+    {
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+}
+
+.module-pagination
+{
+    display: flex;
+    flex-wrap: wrap;
+
+    .m-pgn-list-item
+    {
+        list-style: none;
+        margin: 20px 10px;
     }
 }

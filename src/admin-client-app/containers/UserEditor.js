@@ -26,8 +26,8 @@ let UserEditor = class extends Component
 
         return (
             <Root>
-                <section>
-                    <h2>Edit User</h2>
+                <div className="module-content">
+                    <h1 className="m-ctt-title">Edit User</h1>
                     {user ? (
                         <Form
                             initialEntries={user}
@@ -41,8 +41,8 @@ let UserEditor = class extends Component
                     ) : (
                         <div>loading...</div>
                     )}
-                </section>
-                <nav><Link to={`/users/${id}/password`}>Edit Password</Link></nav>
+                    <nav><Link to={`/users/${id}/password`}>Edit Password</Link></nav>
+                </div>
             </Root>
         );
     }

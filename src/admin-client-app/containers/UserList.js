@@ -47,8 +47,8 @@ let UserList = class extends Component
 
         return (
             <Root>
-                <section>
-                    <h2>User List</h2>
+                <div className="module-content">
+                    <h1 className="m-ctt-title">User List</h1>
                     <table>
                         <thead>
                         <tr>
@@ -80,31 +80,31 @@ let UserList = class extends Component
                         ))}
                         </tbody>
                     </table>
-                </section>
-                <menu className="module-pagination">
-                    {pages > 0 ? (
-                        <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}`}>&lt;&lt; Fist</Link></li>
-                    ) : null}
-
-                    {has_previous_page ? (
-                        <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}&page=${previous_page}`}>&lt; Prev</Link></li>
+                    <menu className="module-pagination">
+                        {pages > 0 ? (
+                            <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}`}>&lt;&lt; Fist</Link></li>
                         ) : null}
 
-                    {pages > 0 ? [...(new Array(pages)).keys()].map(i =>
-                        <li className="m-pgn-list-item" key={i}><Link to={`/users/?sort=${sort}&order=${order}&page=${first_page + i}`}>{first_page + i}</Link></li>
+                        {has_previous_page ? (
+                            <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}&page=${previous_page}`}>&lt; Prev</Link></li>
                         ) : null}
 
-                    {has_next_page ? (
-                        <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}&page=${next_page}`}>Next &gt;</Link></li>
-                    ) : null}
+                        {pages > 0 ? [...(new Array(pages)).keys()].map(i =>
+                            <li className="m-pgn-list-item" key={i}><Link to={`/users/?sort=${sort}&order=${order}&page=${first_page + i}`}>{first_page + i}</Link></li>
+                        ) : null}
 
-                    {total_pages > 0 ? (
-                        <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}&page=${total_pages}`}>Last &gt;&gt;</Link></li>
-                    ) : null}
-                </menu>
-                <nav>
-                    <Link to="/users/new">create a new user</Link>
-                </nav>
+                        {has_next_page ? (
+                            <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}&page=${next_page}`}>Next &gt;</Link></li>
+                        ) : null}
+
+                        {total_pages > 0 ? (
+                            <li className="m-pgn-list-item"><Link to={`/users/?sort=${sort}&order=${order}&page=${total_pages}`}>Last &gt;&gt;</Link></li>
+                        ) : null}
+                    </menu>
+                    <nav>
+                        <Link to="/users/new">create a new user</Link>
+                    </nav>
+                </div>
             </Root>
         );
     }

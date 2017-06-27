@@ -35,8 +35,8 @@ let PostEditor = class extends Component
 
         return (
             <Root>
-                <section>
-                    <h2>Edit Post</h2>
+                <div className="module-content">
+                    <h1 className="m-ctt-title">Edit Post</h1>
                     {post ? (
                         <Form
                             initialEntries={post}
@@ -64,7 +64,7 @@ let PostEditor = class extends Component
                     ) : (
                         <div>loading...</div>
                     )}
-                </section>
+                </div>
             </Root>
         );
     }

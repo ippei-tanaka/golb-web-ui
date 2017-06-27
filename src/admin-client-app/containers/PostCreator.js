@@ -27,8 +27,8 @@ let PostCreator = class extends Component
 
         return (
             <Root>
-                <section>
-                    <h2>Create New Post</h2>
+                <div className="module-content">
+                    <h1 className="m-ctt-title">Create New Post</h1>
                     <Form
                         onSubmit={values => createPost(values)}
                         onSubmissionSucceed={() => history.push('/posts')}>
@@ -51,7 +51,7 @@ let PostCreator = class extends Component
                         <Text name="published_date" label="Published Date" type="date" />
                         <button>Submit</button>
                     </Form>
-                </section>
+                </div>
             </Root>
         );
     }
