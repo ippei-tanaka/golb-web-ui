@@ -1,13 +1,12 @@
 import React from 'react';
-import Header from '../containers/Header';
+import Layout from './Layout';
 
-const NotFound = (props) =>
+const NotFound = () =>
 {
     return (
-        <div>
-            <Header/>
+        <Layout>
             Not Found
-        </div>
+        </Layout>
     );
 };
 

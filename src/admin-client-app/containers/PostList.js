@@ -3,7 +3,7 @@ import queryString from 'query-string';
 import compare from '../helpers/compare';
 import {build as paginatorBuild} from '../helpers/paginator';
 import {connect} from 'react-redux';
-import Header from './Header';
+import Layout from '../components/Layout';
 import {Link} from 'react-router-dom';
 import actionCreators from '../action-creators'
 
@@ -56,8 +56,7 @@ let PostList = class extends Component
         const reverseOrder = order === 'asc' ? 'desc' : 'asc';
 
         return (
-            <div>
-                <Header/>
+            <Layout>
                 <section>
                     <h2>Post List</h2>
                     <table>
@@ -127,7 +126,7 @@ let PostList = class extends Component
                 <nav>
                     <Link to="/posts/new">create a new post</Link>
                 </nav>
-            </div>
+            </Layout>
         );
     }
 

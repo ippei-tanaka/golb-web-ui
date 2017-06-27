@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Header from './Header';
+import Layout from '../components/Layout';
 import {Text, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
@@ -11,8 +11,7 @@ let CategoryCreator = class extends Component
         const {createCategory, history} = this.props;
 
         return (
-            <div>
-                <Header/>
+            <Layout>
                 <section>
                     <h2>Create New Category</h2>
                     <Form
@@ -23,7 +22,7 @@ let CategoryCreator = class extends Component
                         <button>Submit</button>
                     </Form>
                 </section>
-            </div>
+            </Layout>
         );
     }
 };

@@ -1,13 +1,12 @@
 import React from 'react';
-import Header from '../containers/Header';
+import Layout from './Layout';
 
-const Dashboard = (props) => {
+const Dashboard = () => {
 
     return (
-        <div>
-            <Header/>
+        <Layout>
             <p className="module-temp">Dashboard</p>
-        </div>
+        </Layout>
     );
 };
 

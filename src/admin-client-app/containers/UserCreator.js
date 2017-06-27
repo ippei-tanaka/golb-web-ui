@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Header from './Header';
+import Layout from '../components/Layout';
 import {Text, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
@@ -11,8 +11,7 @@ let UserCreator = class extends Component
         const {createUser, history} = this.props;
 
         return (
-            <div>
-                <Header/>
+            <Layout>
                 <section>
                     <h2>Create New User</h2>
                     <Form
@@ -25,7 +24,7 @@ let UserCreator = class extends Component
                         <button>Submit</button>
                     </Form>
                 </section>
-            </div>
+            </Layout>
         );
     }
 };

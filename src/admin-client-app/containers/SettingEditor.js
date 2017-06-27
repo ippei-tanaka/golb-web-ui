@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Header from './Header';
+import Layout from '../components/Layout';
 import {Text, Select, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
@@ -31,8 +31,7 @@ let SettingEditor = class extends Component
         const {flushMessage} = this.state;
 
         return (
-            <div>
-                <Header/>
+            <Layout>
                 <section>
                     <h2>Edit Settings</h2>
                     {Object.keys(settings).length > 0 ? (
@@ -59,7 +58,7 @@ let SettingEditor = class extends Component
                         <div>{flushMessage}</div>
                     ) : null}
                 </section>
-            </div>
+            </Layout>
         );
     }
 };

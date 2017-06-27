@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import actionCreators from '../action-creators'
 
-let Header = ({logout, loggedInUser, authenticate}) =>
+let Menu = ({logout, loggedInUser, authenticate}) =>
 {
     return (
         <header className="module-header">
@@ -25,6 +25,6 @@ let Header = ({logout, loggedInUser, authenticate}) =>
     );
 };
 
-Header = connect(s => s, actionCreators)(Header);
+Menu = connect(s => s, actionCreators)(Menu);
 
-export default Header;
+export default Menu;

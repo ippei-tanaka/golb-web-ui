@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import Header from './Header';
+import Layout from '../components/Layout';
 import {Text, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
@@ -25,8 +25,7 @@ let UserEditor = class extends Component
         const user = users[id];
 
         return (
-            <div>
-                <Header/>
+            <Layout>
                 <section>
                     <h2>Edit User</h2>
                     {user ? (
@@ -44,7 +43,7 @@ let UserEditor = class extends Component
                     )}
                 </section>
                 <nav><Link to={`/users/${id}/password`}>Edit Password</Link></nav>
-            </div>
+            </Layout>
         );
     }
 };

@@ -1,12 +1,11 @@
 import React from 'react';
-import Header from '../containers/Header';
+import Layout from './Layout';
 
-const Home = (props) => {
+const Home = () => {
     return (
-        <div>
-            <Header/>
+        <Layout>
             <p className="module-temp">Home</p>
-        </div>
+        </Layout>
     );
 };
 

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Header from './Header';
+import Layout from '../components/Layout';
 import {Text, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
@@ -24,8 +24,7 @@ let UserPasswordEditor = class extends Component
         const user = users[id];
 
         return (
-            <div>
-                <Header/>
+            <Layout>
                 <section>
                     <h2>Edit User Password</h2>
                     {user ? (
@@ -41,7 +40,7 @@ let UserPasswordEditor = class extends Component
                         <div>loading...</div>
                     )}
                 </section>
-            </div>
+            </Layout>
         );
     }
 };
