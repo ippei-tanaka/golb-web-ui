@@ -1,11 +1,12 @@
 import React from 'react';
+import AuthRoot from './AuthRoot';
 
 const Pending = () => {
 
     return (
-        <div>
+        <AuthRoot>
             Pending...
-        </div>
+        </AuthRoot>
     );
 };
 

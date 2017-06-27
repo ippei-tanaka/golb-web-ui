@@ -3,9 +3,7 @@ import Root from './Root';
 
 const Home = () => {
     return (
-        <Root>
-            <p className="module-temp">Home</p>
-        </Root>
+        <Root>Home</Root>
     );
 };
 

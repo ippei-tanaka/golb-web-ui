@@ -1,7 +1,26 @@
+@import "./mixins.scss";
+
+%clearfix {
+    *zoom: 1;
+    &:before, &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+html
+{
+    height: 100%;
+}
+
 body
 {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 15px;
+    height: 100%;
 }
 
 a
@@ -51,42 +70,67 @@ table {
     }
 }
 
-nav
+#App
 {
-    margin: 20px 10px 40px;
+    height: 100%;
 }
 
-h2, form
+.module-auth-layout
 {
-    margin: 20px 15px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 
-.module-temp
+.module-layout
 {
-    margin: 20px 15px;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: stretch;
+    align-items: stretch;
+    height: 100%;
+
+    .m-lyt-menu-container
+    {
+    }
+
+    .m-lyt-content-container
+    {
+        padding: 20px;
+        overflow: auto;
+        @include box-sizing(border-box);
+    }
 }
 
-.module-header
+.module-menu
 {
-    .m-hdr-list
+    .m-mnu-list
     {
         display: flex;
         flex-wrap: wrap;
+        width: 140px;
     }
 
-    .m-hdr-list-item
+    .m-mnu-list-item
     {
         list-style: none;
         margin: 1px;
+        width: 100%;
+        @include box-sizing(border-box);
     }
 
-    .m-hdr-link
+    .m-mnu-link
     {
         padding: 15px;
         background-color: #00689A;
         display: inline-block;
         color: #f0f0f0;
         text-decoration: none;
+        width: 100%;
+        @include box-sizing(border-box);
 
         &:hover {
             background-color: #007cb8;
@@ -94,7 +138,7 @@ h2, form
         }
     }
 
-    .m-hdr-message
+    .m-mnu-message
     {
         margin: 20px 15px;
     }
