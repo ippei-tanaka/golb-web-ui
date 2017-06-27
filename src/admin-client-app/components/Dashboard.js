@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from './Layout';
+import Root from './Root';
 
 const Dashboard = () => {
 
     return (
-        <Layout>
+        <Root>
             <p className="module-temp">Dashboard</p>
-        </Layout>
+        </Root>
     );
 };
 

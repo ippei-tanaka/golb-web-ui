@@ -1,11 +1,11 @@
 import React from 'react';
-import Layout from './Layout';
+import Root from './Root';
 
 const Home = () => {
     return (
-        <Layout>
+        <Root>
             <p className="module-temp">Home</p>
-        </Layout>
+        </Root>
     );
 };
 

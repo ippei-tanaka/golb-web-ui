@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Layout from '../components/Layout';
+import Root from '../components/Root';
 import {Text, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
@@ -24,7 +24,7 @@ let CategoryEditor = class extends Component
         const category = categories[id];
 
         return (
-            <Layout>
+            <Root>
                 <section>
                     <h2>Edit Category</h2>
                     {category ? (
@@ -40,7 +40,7 @@ let CategoryEditor = class extends Component
                         <div>loading...</div>
                     )}
                 </section>
-            </Layout>
+            </Root>
         );
     }
 };

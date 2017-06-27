@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Layout from '../components/Layout';
+import Root from '../components/Root';
 import {Text, Checkbox, TextArea, Select, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
@@ -26,7 +26,7 @@ let PostCreator = class extends Component
         const {createPost, users, categories, history} = this.props;
 
         return (
-            <Layout>
+            <Root>
                 <section>
                     <h2>Create New Post</h2>
                     <Form
@@ -52,7 +52,7 @@ let PostCreator = class extends Component
                         <button>Submit</button>
                     </Form>
                 </section>
-            </Layout>
+            </Root>
         );
     }
 };

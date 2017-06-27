@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Layout from '../components/Layout';
+import Root from '../components/Root';
 import {Text, Checkbox, Date, TextArea, Select, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
@@ -34,7 +34,7 @@ let PostEditor = class extends Component
         const post = posts[id];
 
         return (
-            <Layout>
+            <Root>
                 <section>
                     <h2>Edit Post</h2>
                     {post ? (
@@ -65,7 +65,7 @@ let PostEditor = class extends Component
                         <div>loading...</div>
                     )}
                 </section>
-            </Layout>
+            </Root>
         );
     }
 };

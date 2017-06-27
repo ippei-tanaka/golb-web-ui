@@ -3,7 +3,7 @@ import queryString from 'query-string';
 import compare from '../helpers/compare';
 import {build as paginatorBuild} from '../helpers/paginator';
 import {connect} from 'react-redux';
-import Layout from '../components/Layout';
+import Root from '../components/Root';
 import {Link} from 'react-router-dom';
 import actionCreators from '../action-creators'
 
@@ -46,7 +46,7 @@ let CategoryList = class extends Component
         const reverseOrder = order === 'asc' ? 'desc' : 'asc';
 
         return (
-            <Layout>
+            <Root>
                 <section>
                     <h2>Category List</h2>
                     <table>
@@ -103,7 +103,7 @@ let CategoryList = class extends Component
                 <nav>
                     <Link to="/categories/new">create a new category</Link>
                 </nav>
-            </Layout>
+            </Root>
         );
     }
 

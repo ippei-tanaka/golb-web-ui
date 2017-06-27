@@ -1,11 +1,11 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {createStore} from './store';
-import Root from './components/Root';
+import App from './components/App';
 
 const { ADMIN_ROOT } = window.__GOLB_ENV__;
 
 render(
-    <Root store={createStore()} basename={ADMIN_ROOT} />,
-    document.getElementById("Root")
+    <App store={createStore()} basename={ADMIN_ROOT} />,
+    document.getElementById("App")
 );

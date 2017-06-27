@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Route} from 'react-router-dom';
-import Pending from '../components/Pending';
+import AuthPending from '../components/AuthPending';
 import Login from './Login';
 import actionCreators, {AuthenticationStatus, LoginProcess} from '../action-creators'
 
@@ -50,7 +50,7 @@ let ProtectedRoute = class extends Component
             case PRISTINE:
             default:
                 return (
-                    <Route {...bypassed} component={Pending}/>
+                    <Route {...bypassed} component={AuthPending}/>
                 );
         }
     }

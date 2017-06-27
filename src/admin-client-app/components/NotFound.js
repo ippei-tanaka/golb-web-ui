@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from './Layout';
+import Root from './Root';
 
 const NotFound = () =>
 {
     return (
-        <Layout>
+        <Root>
             Not Found
-        </Layout>
+        </Root>
     );
 };
 
