@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import AuthRoot from '../components/AuthRoot';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Text, Form} from '../components/form';
@@ -33,17 +32,15 @@ let Login = class extends Component
         const pending = loginProcess === PENDING;
 
         return (
-            <AuthRoot>
-                <Form
-                    formId={token}
-                    onSubmit={values => login(values, token)}
-                    onSubmissionSucceed={onLoginSucceed}
-                    onSubmissionFail={onLoginFail}>
-                    <Text name="email" label="Email" disabled={pending}/>
-                    <Text name="password" label="Password" type="password" disabled={pending}/>
-                    <button disabled={pending}>Login</button>
-                </Form>
-            </AuthRoot>
+            <Form
+                formId={token}
+                onSubmit={values => login(values, token)}
+                onSubmissionSucceed={onLoginSucceed}
+                onSubmissionFail={onLoginFail}>
+                <Text name="email" label="Email" disabled={pending}/>
+                <Text name="password" label="Password" type="password" disabled={pending}/>
+                <button disabled={pending}>Login</button>
+            </Form>
         );
     }
 };

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Route} from 'react-router-dom';
-import AuthPending from '../components/AuthPending';
+import AuthRoot from '../components/AuthRoot';
 import Login from './Login';
 import actionCreators, {AuthenticationStatus, LoginProcess} from '../action-creators'
 
@@ -23,6 +23,7 @@ let ProtectedRoute = class extends Component
     {
         const {
             component: Component,
+            render,
             authenticationStatus,
             path,
             computedMatch,
@@ -36,13 +37,15 @@ let ProtectedRoute = class extends Component
         {
             case AUTHENTICATED:
                 return (
-                    <Route {...bypassed} component={Component}/>
+                    <Route {...bypassed} render={render} component={Component}/>
                 );
 
             case UNAUTHENTICATED:
                 return (
                     <Route {...bypassed} render={props => (
-                        <Login {...props} onLoginSucceed={authenticate}/>
+                        <AuthRoot>
+                            <Login {...props} onLoginSucceed={authenticate}/>
+                        </AuthRoot>
                     )}/>
                 );
 
@@ -50,7 +53,9 @@ let ProtectedRoute = class extends Component
             case PRISTINE:
             default:
                 return (
-                    <Route {...bypassed} component={AuthPending}/>
+                    <Route {...bypassed} render={props => (
+                        <AuthRoot>Checking...</AuthRoot>
+                    )}/>
                 );
         }
     }
