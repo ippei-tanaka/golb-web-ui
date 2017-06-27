@@ -34,11 +34,9 @@ export default class
 
         app.use(express.static(config.publicDocRoot));
 
-        app.get("/", respond(this.homeRoute));
-
         app.get("/post/:slug", respond(this.singlePostRoute));
 
-        // adding class methods to the express app
+        app.get(/^\/(page\/\d\/?)?/, respond(this.homeRoute));
 
         for (let propName of Object.getOwnPropertyNames(this.constructor.prototype))
         {
@@ -51,14 +49,19 @@ export default class
 
     get homeRoute ()
     {
-        return async () =>
+        return async (request) =>
         {
-            const posts = await this._fetch('/posts', {method: 'get'});
+            const page = request.params[0] ? request.params[0].split('/')[1] : 1;
+            const {posts, currentPage, nextPage, prevPage} = await this._fetch(`/posts/page/${page}`, {method: 'get'});
+            const {categories} = await this._fetch('/categories', {method: 'get'});
             const settings = await this._fetch('/settings', {method: 'get'});
             return render({
-                posts: posts.posts,
+                posts,
+                nextPage,
+                prevPage,
                 settings,
-                title: settings.name
+                categories,
+                title: settings.name + (currentPage > 1 ? ` - page ${currentPage}` : "")
             });
         }
     }
@@ -69,10 +72,12 @@ export default class
         {
             const slug = request.params.slug;
             const post = await this._fetch(`/post/${slug}`, {method: 'get'});
+            const {categories} = await this._fetch('/categories', {method: 'get'});
             const settings = await this._fetch('/settings', {method: 'get'});
             return render({
                 posts: [post],
                 settings,
+                categories,
                 title: post.title
             });
         }

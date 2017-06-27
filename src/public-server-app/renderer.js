@@ -1,11 +1,12 @@
 import React from "react";
-import { renderToStaticMarkup } from 'react-dom/server';
+import { renderToStaticMarkup, renderToString } from 'react-dom/server';
 import Root from '../public-client-app/components/Root';
 
 const renderDocument = (title, html, preloadedState) => (
     `<!doctype html>
     <html>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>${title}</title>
         <link href="/index.bundle.css" media="all" rel="stylesheet" />
       </head>
@@ -24,5 +25,5 @@ const renderDocument = (title, html, preloadedState) => (
 
 export const render = (data = {}) =>
 {
-    return renderDocument(data.title, renderToStaticMarkup(<Root {...data} />), data);
+    return renderDocument(data.title, renderToString(<Root {...data} />), data);
 };
