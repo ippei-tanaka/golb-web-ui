@@ -28,7 +28,6 @@ let Menu = class extends Component
                 </button>
                 <ul className={`m-mnu-list ${this.state.expanded ? 'm-mnu-expanded' : ''}`}>
                     <li className="m-mnu-list-item"><Link className="m-mnu-link" to="/">Home</Link></li>
-                    <li className="m-mnu-list-item"><Link className="m-mnu-link" to="/dashboard">Dashboard</Link></li>
                     <li className="m-mnu-list-item"><Link className="m-mnu-link" to="/users">User List</Link></li>
                     <li className="m-mnu-list-item"><Link className="m-mnu-link" to="/categories">Category List</Link></li>
                     <li className="m-mnu-list-item"><Link className="m-mnu-link" to="/posts">Post List</Link></li>

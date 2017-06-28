@@ -5,7 +5,6 @@ import {BrowserRouter} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 import {Switch} from 'react-router-dom';
 import Home from './Home';
-import Dashboard from './Dashboard';
 import NotFound from './NotFound';
 import UserList from '../containers/UserList';
 import UserCreator from '../containers/UserCreator';
@@ -30,7 +29,6 @@ const App = ({store, basename}) =>
             <BrowserRouter history={history} basename={basename}>
                 <Switch>
                     <ProtectedRoute path="/" exact component={Home}/>
-                    <ProtectedRoute path="/dashboard" component={Dashboard}/>
                     <ProtectedRoute path="/users" exact component={UserList} />
                     <ProtectedRoute path="/users/new" component={UserCreator} />
                     <ProtectedRoute path="/users/:id" exact component={UserEditor} />
