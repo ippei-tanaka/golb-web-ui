@@ -21,7 +21,6 @@ let Menu = class extends Component
         return (
             <nav className="module-menu">
                 <button className="m-mnu-fold-button" onClick={e => {
-                    console.log(this.state);
                     e.preventDefault();
                     this.setState({expanded: !this.state.expanded});
                 }}>

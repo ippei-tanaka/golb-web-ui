@@ -81,7 +81,7 @@ table {
     align-items: stretch;
     height: 100%;
 
-    @include breakpoint(mobileonly)
+    @include breakpoint(mobile)
     {
         flex-wrap: wrap;
         height: auto;
@@ -89,7 +89,7 @@ table {
 
     .m-lyt-menu-container
     {
-        @include breakpoint(mobileonly)
+        @include breakpoint(mobile)
         {
             width: 100%;
         }
@@ -117,7 +117,7 @@ table {
         cursor: pointer;
         text-align: left;
 
-        @include breakpoint(mobileonly)
+        @include breakpoint(mobile)
         {
             display: block;
         }
@@ -129,7 +129,7 @@ table {
         flex-wrap: wrap;
         width: 140px;
 
-        @include breakpoint(mobileonly)
+        @include breakpoint(mobile)
         {
             width: 100%;
             display: none;

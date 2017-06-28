@@ -2,27 +2,28 @@
 {
     @if $point == desktop
     {
-        @media (min-width: 70em) { @content ; }
+        @media (min-width: 37.5em) { @content ; }
     }
-
+    /*
     @else if $point == laptop
     {
-        @media (min-width: 64em) { @content ; }
+        @media (min-width: 64em) and (max-width: 70em) { @content ; }
     }
 
     @else if $point == tablet
     {
-        @media (min-width: 50em) { @content ; }
+        @media (min-width: 50em) and (max-width: 64em) { @content ; }
     }
 
     @else if $point == phablet
     {
-        @media (min-width: 37.5em)  { @content ; }
+        @media (min-width: 37.5em) and (max-width: 50em) { @content ; }
     }
+    */
 
-    @else if $point == mobileonly
+    @else if $point == mobile
     {
-        @media (max-width: 37.5em)  { @content ; }
+        @media (max-width: 37.5em) { @content ; }
     }
 }
 
