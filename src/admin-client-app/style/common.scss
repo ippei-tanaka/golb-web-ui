@@ -81,8 +81,18 @@ table {
     align-items: stretch;
     height: 100%;
 
+    @include breakpoint(mobileonly)
+    {
+        flex-wrap: wrap;
+        height: auto;
+    }
+
     .m-lyt-menu-container
     {
+        @include breakpoint(mobileonly)
+        {
+            width: 100%;
+        }
     }
 
     .m-lyt-content-container
@@ -95,11 +105,40 @@ table {
 
 .module-menu
 {
+    .m-mnu-fold-button
+    {
+        display: none;
+        background-color: #005178;
+        padding: 15px 20px;
+        width: 100%;
+        border: 0;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+        text-align: left;
+
+        @include breakpoint(mobileonly)
+        {
+            display: block;
+        }
+    }
+
     .m-mnu-list
     {
         display: flex;
         flex-wrap: wrap;
         width: 140px;
+
+        @include breakpoint(mobileonly)
+        {
+            width: 100%;
+            display: none;
+
+            &.m-mnu-expanded
+            {
+                display: flex;
+            }
+        }
     }
 
     .m-mnu-list-item
@@ -113,7 +152,7 @@ table {
     .m-mnu-link
     {
         padding: 15px;
-        background-color: #00689A;
+        background-color: #005178;
         display: inline-block;
         color: #f0f0f0;
         text-decoration: none;
