@@ -97,8 +97,8 @@ table {
     .m-lyt-content-container
     {
         padding: 20px;
-        overflow: auto;
         width: 100%;
+        overflow: auto;
         @include box-sizing(border-box);
     }
 }
@@ -183,6 +183,8 @@ table {
     .m-ctt-section
     {
         margin-bottom: 20px;
+        overflow: auto;
+        padding: 1px 0;
     }
 }
 
