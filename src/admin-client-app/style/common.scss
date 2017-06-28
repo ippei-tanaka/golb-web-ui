@@ -146,10 +146,21 @@ table {
 {
     display: flex;
     flex-wrap: wrap;
+    font-size: 90%;
 
     .m-pgn-list-item
     {
         list-style: none;
-        margin: 20px 10px;
+        margin: 0 5px;
+
+        &:first-child
+        {
+            margin-left: 0;
+        }
+
+        &:last-child
+        {
+            margin-right: 0;
+        }
     }
 }
