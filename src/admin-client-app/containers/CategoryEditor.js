@@ -27,18 +27,20 @@ let CategoryEditor = class extends Component
             <Root>
                 <div className="module-content">
                     <h1 className="m-ctt-title">Edit Category</h1>
-                    {category ? (
-                        <Form
-                            initialEntries={category}
-                            onSubmit={values => editCategory(id, values)}
-                            onSubmissionSucceed={() => history.push('/categories')}>
-                            <Text name="name" label="Name" />
-                            <Text name="slug" label="Slug" />
-                            <button>Submit</button>
-                        </Form>
-                    ) : (
-                        <div>loading...</div>
-                    )}
+                    <section className="m-ctt-section">
+                        {category ? (
+                            <Form
+                                initialEntries={category}
+                                onSubmit={values => editCategory(id, values)}
+                                onSubmissionSucceed={() => history.push('/categories')}>
+                                <Text name="name" label="Name" />
+                                <Text name="slug" label="Slug" />
+                                <button>Submit</button>
+                            </Form>
+                        ) : (
+                            <div>loading...</div>
+                        )}
+                    </section>
                 </div>
             </Root>
         );

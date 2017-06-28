@@ -28,20 +28,26 @@ let UserEditor = class extends Component
             <Root>
                 <div className="module-content">
                     <h1 className="m-ctt-title">Edit User</h1>
-                    {user ? (
-                        <Form
-                            initialEntries={user}
-                            onSubmit={values => editUser(id, values)}
-                            onSubmissionSucceed={() => history.push('/users')}>
-                            <Text name="email" label="Email" />
-                            <Text name="display_name" label="Display Name" />
-                            <Text name="slug" label="Slug" />
-                            <button>Submit</button>
-                        </Form>
-                    ) : (
-                        <div>loading...</div>
-                    )}
-                    <nav><Link to={`/users/${id}/password`}>Edit Password</Link></nav>
+                    <section className="m-ctt-section">
+                        {user ? (
+                            <Form
+                                initialEntries={user}
+                                onSubmit={values => editUser(id, values)}
+                                onSubmissionSucceed={() => history.push('/users')}>
+                                <Text name="email" label="Email" />
+                                <Text name="display_name" label="Display Name" />
+                                <Text name="slug" label="Slug" />
+                                <button>Submit</button>
+                            </Form>
+                        ) : (
+                            <div>loading...</div>
+                        )}
+                    </section>
+                    <section className="m-ctt-section">
+                        <nav>
+                            <Link to={`/users/${id}/password`}>Edit Password</Link>
+                        </nav>
+                    </section>
                 </div>
             </Root>
         );

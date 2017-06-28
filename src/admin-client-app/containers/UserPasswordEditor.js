@@ -27,7 +27,7 @@ let UserPasswordEditor = class extends Component
             <Root>
                 <div className="module-content">
                     <h1 className="m-ctt-title">Edit User Password</h1>
-                    <section>
+                    <section className="m-ctt-section">
                         {user ? (
                             <Form
                                 onSubmit={values => editUserPassword(id, values)}

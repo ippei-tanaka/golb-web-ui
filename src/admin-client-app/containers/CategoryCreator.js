@@ -14,13 +14,15 @@ let CategoryCreator = class extends Component
             <Root>
                 <div className="module-content">
                     <h1 className="m-ctt-title">Create New Category</h1>
-                    <Form
-                        onSubmit={values => createCategory(values)}
-                        onSubmissionSucceed={() => history.push('/categories')}>
-                        <Text name="name" label="Name" />
-                        <Text name="slug" label="Slug" />
-                        <button>Submit</button>
-                    </Form>
+                    <section className="m-ctt-section">
+                        <Form
+                            onSubmit={values => createCategory(values)}
+                            onSubmissionSucceed={() => history.push('/categories')}>
+                            <Text name="name" label="Name" />
+                            <Text name="slug" label="Slug" />
+                            <button>Submit</button>
+                        </Form>
+                    </section>
                 </div>
             </Root>
         );

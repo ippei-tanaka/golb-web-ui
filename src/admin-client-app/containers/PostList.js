@@ -49,52 +49,60 @@ let PostList = class extends Component
             <Root>
                 <div className="module-content">
                     <h1 className="m-ctt-title">Post List</h1>
-                    <table>
-                        <thead>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><Link to={`/posts/?sort=title&order=${reverseOrder}`}>Title</Link></td>
-                            <td><Link to={`/posts/?sort=author_id&order=${reverseOrder}`}>Author</Link></td>
-                            <td><Link to={`/posts/?sort=category_id&order=${reverseOrder}`}>Category</Link></td>
-                            <td><Link to={`/posts/?sort=slug&order=${reverseOrder}`}>Slug</Link></td>
-                            <td><Link to={`/posts/?sort=is_draft&order=${reverseOrder}`}>Draft</Link></td>
-                            <td><Link to={`/posts/?sort=published_date&order=${reverseOrder}`}>Published Date</Link></td>
-                            <td><Link to={`/posts/?sort=created_date&order=${reverseOrder}`}>Created</Link></td>
-                            <td><Link to={`/posts/?sort=updated_date&order=${reverseOrder}`}>Updated</Link></td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {sortedAndFilteredArray.map(({
-                            _id, title, slug, author_id, category_id,
-                            is_draft, published_date, created_date, updated_date}, index) =>
-                        {
-                            return (
-                                <tr key={_id}>
-                                    <td>{firstResult + index + 1}</td>
-                                    <td><Link to={`/posts/${_id}`}>edit</Link></td>
-                                    <td><a href="#"
-                                           data-post-id={_id}
-                                           data-post-title={title}
-                                           onClick={this.onClickDelete.bind(this)}>delete</a></td>
-                                    <td>{title}</td>
-                                    <td>{this.getRelatedValue(users, author_id, 'display_name')}</td>
-                                    <td>{this.getRelatedValue(categories, category_id, 'name')}</td>
-                                    <td>{slug}</td>
-                                    <td>{is_draft ? "yes" : "no"}</td>
-                                    <td>{published_date}</td>
-                                    <td>{created_date}</td>
-                                    <td>{updated_date}</td>
-                                </tr>
-                            );
-                        })}
-                        </tbody>
-                    </table>
-                    <Pagination linkUrlBase="/posts/" {...paginationData} />
-                    <nav>
-                        <Link to="/posts/new">create a new post</Link>
-                    </nav>
+                    <section className="m-ctt-section">
+                        <table>
+                            <thead>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><Link to={`/posts/?sort=title&order=${reverseOrder}`}>Title</Link></td>
+                                <td><Link to={`/posts/?sort=author_id&order=${reverseOrder}`}>Author</Link></td>
+                                <td><Link to={`/posts/?sort=category_id&order=${reverseOrder}`}>Category</Link></td>
+                                <td><Link to={`/posts/?sort=slug&order=${reverseOrder}`}>Slug</Link></td>
+                                <td><Link to={`/posts/?sort=is_draft&order=${reverseOrder}`}>Draft</Link></td>
+                                <td><Link to={`/posts/?sort=published_date&order=${reverseOrder}`}>Published Date</Link></td>
+                                <td><Link to={`/posts/?sort=created_date&order=${reverseOrder}`}>Created</Link></td>
+                                <td><Link to={`/posts/?sort=updated_date&order=${reverseOrder}`}>Updated</Link></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {sortedAndFilteredArray.map(({
+                                _id, title, slug, author_id, category_id,
+                                is_draft, published_date, created_date, updated_date}, index) =>
+                            {
+                                return (
+                                    <tr key={_id}>
+                                        <td>{firstResult + index + 1}</td>
+                                        <td><Link to={`/posts/${_id}`}>edit</Link></td>
+                                        <td><a href="#"
+                                               data-post-id={_id}
+                                               data-post-title={title}
+                                               onClick={this.onClickDelete.bind(this)}>delete</a></td>
+                                        <td>{title}</td>
+                                        <td>{this.getRelatedValue(users, author_id, 'display_name')}</td>
+                                        <td>{this.getRelatedValue(categories, category_id, 'name')}</td>
+                                        <td>{slug}</td>
+                                        <td>{is_draft ? "yes" : "no"}</td>
+                                        <td>{published_date}</td>
+                                        <td>{created_date}</td>
+                                        <td>{updated_date}</td>
+                                    </tr>
+                                );
+                            })}
+                            </tbody>
+                        </table>
+                    </section>
+                    {paginationData.totalPages > 1 ? (
+                        <section className="m-ctt-section">
+                            <Pagination linkUrlBase="/posts/" {...paginationData} />
+                        </section>
+                    ) : null}
+                    <section className="m-ctt-section">
+                        <nav>
+                            <Link to="/posts/new">create a new post</Link>
+                        </nav>
+                    </section>
                 </div>
             </Root>
         );

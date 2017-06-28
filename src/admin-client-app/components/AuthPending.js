@@ -1,12 +1,10 @@
 import React from 'react';
 import AuthRoot from './AuthRoot';
 
-const Pending = () => {
+const Pending = ({children}) => {
 
     return (
-        <AuthRoot>
-            Pending...
-        </AuthRoot>
+        <AuthRoot>{children}</AuthRoot>
     );
 };
 

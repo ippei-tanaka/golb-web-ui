@@ -29,28 +29,30 @@ let PostCreator = class extends Component
             <Root>
                 <div className="module-content">
                     <h1 className="m-ctt-title">Create New Post</h1>
-                    <Form
-                        onSubmit={values => createPost(values)}
-                        onSubmissionSucceed={() => history.push('/posts')}>
-                        <Text name="title" label="Title" />
-                        <Text name="slug" label="Slug" />
-                        <Select name="author_id" label="Author">
-                            <option key="0" value="">(None)</option>
-                            {Object.keys(users).map(userId => (
-                                <option key={userId} value={userId}>{users[userId].display_name}</option>
-                            ))}
-                        </Select>
-                        <Select name="category_id" label="Category">
-                            <option key="0" value="">(None)</option>
-                            {Object.keys(categories).map(categoryId => (
-                                <option key={categoryId} value={categoryId}>{categories[categoryId].name}</option>
-                            ))}
-                        </Select>
-                        <TextArea name="content" label="Content" placeholder="Write your post here." />
-                        <Checkbox name="is_draft" label="Draft" />
-                        <Text name="published_date" label="Published Date" type="date" />
-                        <button>Submit</button>
-                    </Form>
+                    <section className="m-ctt-section">
+                        <Form
+                            onSubmit={values => createPost(values)}
+                            onSubmissionSucceed={() => history.push('/posts')}>
+                            <Text name="title" label="Title" />
+                            <Text name="slug" label="Slug" />
+                            <Select name="author_id" label="Author">
+                                <option key="0" value="">(None)</option>
+                                {Object.keys(users).map(userId => (
+                                    <option key={userId} value={userId}>{users[userId].display_name}</option>
+                                ))}
+                            </Select>
+                            <Select name="category_id" label="Category">
+                                <option key="0" value="">(None)</option>
+                                {Object.keys(categories).map(categoryId => (
+                                    <option key={categoryId} value={categoryId}>{categories[categoryId].name}</option>
+                                ))}
+                            </Select>
+                            <TextArea name="content" label="Content" placeholder="Write your post here." />
+                            <Checkbox name="is_draft" label="Draft" />
+                            <Text name="published_date" label="Published Date" type="date" />
+                            <button>Submit</button>
+                        </Form>
+                    </section>
                 </div>
             </Root>
         );
