@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {Text, Form} from '../components/form';
+import {Text, Button, Form} from '../components/form';
 import actionCreators, {LoginProcess} from '../action-creators'
 import AuthRoot from '../components/AuthRoot';
 
@@ -41,7 +41,7 @@ let Login = class extends Component
                     onSubmissionFail={onLoginFail}>
                     <Text name="email" label="Email" disabled={pending}/>
                     <Text name="password" label="Password" type="password" disabled={pending}/>
-                    <button disabled={pending}>Login</button>
+                    <Button disabled={pending}>Login</Button>
                 </Form>
             </AuthRoot>
         );

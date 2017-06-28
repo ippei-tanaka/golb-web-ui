@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Root from '../components/Root';
-import {Text, Form} from '../components/form';
+import {Text, Button, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
 let UserPasswordEditor = class extends Component
@@ -35,7 +35,7 @@ let UserPasswordEditor = class extends Component
                                 <Text name="old_password" label="Current Password" type="password" />
                                 <Text name="password" label="New Password" type="password" />
                                 <Text name="password_confirmed" label="New Password Confirmed" type="password" />
-                                <button>Submit</button>
+                                <Button>Submit</Button>
                             </Form>
                         ) : (
                             <div>loading...</div>

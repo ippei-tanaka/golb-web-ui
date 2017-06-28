@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import Root from '../components/Root';
-import {Text, Form} from '../components/form';
+import {Text, Button, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
 let UserEditor = class extends Component
@@ -37,7 +37,7 @@ let UserEditor = class extends Component
                                 <Text name="email" label="Email" />
                                 <Text name="display_name" label="Display Name" />
                                 <Text name="slug" label="Slug" />
-                                <button>Submit</button>
+                                <Button>Submit</Button>
                             </Form>
                         ) : (
                             <div>loading...</div>

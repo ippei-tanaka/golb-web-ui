@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Root from '../components/Root';
-import {Text, Form} from '../components/form';
+import {Text, Button, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
 let CategoryEditor = class extends Component
@@ -35,7 +35,7 @@ let CategoryEditor = class extends Component
                                 onSubmissionSucceed={() => history.push('/categories')}>
                                 <Text name="name" label="Name" />
                                 <Text name="slug" label="Slug" />
-                                <button>Submit</button>
+                                <Button>Submit</Button>
                             </Form>
                         ) : (
                             <div>loading...</div>

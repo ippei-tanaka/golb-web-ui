@@ -1,5 +1,4 @@
 @import "./mixins.scss";
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
 
 %clearfix {
     *zoom: 1;
@@ -19,7 +18,7 @@ html
 
 body
 {
-    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 15px;
     height: 100%;
 }
@@ -212,7 +211,7 @@ table {
 
 .module-form-element
 {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     .m-fel-label
     {
@@ -237,6 +236,12 @@ table {
             font-size: 13px;
             @include border-radius(3px);
             @include box-sizing(border-box);
+
+            &:disabled
+            {
+                background-color: #eeeeee;
+                color: #555555;
+            }
         }
 
         &.m-fel-textarea-element
@@ -248,6 +253,12 @@ table {
             min-height: 10em;
             @include border-radius(3px);
             @include box-sizing(border-box);
+
+            &:disabled
+            {
+                background-color: #eeeeee;
+                color: #555555;
+            }
         }
 
         &.m-fel-datetime-element
@@ -257,6 +268,12 @@ table {
             font-size: 13px;
             @include border-radius(3px);
             @include box-sizing(border-box);
+
+            &:disabled
+            {
+                background-color: #eeeeee;
+                color: #555555;
+            }
         }
 
         &.m-fel-select-element
@@ -266,10 +283,41 @@ table {
             font-size: 13px;
             @include border-radius(3px);
             @include box-sizing(border-box);
+
+            &:disabled
+            {
+                background-color: #eeeeee;
+                color: #555555;
+            }
         }
 
         &.m-fel-checkbox-element
         {
+        }
+
+        &.m-fel-button-element
+        {
+            border: 2px solid #cccccc;
+            background-color: #0095dd;
+            color: #ffffff;
+            padding: 6px 15px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            @include border-radius(5px);
+            @include box-sizing(border-box);
+
+            &:hover
+            {
+                background-color: #ffffff;
+                color: #0095dd;
+            }
+
+            &:disabled
+            {
+                background-color: #eeeeee;
+                color: #555555;
+            }
         }
     }
 

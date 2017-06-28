@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Root from '../components/Root';
-import {Text, Select, Form} from '../components/form';
+import {Text, Select, Button, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
 let SettingEditor = class extends Component
@@ -49,7 +49,7 @@ let SettingEditor = class extends Component
                                     <option key="5" value={5}>5</option>
                                     <option key="10" value={10}>10</option>
                                 </Select>
-                                <button>Save</button>
+                                <Button>Save</Button>
                             </Form>
                         ) : (
                             <div>loading...</div>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Root from '../components/Root';
-import {Text, Form} from '../components/form';
+import {Text, Button, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
 let UserCreator = class extends Component
@@ -22,7 +22,7 @@ let UserCreator = class extends Component
                             <Text name="password" label="Password" type="password"/>
                             <Text name="display_name" label="Display Name"/>
                             <Text name="slug" label="Slug"/>
-                            <button>Submit</button>
+                            <Button>Submit</Button>
                         </Form>
                     </section>
                 </div>
