@@ -23,7 +23,7 @@ let PostCreator = class extends Component
 
     render ()
     {
-        const {createPost, users, categories, history} = this.props;
+        const {createPost, users, categories, history, loggedInUser} = this.props;
 
         return (
             <Root>
@@ -31,7 +31,10 @@ let PostCreator = class extends Component
                     <h1 className="m-ctt-title">Create New Post</h1>
                     <section className="m-ctt-section">
                         <Form
-                            initialEntries={{published_date: new window.Date()}}
+                            initialEntries={{
+                                published_date: new window.Date(),
+                                author_id: loggedInUser._id
+                            }}
                             onSubmit={values => createPost(values)}
                             onSubmissionSucceed={() => history.push('/posts')}>
                             <Text name="title" label="Title" />
