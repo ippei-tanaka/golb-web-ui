@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {generate} from '../../helpers/random-string-generator';
 
 class Select extends Component
 {
@@ -20,19 +21,29 @@ class Select extends Component
 
         const messages = errorMessages[name] || [];
 
+        const randomString = generate();
+
         return (
-            <div>
-                <label>{label}</label>
+            <div className="module-form-element">
+                <label
+                    htmlFor={`select-${randomString}`}
+                    className="m-fel-label"
+                >{label}</label>
                 <select
+                    id={`select-${randomString}`}
+                    className="m-fel-element m-fel-select-element"
                     name={name}
                     value={entries[name] || ""}
                     onChange={e => update(name, e.target.value)}
                     disabled={disabled}
                 >{children}</select>
                 {messages.length > 0 ? (
-                    <ul>
+                    <ul className="m-fel-error-message-list">
                         {messages.map((message, index) => (
-                            <li key={index} style={{color: 'red'}}>{message}</li>
+                            <li
+                                className="m-fel-error-message-list-item"
+                                key={index}
+                            >{message}</li>
                         ))}
                     </ul>
                 ) : null}

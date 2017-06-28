@@ -4,23 +4,6 @@
     {
         @media (min-width: 37.5em) { @content ; }
     }
-    /*
-    @else if $point == laptop
-    {
-        @media (min-width: 64em) and (max-width: 70em) { @content ; }
-    }
-
-    @else if $point == tablet
-    {
-        @media (min-width: 50em) and (max-width: 64em) { @content ; }
-    }
-
-    @else if $point == phablet
-    {
-        @media (min-width: 37.5em) and (max-width: 50em) { @content ; }
-    }
-    */
-
     @else if $point == mobile
     {
         @media (max-width: 37.5em) { @content ; }
@@ -39,7 +22,6 @@
     border-radius: $radius;
     background-clip: padding-box;
 }
-
 @mixin border-top-radius($radius) {
     -webkit-border-top-right-radius: $radius;
     border-top-right-radius: $radius;

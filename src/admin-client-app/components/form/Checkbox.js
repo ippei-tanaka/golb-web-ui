@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {generate} from '../../helpers/random-string-generator';
 
 class Checkbox extends Component
 {
@@ -20,10 +21,17 @@ class Checkbox extends Component
 
         const messages = errorMessages[name] || [];
 
+        const randomString = generate();
+
         return (
-            <div>
-                <label>{label}</label>
+            <div className="module-form-element">
+                <label
+                    htmlFor={`checkbox-${randomString}`}
+                    className="m-fel-label m-fel-inline-label"
+                >{label}</label>
                 <input
+                    id={`checkbox-${randomString}`}
+                    className="m-fel-element m-fel-checkbox-element"
                     type="checkbox"
                     name={name}
                     placeholder={placeholder}
@@ -33,9 +41,12 @@ class Checkbox extends Component
                     disabled={disabled}
                 />
                 {messages.length > 0 ? (
-                    <ul>
+                    <ul className="m-fel-error-message-list">
                         {messages.map((message, index) => (
-                            <li key={index} style={{color: 'red'}}>{message}</li>
+                            <li
+                                className="m-fel-error-message-list-item"
+                                key={index}
+                            >{message}</li>
                         ))}
                     </ul>
                 ) : null}

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {generate} from '../../helpers/random-string-generator';
 
 class TextArea extends Component
 {
@@ -20,10 +21,17 @@ class TextArea extends Component
 
         const messages = errorMessages[name] || [];
 
+        const randomString = generate();
+
         return (
-            <div>
-                <label>{label}</label>
+            <div className="module-form-element">
+                <label
+                    htmlFor={`textarea-${randomString}`}
+                    className="m-fel-label"
+                >{label}</label>
                 <textarea
+                    id={`textarea-${randomString}`}
+                    className="m-fel-element m-fel-textarea-element"
                     name={name}
                     placeholder={placeholder}
                     value={entries[name] || ""}
@@ -31,9 +39,12 @@ class TextArea extends Component
                     disabled={disabled}
                 />
                 {messages.length > 0 ? (
-                    <ul>
+                    <ul className="m-fel-error-message-list">
                         {messages.map((message, index) => (
-                            <li key={index} style={{color: 'red'}}>{message}</li>
+                            <li
+                                className="m-fel-error-message-list-item"
+                                key={index}
+                            >{message}</li>
                         ))}
                     </ul>
                 ) : null}

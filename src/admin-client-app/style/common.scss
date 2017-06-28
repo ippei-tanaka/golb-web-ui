@@ -99,6 +99,7 @@ table {
     {
         padding: 20px;
         overflow: auto;
+        width: 100%;
         @include box-sizing(border-box);
     }
 }
@@ -206,5 +207,79 @@ table {
         {
             margin-right: 0;
         }
+    }
+}
+
+.module-form-element
+{
+    margin-bottom: 10px;
+
+    .m-fel-label
+    {
+        display: block;
+        margin-bottom: 5px;
+
+        &.m-fel-inline-label
+        {
+            margin-bottom: 0;
+            margin-right: 5px;
+            display: inline-block;
+        }
+    }
+
+    .m-fel-element
+    {
+        &.m-fel-input-element
+        {
+            width: 100%;
+            border: 1px solid #cccccc;
+            padding: 4px;
+            font-size: 13px;
+            @include border-radius(3px);
+            @include box-sizing(border-box);
+        }
+
+        &.m-fel-textarea-element
+        {
+            width: 100%;
+            border: 1px solid #cccccc;
+            padding: 4px;
+            font-size: 13px;
+            min-height: 10em;
+            @include border-radius(3px);
+            @include box-sizing(border-box);
+        }
+
+        &.m-fel-datetime-element
+        {
+            border: 1px solid #cccccc;
+            padding: 4px;
+            font-size: 13px;
+            @include border-radius(3px);
+            @include box-sizing(border-box);
+        }
+
+        &.m-fel-select-element
+        {
+            border: 1px solid #cccccc;
+            padding: 6px;
+            font-size: 13px;
+            @include border-radius(3px);
+            @include box-sizing(border-box);
+        }
+
+        &.m-fel-checkbox-element
+        {
+        }
+    }
+
+    .m-fel-error-message-list
+    {
+        margin-top: 5px;
+    }
+
+    .m-fel-error-message-list-item
+    {
+        color: #ff0000;
     }
 }
