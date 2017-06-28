@@ -38,7 +38,6 @@ let Menu = class extends Component
                         logout().then(authenticate);
                     }}>Logout</a></li>
                 </ul>
-                <p className="m-mnu-message">Hello, {loggedInUser.display_name}!</p>
             </nav>
         );
     }
