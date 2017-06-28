@@ -41,49 +41,55 @@ let UserList = class extends Component
                 <div className="module-content">
                     <h1 className="m-ctt-title">User List</h1>
                     <section className="m-ctt-section">
-                        <table>
-                            <thead>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><Link to={`/users/?sortedBy=display_name&order=${reverseOrder}`}>Display Name</Link></td>
-                                <td><Link to={`/users/?sortedBy=email&order=${reverseOrder}`}>Email</Link></td>
-                                <td><Link to={`/users/?sortedBy=slug&order=${reverseOrder}`}>Slug</Link></td>
-                                <td><Link to={`/users/?sortedBy=created_date&order=${reverseOrder}`}>Created</Link></td>
-                                <td><Link to={`/users/?sortedBy=updated_date&order=${reverseOrder}`}>Updated</Link></td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {sortedAndFilteredArray.map(({_id, display_name, email, slug, created_date, updated_date},
-                                index) => (
-                                <tr key={_id}>
-                                    <td>{firstResult + index + 1}</td>
-                                    <td><Link to={`/users/${_id}`}>edit</Link></td>
-                                    <td><a href="#"
-                                           data-user-id={_id}
-                                           data-user-display-name={display_name}
-                                           onClick={this.onClickDelete.bind(this)}>delete</a></td>
-                                    <td>{display_name}</td>
-                                    <td>{email}</td>
-                                    <td>{slug}</td>
-                                    <td>{formatForDisplay(created_date)}</td>
-                                    <td>{formatForDisplay(updated_date)}</td>
+                        <nav>
+                            <Link to="/users/new">
+                                <i className="fa fa-plus-square-o" aria-hidden="true"></i>{' '}create a new user
+                            </Link>
+                        </nav>
+                    </section>
+                    <section className="m-ctt-section">
+                        {sortedAndFilteredArray.length > 0 ? (
+                            <table>
+                                <thead>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><Link to={`/users/?sortedBy=display_name&order=${reverseOrder}`}>Display Name</Link></td>
+                                    <td><Link to={`/users/?sortedBy=email&order=${reverseOrder}`}>Email</Link></td>
+                                    <td><Link to={`/users/?sortedBy=slug&order=${reverseOrder}`}>Slug</Link></td>
+                                    <td><Link to={`/users/?sortedBy=created_date&order=${reverseOrder}`}>Created</Link></td>
+                                    <td><Link to={`/users/?sortedBy=updated_date&order=${reverseOrder}`}>Updated</Link></td>
                                 </tr>
-                            ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {sortedAndFilteredArray.map(({_id, display_name, email, slug, created_date, updated_date},
+                                    index) => (
+                                    <tr key={_id}>
+                                        <td>{firstResult + index + 1}</td>
+                                        <td><Link to={`/users/${_id}`}>edit</Link></td>
+                                        <td><a href="#"
+                                               data-user-id={_id}
+                                               data-user-display-name={display_name}
+                                               onClick={this.onClickDelete.bind(this)}>delete</a></td>
+                                        <td>{display_name}</td>
+                                        <td>{email}</td>
+                                        <td>{slug}</td>
+                                        <td>{formatForDisplay(created_date)}</td>
+                                        <td>{formatForDisplay(updated_date)}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                        ) : (
+                            <div>Loading...</div>
+                        )}
                     </section>
                     {paginationData.totalPages > 1 ? (
                         <section className="m-ctt-section">
                             <Pagination linkUrlBase="/users/" {...paginationData} />
                         </section>
                     ) : null}
-                    <section className="m-ctt-section">
-                        <nav>
-                            <Link to="/users/new">create a new user</Link>
-                        </nav>
-                    </section>
                 </div>
             </Root>
         );

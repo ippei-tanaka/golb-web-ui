@@ -41,46 +41,52 @@ let CategoryList = class extends Component
                 <div className="module-content">
                     <h1 className="m-ctt-title">Category List</h1>
                     <section className="m-ctt-section">
-                        <table>
-                            <thead>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><Link to={`/categories/?sort=name&order=${reverseOrder}`}>Name</Link></td>
-                                <td><Link to={`/categories/?sort=slug&order=${reverseOrder}`}>Slug</Link></td>
-                                <td><Link to={`/categories/?sort=created_date&order=${reverseOrder}`}>Created</Link></td>
-                                <td><Link to={`/categories/?sort=updated_date&order=${reverseOrder}`}>Updated</Link></td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {sortedAndFilteredArray.map(({_id, name, slug, created_date, updated_date}, index) => (
-                                <tr key={_id}>
-                                    <td>{firstResult + index + 1}</td>
-                                    <td><Link to={`/categories/${_id}`}>edit</Link></td>
-                                    <td><a href="#"
-                                           data-category-id={_id}
-                                           data-category-name={name}
-                                           onClick={this.onClickDelete.bind(this)}>delete</a></td>
-                                    <td>{name}</td>
-                                    <td>{slug}</td>
-                                    <td>{formatForDisplay(created_date)}</td>
-                                    <td>{formatForDisplay(updated_date)}</td>
+                        <nav>
+                            <Link to="/categories/new">
+                                <i className="fa fa-plus-square-o" aria-hidden="true"></i>{' '}create a new category
+                            </Link>
+                        </nav>
+                    </section>
+                    <section className="m-ctt-section">
+                        {sortedAndFilteredArray.length > 0 ? (
+                            <table>
+                                <thead>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><Link to={`/categories/?sort=name&order=${reverseOrder}`}>Name</Link></td>
+                                    <td><Link to={`/categories/?sort=slug&order=${reverseOrder}`}>Slug</Link></td>
+                                    <td><Link to={`/categories/?sort=created_date&order=${reverseOrder}`}>Created</Link></td>
+                                    <td><Link to={`/categories/?sort=updated_date&order=${reverseOrder}`}>Updated</Link></td>
                                 </tr>
-                            ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {sortedAndFilteredArray.map(({_id, name, slug, created_date, updated_date}, index) => (
+                                    <tr key={_id}>
+                                        <td>{firstResult + index + 1}</td>
+                                        <td><Link to={`/categories/${_id}`}>edit</Link></td>
+                                        <td><a href="#"
+                                               data-category-id={_id}
+                                               data-category-name={name}
+                                               onClick={this.onClickDelete.bind(this)}>delete</a></td>
+                                        <td>{name}</td>
+                                        <td>{slug}</td>
+                                        <td>{formatForDisplay(created_date)}</td>
+                                        <td>{formatForDisplay(updated_date)}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                        ) : (
+                            <div>Loading...</div>
+                        )}
                     </section>
                     {paginationData.totalPages > 1 ? (
                         <section className="m-ctt-section">
                             <Pagination linkUrlBase="/categories/" {...paginationData} />
                         </section>
                     ) : null}
-                    <section className="m-ctt-section">
-                        <nav>
-                            <Link to="/categories/new">create a new category</Link>
-                        </nav>
-                    </section>
                 </div>
             </Root>
         );
