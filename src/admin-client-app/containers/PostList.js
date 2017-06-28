@@ -6,6 +6,7 @@ import Root from '../components/Root';
 import Pagination from '../components/Pagination';
 import {Link} from 'react-router-dom';
 import actionCreators from '../action-creators'
+import {formatForDisplay} from '../helpers/date-formatter';
 
 let PostList = class extends Component
 {
@@ -84,9 +85,9 @@ let PostList = class extends Component
                                         <td>{this.getRelatedValue(categories, category_id, 'name')}</td>
                                         <td>{slug}</td>
                                         <td>{is_draft ? "yes" : "no"}</td>
-                                        <td>{published_date}</td>
-                                        <td>{created_date}</td>
-                                        <td>{updated_date}</td>
+                                        <td>{formatForDisplay(published_date)}</td>
+                                        <td>{formatForDisplay(created_date)}</td>
+                                        <td>{formatForDisplay(updated_date)}</td>
                                     </tr>
                                 );
                             })}

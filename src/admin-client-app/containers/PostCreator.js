@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Root from '../components/Root';
-import {Text, Checkbox, TextArea, Select, Form} from '../components/form';
+import {Text, Date, Checkbox, TextArea, Select, Form} from '../components/form';
 import actionCreators from '../action-creators'
 
 let PostCreator = class extends Component
@@ -31,6 +31,7 @@ let PostCreator = class extends Component
                     <h1 className="m-ctt-title">Create New Post</h1>
                     <section className="m-ctt-section">
                         <Form
+                            initialEntries={{published_date: new window.Date()}}
                             onSubmit={values => createPost(values)}
                             onSubmissionSucceed={() => history.push('/posts')}>
                             <Text name="title" label="Title" />
@@ -49,7 +50,7 @@ let PostCreator = class extends Component
                             </Select>
                             <TextArea name="content" label="Content" placeholder="Write your post here." />
                             <Checkbox name="is_draft" label="Draft" />
-                            <Text name="published_date" label="Published Date" type="date" />
+                            <Date name="published_date" label="Published Date" />
                             <button>Submit</button>
                         </Form>
                     </section>

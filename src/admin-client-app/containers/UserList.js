@@ -6,6 +6,7 @@ import Root from '../components/Root';
 import Pagination from '../components/Pagination';
 import {Link} from 'react-router-dom';
 import actionCreators from '../action-creators'
+import {formatForDisplay} from '../helpers/date-formatter';
 
 let UserList = class extends Component
 {
@@ -66,8 +67,8 @@ let UserList = class extends Component
                                     <td>{display_name}</td>
                                     <td>{email}</td>
                                     <td>{slug}</td>
-                                    <td>{created_date}</td>
-                                    <td>{updated_date}</td>
+                                    <td>{formatForDisplay(created_date)}</td>
+                                    <td>{formatForDisplay(updated_date)}</td>
                                 </tr>
                             ))}
                             </tbody>

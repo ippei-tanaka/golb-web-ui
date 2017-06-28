@@ -1,18 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-const formatDate = (date) =>
-{
-    const d = new window.Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    let year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-};
+import {formatForInput} from '../../helpers/date-formatter';
 
 class Date extends Component
 {
@@ -33,13 +21,13 @@ class Date extends Component
 
         const messages = errorMessages[name] || [];
 
-        const value = entries[name] ? formatDate(entries[name]) : "";
+        const value = entries[name] ? formatForInput(entries[name]) : "";
 
         return (
             <div>
                 <label>{label}</label>
                 <input
-                    type="date"
+                    type="datetime-local"
                     name={name}
                     placeholder={placeholder}
                     value={value}
