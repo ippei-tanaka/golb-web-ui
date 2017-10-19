@@ -30,7 +30,7 @@ export const start = async (config = {}) =>
         error =>
         {
             if (error) throw error;
-            if (!config.silent) console.log("Golb has started.");
+            if (!config.silent) console.log(`The web server has started listening on Port ${config.webPort}.`);
         }
     );
 };
