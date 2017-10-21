@@ -37,11 +37,10 @@ let SettingEditor = class extends Component
                     <section className="m-ctt-section">
                         {Object.keys(settings).length > 0 ? (
                             <Form
-                                initialEntries={settings}
                                 onSubmit={values => editSettings(values)}
                                 onSubmissionSucceed={() => this.setState({flushMessage: "The settings saved successfully."})}>
-                                <Text name="name" label="Blog Name" />
-                                <Select name="posts_per_page" label="Posts per page">
+                                <Text name="name" label="Blog Name" initialValue={settings.name} />
+                                <Select name="posts_per_page" label="Posts per page" initialValue={settings.posts_per_page}>
                                     <option key="0" value="">(None)</option>
                                     <option key="1" value={1}>1</option>
                                     <option key="2" value={2}>2</option>

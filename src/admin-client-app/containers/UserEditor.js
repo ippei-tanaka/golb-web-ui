@@ -31,12 +31,11 @@ let UserEditor = class extends Component
                     <section className="m-ctt-section">
                         {user ? (
                             <Form
-                                initialEntries={user}
                                 onSubmit={values => editUser(id, values)}
                                 onSubmissionSucceed={() => history.push('/users')}>
-                                <Text name="email" label="Email" />
-                                <Text name="display_name" label="Display Name" />
-                                <Text name="slug" label="Slug" />
+                                <Text name="email" label="Email" initialValue={user.email} />
+                                <Text name="display_name" label="Display Name" initialValue={user.display_name} />
+                                <Text name="slug" label="Slug" initialValue={user.slug} />
                                 <Button>Submit</Button>
                             </Form>
                         ) : (

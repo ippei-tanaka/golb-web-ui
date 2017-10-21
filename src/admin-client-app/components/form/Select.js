@@ -1,9 +1,30 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import FormElement from './FormElement';
 import {generate} from '../../helpers/random-string-generator';
 
-class Select extends Component
+class Select extends FormElement
 {
+    constructor (props)
+    {
+        super(props);
+
+        this.state = {
+            value: props.initialValue || "",
+            error: []
+        };
+    }
+
+    onFormSubmit ()
+    {
+        return this.state.value;
+    }
+
+    onFormSubmitFailed (error)
+    {
+        this.setState({error: error || []});
+    }
+
     render ()
     {
         const {
@@ -14,12 +35,9 @@ class Select extends Component
         } = this.props;
 
         const {
-            entries,
-            update,
-            errorMessages = {}
-        } = this.context;
-
-        const messages = errorMessages[name] || [];
+            value,
+            error
+        } = this.state;
 
         const randomString = generate();
 
@@ -33,13 +51,13 @@ class Select extends Component
                     id={`select-${randomString}`}
                     className="m-fel-element m-fel-select-element"
                     name={name}
-                    value={entries[name] || ""}
-                    onChange={e => update(name, e.target.value)}
+                    value={value}
+                    onChange={e => this.setState({value: e.target.value})}
                     disabled={disabled}
                 >{children}</select>
-                {messages.length > 0 ? (
+                {error.length > 0 ? (
                     <ul className="m-fel-error-message-list">
-                        {messages.map((message, index) => (
+                        {error.map((message, index) => (
                             <li
                                 className="m-fel-error-message-list-item"
                                 key={index}
@@ -52,19 +70,14 @@ class Select extends Component
     }
 }
 
-Select.propTypes =
-{
-    name: PropTypes.string.isRequired,
+Select.propTypes = Object.assign({
     label: PropTypes.string,
     disabled: PropTypes.bool,
-    children: PropTypes.node.isRequired
-};
-
-Select.contextTypes =
-{
-    update: PropTypes.func.isRequired,
-    entries: PropTypes.object.isRequired,
-    errorMessages: PropTypes.object
-};
+    children: PropTypes.node.isRequired,
+    initialValue: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number
+    ]),
+}, FormElement.propTypes);
 
 export default Select;

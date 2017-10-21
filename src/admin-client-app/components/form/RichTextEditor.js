@@ -1,21 +1,33 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import FormElement from './FormElement';
 import {generate} from '../../helpers/random-string-generator';
-import {Editor, EditorState, RichUtils, convertToRaw} from 'draft-js';
+import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js';
 
-class RichEditorExample extends Component
+class RichTextEditor extends FormElement
 {
     constructor (props)
     {
         super(props);
-        this.state = {editorState: EditorState.createEmpty()};
 
-        //this.focus = () => this.refs.editor.focus();
-        //this.onChange = (editorState) => this.setState({editorState});
-        //this.handleKeyCommand = (command) => this._handleKeyCommand(command);
-        //this.onTab = (e) => this._onTab(e);
-        //this.toggleBlockType = (type) => this._toggleBlockType(type);
-        //this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
+        const {initialValue} = props;
+
+        this.state = {
+            editorState: initialValue
+                ? EditorState.createWithContent(convertFromRaw(JSON.parse(initialValue)))
+                : EditorState.createEmpty(),
+            error: []
+        };
+    }
+
+    onFormSubmit ()
+    {
+        return JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
+    }
+
+    onFormSubmitFailed (error)
+    {
+        this.setState({error: error || []});
     }
 
     focus ()
@@ -25,12 +37,6 @@ class RichEditorExample extends Component
 
     onChange (editorState)
     {
-        const {
-            entries,
-            update,
-            errorMessages = {}
-        } = this.context;
-
         this.setState({editorState});
     }
 
@@ -80,6 +86,30 @@ class RichEditorExample extends Component
 
         // If the user changes block type before entering any text, we can
         // either style the placeholder or hide it. Let's just hide it now.
+
+        const {
+            name,
+            label = "",
+            disabled = false,
+            placeholder = ""
+        } = this.props;
+
+        const {
+            entries,
+            errorMessages = {}
+        } = this.context;
+
+        const messages = errorMessages[name] || [];
+
+        //console.log(this.context);
+
+        //const value = entries[name];
+
+        //if (typeof value === "string" && value !== "")
+        //{
+            //editorState.setCconvertFromRaw(JSON.parse(value));
+        //}
+
         let className = 'RichEditor-editor';
         const contentState = editorState.getCurrentContent();
 
@@ -91,30 +121,15 @@ class RichEditorExample extends Component
             }
         }
 
-        const {
-            name,
-            label = "",
-            disabled = false,
-            //children
-        } = this.props;
+        const randomString = generate();
 
-        const {
-            entries,
-            update,
-            errorMessages = {}
-        } = this.context;
-
-        const messages = errorMessages[name] || [];
-
-        //const randomString = generate();
-
-        console.log(convertToRaw(editorState.getCurrentContent()));
+        //console.log(convertToRaw(editorState.getCurrentContent()));
 
         return (
         <div className="module-form-element">
 
             <label
-                //htmlFor={`select-${randomString}`}
+                htmlFor={`rich-text-editor-${randomString}`}
                 className="m-fel-label"
             >{label}</label>
 
@@ -129,18 +144,22 @@ class RichEditorExample extends Component
                 />
                 <div className={className} onClick={this.focus.bind(this)}>
                     <Editor
+                        id={`rich-text-editor-${randomString}`}
                         blockStyleFn={getBlockStyle}
                         customStyleMap={styleMap}
                         editorState={editorState}
                         handleKeyCommand={this.handleKeyCommand.bind(this)}
                         onChange={this.onChange.bind(this)}
                         onTab={this.onTab.bind(this)}
-                        placeholder="Tell a story..."
+                        placeholder={placeholder}
                         ref="editor"
                         spellCheck={true}
+                        readOnly={disabled}
                     />
                 </div>
             </div>
+
+            <input type="hidden" name={name} />
 
             {messages.length > 0 ? (
                 <ul className="m-fel-error-message-list">
@@ -167,7 +186,7 @@ const styleMap = {
     },
 };
 
-function getBlockStyle (block)
+const getBlockStyle = (block) =>
 {
     switch (block.getType())
     {
@@ -176,33 +195,24 @@ function getBlockStyle (block)
         default:
             return null;
     }
-}
+};
 
-class StyleButton extends React.Component {
-    constructor ()
+const StyleButton = ({active, label, style, onToggle}) =>
+{
+    let className = 'RichEditor-styleButton';
+
+    if (active)
     {
-        super();
-        this.onToggle = (e) =>
-        {
+        className += ' RichEditor-activeButton';
+    }
+
+    return (
+        <span className={className} onMouseDown={e => {
             e.preventDefault();
-            this.props.onToggle(this.props.style);
-        };
-    }
-
-    render ()
-    {
-        let className = 'RichEditor-styleButton';
-        if (this.props.active)
-        {
-            className += ' RichEditor-activeButton';
-        }
-        return (
-            <span className={className} onMouseDown={this.onToggle}>
-              {this.props.label}
-            </span>
-        );
-    }
-}
+            onToggle(style);
+        }}>{label}</span>
+    );
+};
 
 const BLOCK_TYPES = [
     {label: 'H1', style: 'header-one'},
@@ -265,67 +275,11 @@ const InlineStyleControls = (props) =>
     );
 };
 
-class Select extends Component {
-    render ()
-    {
-        const {
-            name,
-            label = "",
-            disabled = false,
-            children
-        } = this.props;
-
-        const {
-            entries,
-            update,
-            errorMessages = {}
-        } = this.context;
-
-        const messages = errorMessages[name] || [];
-
-        const randomString = generate();
-
-        return (
-            <div className="module-form-element">
-                <label
-                    htmlFor={`select-${randomString}`}
-                    className="m-fel-label"
-                >{label}</label>
-                <select
-                    id={`select-${randomString}`}
-                    className="m-fel-element m-fel-select-element"
-                    name={name}
-                    value={entries[name] || ""}
-                    onChange={e => update(name, e.target.value)}
-                    disabled={disabled}
-                >{children}</select>
-                {messages.length > 0 ? (
-                    <ul className="m-fel-error-message-list">
-                        {messages.map((message, index) => (
-                            <li
-                                className="m-fel-error-message-list-item"
-                                key={index}
-                            >{message}</li>
-                        ))}
-                    </ul>
-                ) : null}
-            </div>
-        );
-    }
-}
-
-RichEditorExample.propTypes =
-{
-    name: PropTypes.string.isRequired,
+RichTextEditor.propTypes = Object.assign({
     label: PropTypes.string,
-    disabled: PropTypes.bool
-};
+    disabled: PropTypes.bool,
+    placeholder: PropTypes.string,
+    initialValue: PropTypes.string
+}, FormElement.propTypes);
 
-RichEditorExample.contextTypes =
-{
-    update: PropTypes.func.isRequired,
-    entries: PropTypes.object.isRequired,
-    errorMessages: PropTypes.object
-};
-
-export default RichEditorExample;
+export default RichTextEditor;

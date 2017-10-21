@@ -1,23 +1,19 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-let Form = class extends Component {
+class Form extends Component
+{
     constructor (props)
     {
         super(props);
-
-        this.state = {
-            entries: {...props.initialEntries},
-            error: {}
-        };
-
+        this._submitCallbacks = {};
+        this._submitFailCallbacks = {};
         this._isMounted = true;
     }
 
     render ()
     {
         const {children} = this.props;
-
         return (
             <form ref="formElement" onSubmit={this.submit.bind(this)}>{children}</form>
         );
@@ -26,9 +22,12 @@ let Form = class extends Component {
     getChildContext ()
     {
         return {
-            update: (name, value) => this.setState(s => {s.entries[name] = value}),
-            entries: this.state.entries,
-            errorMessages: this.state.error
+            setSubmitCallback: (name, callback) => {
+                this._submitCallbacks[name] = callback;
+            },
+            setSubmitFailCallback: (name, callback) => {
+                this._submitFailCallbacks[name] = callback;
+            }
         };
     }
 
@@ -36,24 +35,17 @@ let Form = class extends Component {
     {
         event.preventDefault();
 
-        const formElements = event.target.querySelectorAll('input, select, textarea, button');
-        const submitted = {};
-        const entries = this.state.entries;
+        const data = {};
 
-        for (let element of formElements)
+        const callbacks = this._submitCallbacks;
+
+        for (let key of Object.keys(callbacks))
         {
-            const name = element.getAttribute('name');
-
-            if (!name) continue;
-
-            const value = entries[name];
-
-            if (typeof value === "undefined") continue;
-
-            submitted[name] = value;
+            const callback = callbacks[key];
+            data[key] = callback();
         }
 
-        const obj = this.props.onSubmit(submitted);
+        const obj = this.props.onSubmit(data);
 
         if (obj instanceof Promise)
         {
@@ -67,8 +59,6 @@ let Form = class extends Component {
     {
         if (!this._isMounted) return;
 
-        this.setState(s => {s.error = {}});
-
         this.props.onSubmissionSucceed();
     }
 
@@ -78,7 +68,13 @@ let Form = class extends Component {
 
         if (error && error.message && !Array.isArray(error.message))
         {
-            this.setState(s => {s.error = error.message});
+            const callbacks = this._submitFailCallbacks;
+
+            for (let key of Object.keys(callbacks))
+            {
+                const callback = callbacks[key];
+                callback(error.message[key]);
+            }
         }
 
         this.props.onSubmissionFail();
@@ -88,7 +84,7 @@ let Form = class extends Component {
     {
         this._isMounted = false;
     }
-};
+}
 
 Form.propTypes =
 {
@@ -105,9 +101,8 @@ Form.defaultProps = {
 };
 
 Form.childContextTypes = {
-    update: PropTypes.func,
-    entries: PropTypes.object,
-    errorMessages: PropTypes.object
+    setSubmitCallback: PropTypes.func,
+    setSubmitFailCallback: PropTypes.func
 };
 
 export default Form;

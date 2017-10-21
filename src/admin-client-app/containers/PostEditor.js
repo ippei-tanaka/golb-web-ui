@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Root from '../components/Root';
-import {Text, Checkbox, Date, TextArea, Select, Button, Form, HtmlEditor} from '../components/form';
+import {Text, Checkbox, Date, TextArea, Select, Button, Form, RichTextEditor} from '../components/form';
 import actionCreators from '../action-creators'
 
 let PostEditor = class extends Component
@@ -40,27 +40,25 @@ let PostEditor = class extends Component
                     <section className="m-ctt-section">
                         {post ? (
                             <Form
-                                initialEntries={post}
                                 onSubmit={values => editPost(id, values)}
                                 onSubmissionSucceed={() => history.push('/posts')}>
-                                <Text name="title" label="Title" />
-                                <Text name="slug" label="Slug" />
-                                <Select name="author_id" label="Author">
+                                <Text name="title" label="Title" initialValue={post.title} />
+                                <Text name="slug" label="Slug" initialValue={post.slug} />
+                                <Select name="author_id" label="Author" initialValue={post.author_id} >
                                     <option key="0" value="">(None)</option>
                                     {Object.keys(users).map(userId => (
                                         <option key={userId} value={userId}>{users[userId].display_name}</option>
                                     ))}
                                 </Select>
-                                <Select name="category_id" label="Category">
+                                <Select name="category_id" label="Category" initialValue={post.category_id} >
                                     <option key="0" value="">(None)</option>
                                     {Object.keys(categories).map(categoryId => (
                                         <option key={categoryId} value={categoryId}>{categories[categoryId].name}</option>
                                     ))}
                                 </Select>
-                                <TextArea name="content" label="Content" placeholder="Write your post here." />
-                                <HtmlEditor name="content2" label="Content" />
-                                <Checkbox name="is_draft" label="Draft" />
-                                <Date name="published_date" label="Published Date" />
+                                <RichTextEditor name="content" label="Content" placeholder="Write your post here." initialValue={post.content} />
+                                <Checkbox name="is_draft" label="Draft" initialValue={post.is_draft} />
+                                <Date name="published_date" label="Published Date" initialValue={post.published_date} />
                                 <Button>Submit</Button>
                             </Form>
                         ) : (

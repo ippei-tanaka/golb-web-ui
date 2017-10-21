@@ -30,11 +30,10 @@ let CategoryEditor = class extends Component
                     <section className="m-ctt-section">
                         {category ? (
                             <Form
-                                initialEntries={category}
                                 onSubmit={values => editCategory(id, values)}
                                 onSubmissionSucceed={() => history.push('/categories')}>
-                                <Text name="name" label="Name" />
-                                <Text name="slug" label="Slug" />
+                                <Text name="name" label="Name" initialValue={category.name} />
+                                <Text name="slug" label="Slug" initialValue={category.slug} />
                                 <Button>Submit</Button>
                             </Form>
                         ) : (
