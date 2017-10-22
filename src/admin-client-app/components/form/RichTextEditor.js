@@ -82,7 +82,7 @@ class RichTextEditor extends FormElement
 
     render ()
     {
-        const {editorState} = this.state;
+        const {editorState, error} = this.state;
 
         // If the user changes block type before entering any text, we can
         // either style the placeholder or hide it. Let's just hide it now.
@@ -93,22 +93,6 @@ class RichTextEditor extends FormElement
             disabled = false,
             placeholder = ""
         } = this.props;
-
-        const {
-            entries,
-            errorMessages = {}
-        } = this.context;
-
-        const messages = errorMessages[name] || [];
-
-        //console.log(this.context);
-
-        //const value = entries[name];
-
-        //if (typeof value === "string" && value !== "")
-        //{
-            //editorState.setCconvertFromRaw(JSON.parse(value));
-        //}
 
         let className = 'RichEditor-editor';
         const contentState = editorState.getCurrentContent();
@@ -122,8 +106,6 @@ class RichTextEditor extends FormElement
         }
 
         const randomString = generate();
-
-        //console.log(convertToRaw(editorState.getCurrentContent()));
 
         return (
         <div className="module-form-element">
@@ -159,11 +141,9 @@ class RichTextEditor extends FormElement
                 </div>
             </div>
 
-            <input type="hidden" name={name} />
-
-            {messages.length > 0 ? (
+            {error.length > 0 ? (
                 <ul className="m-fel-error-message-list">
-                    {messages.map((message, index) => (
+                    {error.map((message, index) => (
                         <li
                             className="m-fel-error-message-list-item"
                             key={index}
