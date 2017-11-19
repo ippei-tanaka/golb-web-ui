@@ -3,50 +3,52 @@ import PropTypes from 'prop-types';
 import FormElement from './FormElement';
 import {generate} from '../../helpers/random-string-generator';
 import {Editor, EditorState, RichUtils, convertToRaw, convertFromRaw} from 'draft-js';
+import PrismDecorator from 'draft-js-prism';
+import Prism from 'prismjs';
 
-class RichTextEditor extends FormElement
-{
-    constructor (props)
-    {
+const decorator = new PrismDecorator({
+    prism: Prism,
+    defaultSyntax: "javascript",
+    render: ({children, type}) => {
+        return <span className={`prism-token token ${type}`} type={type}>{children}</span>;
+    }
+});
+
+class RichTextEditor extends FormElement {
+    constructor(props) {
         super(props);
 
         const {initialValue} = props;
 
         this.state = {
             editorState: initialValue
-                ? EditorState.createWithContent(convertFromRaw(JSON.parse(initialValue)))
-                : EditorState.createEmpty(),
+                ? EditorState.createWithContent(convertFromRaw(JSON.parse(initialValue)), decorator)
+                : EditorState.createEmpty(decorator),
             error: []
         };
     }
 
-    onFormSubmit ()
-    {
+    onFormSubmit() {
         return JSON.stringify(convertToRaw(this.state.editorState.getCurrentContent()));
     }
 
-    onFormSubmitFailed (error)
-    {
+    onFormSubmitFailed(error) {
         this.setState({error: error || []});
     }
 
-    focus ()
-    {
+    focus() {
         this.refs.editor.focus();
     }
 
-    onChange (editorState)
-    {
+    onChange(editorState) {
         this.setState({editorState});
     }
 
-    handleKeyCommand (command)
-    {
+    handleKeyCommand(command) {
         const {editorState} = this.state;
         const newState = RichUtils.handleKeyCommand(editorState, command);
 
-        if (newState)
-        {
+        if (newState) {
             this.onChange(newState);
             return true;
         }
@@ -54,14 +56,12 @@ class RichTextEditor extends FormElement
         return false;
     }
 
-    onTab (e)
-    {
+    onTab(e) {
         const maxDepth = 4;
         this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth));
     }
 
-    toggleBlockType (blockType)
-    {
+    toggleBlockType(blockType) {
         this.onChange(
             RichUtils.toggleBlockType(
                 this.state.editorState,
@@ -70,8 +70,7 @@ class RichTextEditor extends FormElement
         );
     }
 
-    toggleInlineStyle (inlineStyle)
-    {
+    toggleInlineStyle(inlineStyle) {
         this.onChange(
             RichUtils.toggleInlineStyle(
                 this.state.editorState,
@@ -80,27 +79,23 @@ class RichTextEditor extends FormElement
         );
     }
 
-    render ()
-    {
+    render() {
         const {editorState, error} = this.state;
 
-        // If the user changes block type before entering any text, we can
-        // either style the placeholder or hide it. Let's just hide it now.
-
         const {
-            name,
             label = "",
             disabled = false,
             placeholder = ""
         } = this.props;
 
+        // If the user changes block type before entering any text, we can
+        // either style the placeholder or hide it. Let's just hide it now.
+
         let className = 'RichEditor-editor';
         const contentState = editorState.getCurrentContent();
 
-        if (!contentState.hasText())
-        {
-            if (contentState.getBlockMap().first().getType() !== 'unstyled')
-            {
+        if (!contentState.hasText()) {
+            if (contentState.getBlockMap().first().getType() !== 'unstyled') {
                 className += ' RichEditor-hidePlaceholder';
             }
         }
@@ -108,81 +103,85 @@ class RichTextEditor extends FormElement
         const randomString = generate();
 
         return (
-        <div className="module-form-element">
+            <div className="module-form-element">
 
-            <label
-                htmlFor={`rich-text-editor-${randomString}`}
-                className="m-fel-label"
-            >{label}</label>
+                <label
+                    htmlFor={`rich-text-editor-${randomString}`}
+                    className="m-fel-label"
+                >{label}</label>
 
-            <div className="RichEditor-root m-fel-element m-fel-html-editor-element">
-                <BlockStyleControls
-                    editorState={editorState}
-                    onToggle={this.toggleBlockType.bind(this)}
-                />
-                <InlineStyleControls
-                    editorState={editorState}
-                    onToggle={this.toggleInlineStyle.bind(this)}
-                />
-                <div className={className} onClick={this.focus.bind(this)}>
-                    <Editor
-                        id={`rich-text-editor-${randomString}`}
-                        blockStyleFn={getBlockStyle}
-                        customStyleMap={styleMap}
-                        editorState={editorState}
-                        handleKeyCommand={this.handleKeyCommand.bind(this)}
-                        onChange={this.onChange.bind(this)}
-                        onTab={this.onTab.bind(this)}
-                        placeholder={placeholder}
-                        ref="editor"
-                        spellCheck={true}
-                        readOnly={disabled}
-                    />
+                <div className="m-fel-element m-fel-rich-text-editor-element">
+                    <div className="RichEditor-root">
+                        <BlockStyleControls
+                            editorState={editorState}
+                            onToggle={this.toggleBlockType.bind(this)}
+                        />
+                        <InlineStyleControls
+                            editorState={editorState}
+                            onToggle={this.toggleInlineStyle.bind(this)}
+                        />
+                        <div className={className} onClick={this.focus.bind(this)}>
+                            <Editor
+                                id={`rich-text-editor-${randomString}`}
+                                blockStyleFn={getBlockStyle}
+                                customStyleMap={styleMap}
+                                editorState={editorState}
+                                handleKeyCommand={this.handleKeyCommand.bind(this)}
+                                onChange={this.onChange.bind(this)}
+                                onTab={this.onTab.bind(this)}
+                                placeholder={placeholder}
+                                ref="editor"
+                                spellCheck={true}
+                                readOnly={disabled}
+                            />
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            {error.length > 0 ? (
-                <ul className="m-fel-error-message-list">
-                    {error.map((message, index) => (
-                        <li
-                            className="m-fel-error-message-list-item"
-                            key={index}
-                        >{message}</li>
-                    ))}
-                </ul>
-            ) : null}
-        </div>
+                {error.length > 0 ? (
+                    <ul className="m-fel-error-message-list">
+                        {error.map((message, index) => (
+                            <li
+                                className="m-fel-error-message-list-item"
+                                key={index}
+                            >{message}</li>
+                        ))}
+                    </ul>
+                ) : null}
+            </div>
         );
     }
 }
 
 // Custom overrides for "code" style.
 const styleMap = {
+    /*
     CODE: {
         backgroundColor: 'rgba(0, 0, 0, 0.05)',
         fontFamily: '"Inconsolata", "Menlo", "Consolas", monospace',
         fontSize: 16,
         padding: 2,
     },
+    */
 };
 
-const getBlockStyle = (block) =>
-{
-    switch (block.getType())
-    {
+const getBlockStyle = (block) => {
+    switch (block.getType()) {
         case 'blockquote':
             return 'RichEditor-blockquote';
+        case 'unstyled':
+            return 'RichEditor-unstyled-block';
+        case 'code-block':
+            return 'RichEditor-code-block';
         default:
             return null;
     }
 };
 
-const StyleButton = ({active, label, style, onToggle}) =>
-{
+const StyleButton = ({active, label, style, onToggle}) => {
     let className = 'RichEditor-styleButton';
 
-    if (active)
-    {
+    if (active) {
         className += ' RichEditor-activeButton';
     }
 
@@ -195,20 +194,19 @@ const StyleButton = ({active, label, style, onToggle}) =>
 };
 
 const BLOCK_TYPES = [
-    {label: 'H1', style: 'header-one'},
-    {label: 'H2', style: 'header-two'},
+    //{label: 'H1', style: 'header-one'},
+    //{label: 'H2', style: 'header-two'},
     {label: 'H3', style: 'header-three'},
     {label: 'H4', style: 'header-four'},
     {label: 'H5', style: 'header-five'},
-    {label: 'H6', style: 'header-six'},
+    //{label: 'H6', style: 'header-six'},
     {label: 'Blockquote', style: 'blockquote'},
     {label: 'UL', style: 'unordered-list-item'},
     {label: 'OL', style: 'ordered-list-item'},
     {label: 'Code Block', style: 'code-block'},
 ];
 
-const BlockStyleControls = (props) =>
-{
+const BlockStyleControls = (props) => {
     const {editorState} = props;
     const selection = editorState.getSelection();
     const blockType = editorState
@@ -233,12 +231,11 @@ const BlockStyleControls = (props) =>
 const INLINE_STYLES = [
     {label: 'Bold', style: 'BOLD'},
     {label: 'Italic', style: 'ITALIC'},
-    {label: 'Underline', style: 'UNDERLINE'},
-    {label: 'Monospace', style: 'CODE'},
+    {label: 'Underline', style: 'UNDERLINE'}//,
+    //{label: 'Monospace', style: 'CODE'},
 ];
 
-const InlineStyleControls = (props) =>
-{
+const InlineStyleControls = (props) => {
     const currentStyle = props.editorState.getCurrentInlineStyle();
     return (
         <div className="RichEditor-controls">

@@ -11,26 +11,22 @@
     }
 }
 
-html
-{
+html {
     height: 100%;
 }
 
-body
-{
+body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-size: 15px;
     height: 100%;
 }
 
-a
-{
+a {
     color: #1b5b97;
     text-decoration: none;
 }
 
-a:hover
-{
+a:hover {
     color: #2272bd;
     text-decoration: underline;
 }
@@ -39,8 +35,7 @@ table {
     width: 100%;
     font-size: 90%;
 
-    th, td
-    {
+    th, td {
         padding: 7px;
         border: 1px solid #f0f0f0;
     }
@@ -50,20 +45,17 @@ table {
     }
 
     tbody {
-        tr:nth-child(2n)
-        {
+        tr:nth-child(2n) {
             background-color: #e0e0e0;
         }
     }
 }
 
-#App
-{
+#App {
     height: 100%;
 }
 
-.module-auth-layout
-{
+.module-auth-layout {
     display: flex;
     align-content: center;
     align-items: center;
@@ -72,32 +64,27 @@ table {
     width: 100%;
 }
 
-.module-layout
-{
+.module-layout {
     display: flex;
     flex-wrap: nowrap;
     align-content: stretch;
     align-items: stretch;
     height: 100%;
 
-    @include breakpoint(mobile)
-    {
+    @include breakpoint(mobile) {
         flex-wrap: wrap;
         height: auto;
     }
 
-    .m-lyt-menu-container
-    {
+    .m-lyt-menu-container {
         background-color: #0079b3;
 
-        @include breakpoint(mobile)
-        {
+        @include breakpoint(mobile) {
             width: 100%;
         }
     }
 
-    .m-lyt-content-container
-    {
+    .m-lyt-content-container {
         padding: 20px;
         width: 100%;
         overflow: auto;
@@ -105,10 +92,8 @@ table {
     }
 }
 
-.module-menu
-{
-    .m-mnu-fold-button
-    {
+.module-menu {
+    .m-mnu-fold-button {
         display: none;
         background-color: #0079b3;
         padding: 12px 20px;
@@ -120,40 +105,34 @@ table {
         text-align: left;
         border-bottom: 1px solid #ffffff;
 
-        @include breakpoint(mobile)
-        {
+        @include breakpoint(mobile) {
             display: block;
         }
     }
 
-    .m-mnu-list
-    {
+    .m-mnu-list {
         display: flex;
         flex-wrap: wrap;
         width: 140px;
 
-        @include breakpoint(mobile)
-        {
+        @include breakpoint(mobile) {
             width: 100%;
             display: none;
 
-            &.m-mnu-expanded
-            {
+            &.m-mnu-expanded {
                 display: flex;
             }
         }
     }
 
-    .m-mnu-list-item
-    {
+    .m-mnu-list-item {
         list-style: none;
         border-bottom: 1px solid #ffffff;
         width: 100%;
         @include box-sizing(border-box);
     }
 
-    .m-mnu-link
-    {
+    .m-mnu-link {
         padding: 15px;
         background-color: #0079b3;
         display: inline-block;
@@ -169,67 +148,55 @@ table {
     }
 }
 
-.module-content
-{
-    .m-ctt-title
-    {
+.module-content {
+    .m-ctt-title {
         font-size: 20px;
         font-weight: 500;
         margin-bottom: 20px;
     }
 
-    .m-ctt-section
-    {
+    .m-ctt-section {
         margin-bottom: 20px;
         overflow: auto;
         padding: 1px 0;
     }
 }
 
-.module-pagination
-{
+.module-pagination {
     display: flex;
     flex-wrap: wrap;
     font-size: 90%;
 
-    .m-pgn-list-item
-    {
+    .m-pgn-list-item {
         list-style: none;
         margin: 0 5px;
 
-        &:first-child
-        {
+        &:first-child {
             margin-left: 0;
         }
 
-        &:last-child
-        {
+        &:last-child {
             margin-right: 0;
         }
     }
 }
 
-.module-form-element
-{
+.module-form-element {
     margin-bottom: 20px;
 
-    .m-fel-label
-    {
+    .m-fel-label {
         display: block;
         margin-bottom: 5px;
 
-        &.m-fel-inline-label
-        {
+        &.m-fel-inline-label {
             margin-bottom: 0;
             margin-right: 5px;
             display: inline-block;
         }
     }
 
-    .m-fel-element
-    {
-        &.m-fel-input-element
-        {
+    .m-fel-element {
+        &.m-fel-input-element {
             width: 100%;
             border: 1px solid #cccccc;
             padding: 4px;
@@ -237,15 +204,13 @@ table {
             @include border-radius(3px);
             @include box-sizing(border-box);
 
-            &:disabled
-            {
+            &:disabled {
                 background-color: #eeeeee;
                 color: #555555;
             }
         }
 
-        &.m-fel-textarea-element
-        {
+        &.m-fel-textarea-element {
             width: 100%;
             border: 1px solid #cccccc;
             padding: 4px;
@@ -254,49 +219,42 @@ table {
             @include border-radius(3px);
             @include box-sizing(border-box);
 
-            &:disabled
-            {
+            &:disabled {
                 background-color: #eeeeee;
                 color: #555555;
             }
         }
 
-        &.m-fel-datetime-element
-        {
+        &.m-fel-datetime-element {
             border: 1px solid #cccccc;
             padding: 4px;
             font-size: 13px;
             @include border-radius(3px);
             @include box-sizing(border-box);
 
-            &:disabled
-            {
+            &:disabled {
                 background-color: #eeeeee;
                 color: #555555;
             }
         }
 
-        &.m-fel-select-element
-        {
+        &.m-fel-select-element {
             border: 1px solid #cccccc;
             padding: 6px;
             font-size: 13px;
             @include border-radius(3px);
             @include box-sizing(border-box);
 
-            &:disabled
-            {
+            &:disabled {
                 background-color: #eeeeee;
                 color: #555555;
             }
         }
 
-        &.m-fel-checkbox-element
-        {
+        &.m-fel-checkbox-element {
         }
 
-        &.m-fel-button-element
-        {
+        &.m-fel-button-element {
             border: 2px solid #cccccc;
             background-color: #0095dd;
             color: #ffffff;
@@ -307,99 +265,27 @@ table {
             @include border-radius(5px);
             @include box-sizing(border-box);
 
-            &:hover
-            {
+            &:hover {
                 background-color: #ffffff;
                 color: #0095dd;
             }
 
-            &:disabled
-            {
+            &:disabled {
                 background-color: #eeeeee;
                 color: #555555;
             }
         }
+
+        .m-fel-rich-text-editor-element {
+        }
     }
 
-    .m-fel-error-message-list
-    {
+    .m-fel-error-message-list {
         margin-top: 5px;
     }
 
-    .m-fel-error-message-list-item
-    {
+    .m-fel-error-message-list-item {
         color: #ff0000;
-    }
-
-
-
-
-    /*
-        Html Editor (Draft JS)
-    */
-    .RichEditor-root {
-        background: #fff;
-        border: 1px solid #ddd;
-        font-family: 'Georgia', serif;
-        font-size: 14px;
-        padding: 15px;
-
-        .RichEditor-editor {
-            border-top: 1px solid #ddd;
-            cursor: text;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-
-        .RichEditor-editor .public-DraftEditorPlaceholder-root,
-        .RichEditor-editor .public-DraftEditor-content {
-            margin: 0 -15px -15px;
-            padding: 15px;
-        }
-
-        .RichEditor-editor .public-DraftEditor-content {
-            min-height: 100px;
-        }
-
-        .RichEditor-hidePlaceholder .public-DraftEditorPlaceholder-root {
-            display: none;
-        }
-
-        .RichEditor-editor .RichEditor-blockquote {
-            border-left: 5px solid #eee;
-            color: #666;
-            font-family: 'Hoefler Text', 'Georgia', serif;
-            font-style: italic;
-            margin: 16px 0;
-            padding: 10px 20px;
-        }
-
-        .RichEditor-editor .public-DraftStyleDefault-pre {
-            background-color: rgba(0, 0, 0, 0.05);
-            font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
-            font-size: 16px;
-            padding: 20px;
-        }
-
-        .RichEditor-controls {
-            font-family: 'Helvetica', sans-serif;
-            font-size: 14px;
-            margin-bottom: 5px;
-            user-select: none;
-        }
-
-        .RichEditor-styleButton {
-            color: #999;
-            cursor: pointer;
-            margin-right: 16px;
-            padding: 2px 0;
-            display: inline-block;
-        }
-
-        .RichEditor-activeButton {
-            color: #5890ff;
-        }
-
     }
 
 }

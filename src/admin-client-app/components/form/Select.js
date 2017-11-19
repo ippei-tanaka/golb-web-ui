@@ -77,7 +77,7 @@ Select.propTypes = Object.assign({
     initialValue: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number
-    ]),
+    ])
 }, FormElement.propTypes);
 
 export default Select;
