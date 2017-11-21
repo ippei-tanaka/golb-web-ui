@@ -2,9 +2,16 @@ import fetch from 'node-fetch';
 import urlModule from 'url';
 import pathModule from 'path';
 
-export default (host, port, base, path, options) =>
+export default ({
+                    protocol = "http",
+                    host = "localhost",
+                    port = 80,
+                    base = "",
+                    path = "",
+                    options = {}
+}) =>
 {
-    const url = urlModule.parse(`http://${host}:${port}/${base}`);
+    const url = urlModule.parse(`${protocol}://${host}:${port}/${base}`);
     const base_pathname = url.pathname;
 
     try {

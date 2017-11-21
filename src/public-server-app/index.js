@@ -1,5 +1,5 @@
 import express from 'express';
-import fetch from './fetch';
+import fetch from '../utilities/fetch';
 import {BAD_REQUEST, OK} from './status-codes';
 import {render} from './renderer';
 import config from './public-server.setting';
@@ -30,7 +30,13 @@ export default class
     {
         const app = express();
 
-        this._fetch = fetch.bind(null, publicApiHostname, publicApiPort, publicApiBasename);
+        this._fetch = (path, options) => fetch({
+            host: publicApiHostname,
+            port: publicApiPort,
+            base: publicApiBasename,
+            path,
+            options
+        });
 
         app.use(express.static(config.publicDocRoot));
 
