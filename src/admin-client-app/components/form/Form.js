@@ -47,7 +47,7 @@ class Form extends Component
 
         const obj = this.props.onSubmit(data);
 
-        if (obj instanceof Promise)
+        if (typeof obj === 'object' && obj && typeof obj.then === 'function')
         {
             obj
                 .then(this._submissionDidSucceed.bind(this))
