@@ -9,7 +9,7 @@ const ejsFile = fs.readFileSync(path.resolve(__dirname, '../admin-client-app/ind
 
 export default class {
 
-    constructor ({adminRoot, adminApiHostname, adminApiPort, adminApiBasename})
+    constructor ({adminRoot, adminApiHostname, adminApiPort, adminApiBasename, adminApiProtocol})
     {
         const app = express();
 
@@ -19,6 +19,7 @@ export default class {
             response.type('html').send(ejs.render(ejsFile, {
                 ADMIN_ROOT: adminRoot,
                 ADMIN_API_HOSTNAME: adminApiHostname,
+                ADMIN_API_PROTOCOL: adminApiProtocol,
                 ADMIN_API_PORT: adminApiPort,
                 ADMIN_API_BASENAME: adminApiBasename,
             }));

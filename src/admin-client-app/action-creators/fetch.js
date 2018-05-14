@@ -5,10 +5,11 @@ import path from 'path';
 const {
     ADMIN_API_HOSTNAME,
     ADMIN_API_PORT,
-    ADMIN_API_BASENAME
+    ADMIN_API_BASENAME,
+    ADMIN_API_PROTOCOL
 } = window.__GOLB_ENV__;
 
-const _url = url.parse(`http://${ADMIN_API_HOSTNAME}:${ADMIN_API_PORT}/${ADMIN_API_BASENAME}`);
+const _url = url.parse(`${ADMIN_API_PROTOCOL}://${ADMIN_API_HOSTNAME}:${ADMIN_API_PORT}/${ADMIN_API_BASENAME}`);
 const _base_pathname = _url.pathname;
 
 export default (_path, options) =>

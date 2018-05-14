@@ -3,6 +3,7 @@ export default {
     "webPort": 3003,
     "adminRoot": "/admin",
     "adminApiHostname": "localhost",
+    "adminApiProtocol": "https",
     "adminApiPort": 3000,
     "adminApiBasename": "admin-api",
     "publicRoot": "/",
